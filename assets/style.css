@@ -1,0 +1,188 @@
+/* Still Goods · 스틸 굿즈 — 브랜드 홈페이지 겉모습 한 벌(GROO STUDIO 002)
+   토큰은 기록 페이지(site/assets/style.css) · 통합 사이트 스타일 가이드와 같다: 검은 바탕 · 흑연 · 크림 · 흰 틀 · 모노.
+   글꼴: IBM Plex Mono · IBM Plex Sans KR(Google Fonts · OFL 1.1). 재질(필름 결 · 종이 결)은 전부 SVG feTurbulence 로 화면 안에서 만든다 — 바깥 파일 0.
+   움직임: 나타남 500ms · 호버 240ms, cubic-bezier(.2,.7,.2,1) 하나. 시차 스크롤 · 튐 0. prefers-reduced-motion 이면 전부 끈다. */
+:root{
+  --black:#0a0a0b; --gun:#1b1d20; --gun-2:#2b2e32;
+  --hi:#eef0f2; --silver:#c8ccd1; --label:#9aa0a6; --muted:#8b8279; --steel:#6f757c; --cream:#f3eee7;
+  --hair:rgba(200,204,209,.14); --hair-2:rgba(200,204,209,.08); --hair-3:rgba(200,204,209,.35);
+  --paper:#ffffff; --paper-2:#f4f4f3; --paper-line:#e7e7e6; --paper-ink:#6f757c;   /* 흰 틀 위 글자 — 흰 바탕 대비 4.65:1 */
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --f-ui:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --gutter:32px; --max:1200px; --gap:24px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --sec:112px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;background:var(--black)}
+body{min-height:100svh;color:var(--hi);font-family:var(--f-ui);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;
+     word-break:keep-all;overflow-wrap:anywhere;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ol,ul{list-style:none;margin:0;padding:0}
+figure{margin:0}
+[hidden]{display:none !important}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+/* 필름 결 — 정지, 4%(기록 페이지 · 문로그와 같은 한 장) */
+.grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.065;mix-blend-mode:overlay;z-index:5}   /* 2판: 4% → 6.5% */
+
+/* ① 머리 — 영문 이름 앞 · 한글 작게 · 오른쪽 작은 각인 */
+.top{padding:calc(24px + env(safe-area-inset-top)) 0 0}
+.top .row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--hair-2)}
+.wm{margin:0;font-weight:500}
+.wm-a{display:inline-flex;align-items:baseline;gap:9px;white-space:nowrap}
+.wm .en{font-family:var(--f-mono);font-weight:500;font-size:22px;line-height:1;letter-spacing:.04em;color:var(--hi)}
+.wm .ko{font-family:var(--f-ui);font-weight:500;font-size:11px;line-height:1;letter-spacing:.2em;color:var(--label);position:relative;top:-2px}
+.wm-a:focus-visible{outline:1px solid var(--cream);outline-offset:4px}
+.mark{font-family:var(--f-mono);font-size:11px;line-height:1;letter-spacing:.18em;color:var(--label);white-space:nowrap}
+.mark .g{font-weight:500}
+.mark .s{font-weight:400;margin-left:.9em;color:var(--label)}
+.mark .n{margin-left:1.4em;color:var(--label);position:relative}
+.mark .n::before{content:"";position:absolute;left:-.95em;top:50%;width:1px;height:10px;transform:translateY(-50%);background:var(--hair-3)}
+
+/* 절 머리 — 작은 영문 눈썹 · 한글 제목 · 규칙 한 줄 */
+.sec-head{display:flex;flex-direction:column;gap:12px;margin-bottom:44px;max-width:640px}
+.eyebrow{font-family:var(--f-mono);font-weight:500;font-size:11px;line-height:1;letter-spacing:.24em;color:var(--label);margin:0}
+.sec-head h2{margin:0;font-weight:500;font-size:clamp(20px,2vw,24px);line-height:1.3;color:var(--hi);letter-spacing:-.005em}
+.rule{margin:0;font-size:13px;line-height:1.6;color:var(--label)}
+
+/* ② 첫 화면 — 1024 이상은 두 단(왼쪽 글 · 오른쪽 정물 프레임, 첫 화면 안에), 그 아래는 세로로 쌓는다 */
+.hero{display:flex;align-items:center;padding:48px 0 var(--sec);overflow:hidden}   /* 프레임 뒤 빛(150%)이 옆으로 새어 가로 스크롤을 만들지 않게 */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:56px;align-items:center;width:100%}
+.hero-text{position:relative;z-index:1}
+/* 첫 화면 눈썹은 한글이라 모노가 아니라 Sans KR(Plex Mono 에는 한글이 없다) */
+.hero .eyebrow{margin-bottom:28px;font-family:var(--f-ui);font-weight:400;font-size:12px;letter-spacing:.12em}
+.lead{margin:0;font-family:var(--f-ui);font-weight:400;font-size:clamp(30px,4.4vw,56px);line-height:1.22;letter-spacing:-.015em;color:var(--hi);max-width:15.5em}
+.sub{margin:28px 0 0;font-size:15px;line-height:1.75;color:var(--silver);max-width:34em}
+.cue{display:block;width:1px;height:56px;margin-top:48px;background:linear-gradient(180deg,var(--hair-3),rgba(200,204,209,0))}
+
+/* 정물 프레임 — 흰 틀 한 점 · 종이 결 · 8% 여백 선 · 그림자 한 결 · 선반 한 줄(아이콘 · 배너와 같은 결) */
+.frame{position:relative;z-index:1}
+.frame-hero{max-width:760px;width:100%;margin:0 auto}
+/* 큰 프레임 뒤의 은은한 빛(배너와 같은 결) */
+.frame-hero::before{content:"";position:absolute;left:50%;top:50%;width:150%;height:150%;transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(closest-side, rgba(243,238,231,.075), rgba(243,238,231,.02) 55%, rgba(243,238,231,0));z-index:0}
+.pedestal{position:relative;z-index:1}
+.tile{position:relative;aspect-ratio:1/1;border-radius:6px;overflow:hidden;background:linear-gradient(180deg,var(--paper),var(--paper-2));
+  box-shadow:inset 0 1px 0 #fff, 0 2px 4px rgba(0,0,0,.35), 0 20px 40px -14px rgba(0,0,0,.7);
+  transition:transform .24s var(--ease),box-shadow .24s var(--ease)}
+.frame-hero .tile{aspect-ratio:4/3;border-radius:8px}
+/* 종이 결 — SVG feTurbulence 한 장(파일 0). 곱하기 혼합으로 흰 바탕을 살짝 거칠게 */
+.tile::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.85;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .62 0 0 0 0 .62 0 0 0 0 .60 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E")}   /* 2판: 결 알파 .10 → .16 · 불투명 .6 → .85 */
+/* 8% 여백 선 — 썸네일 규정의 안쪽 여백 자리(사진이 오면 이 안에 놓인다) */
+.tile::after{content:"";position:absolute;inset:8%;border:1px solid var(--paper-line);border-radius:3px;pointer-events:none}
+.tile img{position:absolute;left:8%;top:8%;width:84%;height:84%;object-fit:contain;display:block;z-index:1}
+.idx{position:absolute;right:7%;bottom:6.5%;font-family:var(--f-mono);font-weight:500;font-size:11px;line-height:1;letter-spacing:.14em;color:var(--paper-ink);z-index:1}
+.has-img .idx{opacity:.7}
+.ground{position:absolute;left:10%;right:10%;bottom:-7px;height:14px;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(10px);z-index:-1}
+.shelf{display:block;height:1px;margin:16px 4% 0;
+  background:linear-gradient(90deg,rgba(200,204,209,0),rgba(200,204,209,.45) 14%,rgba(200,204,209,.45) 86%,rgba(200,204,209,0))}
+.cap{display:flex;flex-direction:column;gap:3px;min-height:40px;margin-top:12px;padding:0 4%}
+.cap .name{font-size:13px;font-weight:500;line-height:1.5;color:var(--hi)}
+.cap .spec{font-size:12px;line-height:1.5;color:var(--label)}
+.frame-hero .cap{align-items:center;text-align:center;min-height:0}
+@media (hover:hover){
+  .frame:hover .tile{transform:translateY(-3px);box-shadow:inset 0 1px 0 #fff, 0 3px 6px rgba(0,0,0,.4), 0 28px 48px -14px rgba(0,0,0,.75)}
+  .frame-hero:hover .tile{transform:none;box-shadow:inset 0 1px 0 #fff, 0 2px 4px rgba(0,0,0,.35), 0 20px 40px -14px rgba(0,0,0,.7)}
+}
+
+/* ③ 고른 물건 — 1440 4칸 · 1024 3칸 · 390 2칸 */
+.picks{padding:0 0 var(--sec)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px var(--gap)}
+.grid .frame{display:flex;flex-direction:column}
+
+/* ④ 스토어로 가기 — 알약 둘. https 주소가 아니면 '준비 중'(누를 수 없음) */
+.stores{padding:0 0 var(--sec)}
+.btns{display:flex;flex-wrap:wrap;gap:16px}
+.go{display:inline-flex;align-items:center;gap:14px;min-height:48px;min-width:240px;padding:0 24px;border:1px solid var(--hair-3);border-radius:999px;
+    color:var(--hi);transition:border-color .24s var(--ease),background .24s var(--ease)}
+.go .t{font-size:14px;font-weight:500;letter-spacing:.01em}
+.go .pend{margin-left:auto;font-size:12px;color:var(--label);letter-spacing:.02em}
+.go .arrow{margin-left:auto;font-family:var(--f-mono);color:var(--label)}
+.go:hover{border-color:var(--cream);background:rgba(243,238,231,.04)}
+.go:focus-visible{outline:1px solid var(--cream);outline-offset:3px}
+.go.is-off{opacity:.55;cursor:default}
+.go.is-off:hover{border-color:var(--hair-3);background:transparent}
+
+/* ⑤ 어떻게 고르나 — 번호 · 한 줄, 줄 사이 가는 선 */
+.how{padding:0 0 var(--sec)}
+.lines{max-width:720px;border-top:1px solid var(--hair-2)}
+.lines li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--hair-2)}
+.lines .n{font-family:var(--f-mono);font-size:11px;line-height:1.9;letter-spacing:.18em;color:var(--label)}
+.lines p{margin:0;font-size:15px;line-height:1.7;color:var(--silver)}
+
+/* ⑥ 판매자 정보 — 칸 이름 · 값. 값 자리의 {{…}} 는 공개 전에 글자로 바꾼다 */
+.seller{padding:0 0 var(--sec)}
+.info{margin:0;max-width:720px;border-top:1px solid var(--hair-2)}
+.info > div{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--hair-2)}
+.info dt{font-size:13px;line-height:1.6;color:var(--label)}
+.info dd{margin:0;font-size:14px;line-height:1.6;color:var(--hi)}
+.ph{display:inline-block;font-family:var(--f-mono);font-size:12px;line-height:1.4;letter-spacing:.04em;color:var(--label);border-bottom:1px solid var(--hair-3);padding-bottom:1px}
+
+/* ⑦ 바닥 — 머리 줄 · 기록 페이지 링크 · 라이선스 줄 · © · 각인 */
+.foot{padding:0 0 calc(40px + env(safe-area-inset-bottom))}
+.foot .wrap{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.foot-line{display:block;width:min(640px,100%);height:1px;background:var(--hair-3);margin-bottom:26px}
+.rec{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 22px;border:1px solid var(--hair-3);border-radius:999px;font-size:13px;font-weight:500;color:var(--hi);
+     transition:border-color .24s var(--ease),background .24s var(--ease)}
+.rec .arrow{font-family:var(--f-mono);color:var(--label)}
+.rec:hover{border-color:var(--cream);background:rgba(243,238,231,.04)}
+.rec:focus-visible{outline:1px solid var(--cream);outline-offset:3px}
+.license,.copy{margin:0;font-size:12px;line-height:1.6;color:var(--label);letter-spacing:.02em}
+.license{margin-top:14px;max-width:520px;text-wrap:balance}   /* 폰에서 두 줄로 꺾일 때 고르게 */
+.lock{display:inline-flex;flex-direction:column;font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;white-space:nowrap;opacity:.9;margin-top:18px}
+.lock::before,.lock::after{content:"";display:block;height:1px;background:rgba(200,204,209,.22);margin-right:.22em}
+.lock .t{display:block;line-height:1;padding:4px 0}
+.lock .g{font-weight:500;color:var(--label)}
+.lock .s{font-weight:400;color:var(--steel);margin-left:1em}
+
+/* 부드러운 등장 — JS 가 있을 때만(없으면 전부 보임) */
+.js .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease);transition-delay:calc(var(--i,0) * 45ms)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* 1024 이상 — 첫 화면 두 단: 프레임이 첫 화면 안에 다 들어온다(1440×900 · 1024×768) */
+@media (min-width:1024px){
+  .hero{min-height:min(calc(100svh - 81px), 820px)}
+  .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px}
+  .hero .lead{font-size:clamp(30px,3.6vw,50px)}
+  .frame-hero{max-width:none;margin:0}
+}
+/* 1024 — 3칸 */
+@media (max-width:1100px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+/* 폰 — 2칸 · 여백 20 · 절 사이 72 */
+@media (max-width:640px){
+  :root{--gutter:20px;--gap:16px;--sec:72px}
+  .top .row{padding-bottom:14px}
+  .wm .en{font-size:18px}
+  .wm .ko{font-size:10px;letter-spacing:.16em}
+  .mark{letter-spacing:.14em}
+  .hero{padding:32px 0 var(--sec)}
+  .hero-grid{gap:40px}
+  .hero .eyebrow{margin-bottom:20px}
+  .sub{margin-top:20px;font-size:14px}
+  .cue{height:40px;margin-top:36px}
+  .sec-head{margin-bottom:32px;gap:10px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px var(--gap)}
+  .shelf{margin-top:12px}
+  .cap{margin-top:10px;min-height:36px}
+  .btns{flex-direction:column}
+  .go{min-width:0;width:100%}
+  .lines li{grid-template-columns:32px 1fr;gap:12px;padding:16px 0}
+  .lines p{font-size:14px}
+  .info > div{grid-template-columns:120px 1fr;gap:12px;padding:12px 0}
+  .foot-line{margin-bottom:20px}
+}
+/* 아주 좁은 폰(360 아래) — 머리 줄 각인은 두 줄로 꺾지 않고 STUDIO 를 숨긴다 */
+@media (max-width:360px){
+  .mark .s{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .tile,.go,.rec{transition:none}
+  .frame:hover .tile{transform:none}
+}
