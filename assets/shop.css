@@ -1,0 +1,251 @@
+/* Still Goods · 스틸 굿즈 — 3판 가게 쪽 부품(style.css 위에 얹는다)
+   목록(분야 칩 · 카드) · 상세(사진 → 이름 → 값 → 담기 → 세 줄 → 맞아요/안 맞아요 → 설명 · 고시 · 폰 아래 고정 띠)
+   · 단계 표시 · 장바구니 줄 · 합계 상자 · 주문서 칸 · 동의 · 결과 · 조회 · 약관 글. 색은 흰 · 옅은 회색 · 초록 하나. */
+
+/* ── 목록 ── */
+.crumb{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-height:48px;margin-bottom:8px;font-size:16px;color:var(--ink-2)}
+.crumb a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;min-width:48px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
+.example-note{margin:0 0 18px;padding:12px 16px;border-radius:12px;background:#fff4d6;color:#5a4300;font-size:16px;font-weight:600}
+.list-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-bottom:22px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:2px solid var(--line);border-radius:999px;background:#fff;font-size:17px;font-weight:600;cursor:pointer;transition:border-color .2s,background .2s}
+.chip:hover{border-color:var(--green)}
+.chip small{font-size:15px;font-weight:600;color:var(--ink-3)}
+.chip[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff}
+.chip[aria-pressed="true"] small{color:#dcebe2}
+.cat-guide{margin-bottom:22px}
+.attrs{margin:-6px 0 22px}
+.attrs .chip{min-height:48px;border-width:2px;font-size:16px}
+.attrs .chip[aria-pressed="true"]{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.attrs .chip[aria-pressed="true"] small{color:var(--green)}
+.empty{padding:40px 24px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft);font-size:17px;line-height:1.7;color:var(--ink-2);text-align:center}
+.empty p{margin:0}
+.empty .empty-t{margin-bottom:4px;font-size:20px;font-weight:700;color:var(--ink)}
+.empty a:not(.btn){color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.empty .btn{margin-top:20px}
+
+/* ── 상세 ── */
+.item{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.gallery{min-width:0}
+.gallery .pic{border:1px solid var(--line);border-radius:20px}
+.shots{display:flex;width:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border:1px solid var(--line);border-radius:20px}
+.shots::-webkit-scrollbar{display:none}
+.shots > .pic{flex:0 0 100%;scroll-snap-align:center;border:0;border-radius:0}
+.dots{display:flex;justify-content:center;gap:4px;margin-top:8px}
+.dots button{display:grid;place-items:center;width:48px;height:48px;padding:0;border:0;background:none;cursor:pointer}
+.dots i{display:block;width:11px;height:11px;border-radius:50%;background:var(--line-2)}
+.dots button[aria-current="true"] i{background:var(--green)}
+.buybox{min-width:0}
+.buybox h1{font-size:clamp(24px,2.4vw,30px);font-weight:700;line-height:1.38;letter-spacing:-.02em}
+.price-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:14px}
+.bigprice{font-size:clamp(28px,2.8vw,32px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.unit{margin-top:4px;font-size:17px;color:var(--ink-2)}
+.buybox .tags{margin-top:10px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field > label,.field > .lab{font-size:17px;font-weight:600;color:var(--ink)}
+.buybox .field{margin-top:22px}
+.select,.input,.textarea{width:100%;min-height:56px;padding:12px 16px;border:2px solid var(--line-2);border-radius:12px;background:#fff;font-size:18px;line-height:1.4}
+.textarea{min-height:120px;resize:vertical}
+.select:focus,.input:focus,.textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+.input[aria-invalid="true"],.select[aria-invalid="true"]{border-color:var(--warn)}
+.input::placeholder,.textarea::placeholder{color:#7b847b}
+.buy{display:flex;flex-direction:column;gap:12px}
+.buy .line{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.qty{display:inline-flex;align-items:center;border:2px solid var(--line-2);border-radius:12px;overflow:hidden;background:#fff}
+.qty button{width:52px;height:52px;border:0;background:#fff;font-size:24px;line-height:1;cursor:pointer}
+.qty button:hover{background:var(--soft)}
+.qty button[disabled]{color:var(--line-2);cursor:not-allowed}
+.qty output{min-width:52px;text-align:center;font-size:19px;font-weight:600}
+.sum{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums}
+.msg{min-height:26px;margin:0;font-size:17px;line-height:1.6;color:var(--ink-2)}
+.msg.err{color:var(--warn);font-weight:600}
+.msg a{color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.buybox .three{margin-top:16px;padding:2px 18px;border:1px solid var(--line);border-radius:14px}
+.narrow-col{max-width:880px}
+.detail-body figure img{max-width:640px}
+.fitbox{margin-top:clamp(36px,5vw,56px);padding:22px 24px;border:2px solid var(--green-line);border-radius:18px}
+.fit-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:14px}
+.fit-col > b{display:block;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid var(--line);font-size:17.5px;font-weight:700}
+.fit-col.yes > b{color:var(--green)}
+.fit-col.no > b{color:var(--warn)}
+.fit-col ul{list-style:none;margin:0;padding:0}
+.fit-col li{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:17px;line-height:1.55}
+.fit-col li .ic{margin-top:4px;font-size:19px;stroke-width:2.6}
+.fit-col.yes li .ic{color:var(--green)}
+.fit-col.no li .ic{color:var(--warn)}
+.detail{margin-top:clamp(36px,5vw,56px)}
+.detail .h2{padding-bottom:14px;border-bottom:2px solid var(--ink)}
+.detail-body p{margin-top:14px;font-size:18px;line-height:1.8}
+.detail-body figure{margin:18px 0 0}
+.detail-body figure img{width:100%;border:1px solid var(--line);border-radius:14px}
+.tbl{width:100%;margin-top:18px;border-collapse:collapse;font-size:17px}
+.tbl th{width:30%;padding:14px 12px 14px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-weight:600;color:var(--ink-2)}
+.tbl td{padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.fold{border:1px solid var(--line);border-radius:14px;background:#fff}
+.fold summary{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:0 20px;cursor:pointer;list-style:none;font-size:18px;font-weight:700}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::after{content:"+";font-size:24px;font-weight:400;color:var(--green)}
+.fold[open] summary::after{content:"−"}
+.fold > div{padding:0 20px 18px}
+/* 폰: 아래 고정 사기 띠 */
+.buybar{display:none}
+@media (max-width:760px){
+  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:12px;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -10px 24px -18px rgba(0,0,0,.35)}
+  .buybar-sum{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .buybar .btn{flex:1;min-height:56px;padding:0 16px}
+  body.has-buybar{padding-bottom:84px}
+}
+
+/* ── 단계(장바구니 → 주문서 → 결제) ── */
+.steps{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 22px;padding:0;counter-reset:s}
+.steps li{display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--ink-3);counter-increment:s}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;border:2px solid var(--line-2);font-size:15px;font-weight:700;color:var(--ink-3)}
+.steps li[aria-current="step"]{color:var(--ink)}
+.steps li[aria-current="step"]::before{background:var(--green);border-color:var(--green);color:#fff}
+.steps li.done{color:var(--ink-2)}
+.steps li.done::before{content:"✓";border-color:var(--green);color:var(--green)}
+.steps li:not(:last-child)::after{content:"";width:28px;height:2px;margin-left:4px;background:var(--line-2)}
+
+/* ── 장바구니 ── */
+.split{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:clamp(24px,3vw,40px);align-items:start}
+.lines-c{border-top:2px solid var(--ink)}
+.c-row{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.c-row .pic{border:1px solid var(--line);border-radius:12px}
+.c-row .t{display:flex;flex-direction:column;gap:4px;min-width:0}
+.c-row .t a{display:flex;align-items:center;min-height:48px;font-size:17px;font-weight:600;line-height:1.5}
+.c-row .t a:hover{text-decoration:underline;text-underline-offset:4px}
+.c-row .opt{font-size:16px;color:var(--ink-2)}
+.c-row .ctl{display:flex;align-items:center;gap:18px;justify-content:flex-end}
+.c-row .lp{min-width:96px;text-align:right;font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+.linkbtn{appearance:none;flex:none;white-space:nowrap;min-height:48px;min-width:48px;padding:0 10px;border:0;background:none;font-size:16px;font-weight:600;color:var(--ink-2);cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.linkbtn:hover{color:var(--warn)}
+/* 구성 — 세트의 구성품 · 수량 · 나눠 적은 값, 맨 아래 종 · 개수 · 개당(값 · 담기 아래, 세 줄 위) */
+.parts{margin-top:18px;padding:16px 20px 14px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.parts h2{font-size:18px;font-weight:700}
+.parts-list{list-style:none;margin:6px 0 0;padding:0}
+.parts-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:10px 0;border-top:1px solid var(--line)}
+.parts-list li:first-child{border-top:0}
+.parts-list .pn{font-size:16.5px;line-height:1.5}
+.parts-list .pq{font-size:16px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.parts-market{margin-top:4px;padding-top:10px;border-top:1px solid var(--line);font-size:15px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+/* 실측 한 줄 — 상세 사진 바로 아래 */
+.ship-from{margin-top:2px}
+.supplier-consent .ck{border-top:0}
+.measure{margin-top:10px;font-size:16px;font-weight:600;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.summary{position:sticky;top:96px;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--soft)}
+.summary h2{font-size:21px;font-weight:700}
+.sum-rows{margin:14px 0 18px}
+.sum-rows > div{display:flex;justify-content:space-between;gap:16px;padding:8px 0;font-size:17px;color:var(--ink-2)}
+.sum-rows dt,.sum-rows dd{margin:0}
+.sum-rows dd{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.sum-rows .total{margin-top:6px;padding-top:14px;border-top:2px solid var(--ink);font-size:20px;font-weight:700;color:var(--ink)}
+.sum-rows .total dd{font-size:24px;font-weight:700}
+.summary .note{margin-top:14px}
+.summary .btn.wide{margin-top:16px}
+.mini{list-style:none;margin:14px 0 0;padding:0;border-bottom:1px solid var(--line-2)}
+.mini li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:16.5px;line-height:1.5}
+.mini .q{margin-left:6px;color:var(--ink-3)}
+.mini .p{flex:none;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ── 주문서 ── */
+.form{display:flex;flex-direction:column;gap:clamp(24px,3vw,36px)}
+.fset{margin:0;padding:0;border:0;display:flex;flex-direction:column;gap:18px}
+.fset legend{margin-bottom:6px;padding:0;font-size:22px;font-weight:700}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.req{margin-left:8px;padding:1px 7px;border-radius:6px;background:var(--green-soft);color:var(--green);font-size:15px;font-weight:700;vertical-align:2px}
+.hint{margin:0;font-size:16px;line-height:1.6;color:var(--ink-2)}
+/* 주소 찾기 — 우편번호 칸 옆 단추 · 그 아래 카카오 우편번호 서비스 상자(아래 로고는 가리지 않음 — 서비스 이용 조건) */
+.zip-row{display:flex;gap:10px}
+.zip-row .input{flex:1 1 auto;min-width:0}
+.zip-btn{flex:none;min-height:48px;padding:0 18px;white-space:nowrap}
+.postcode{margin-top:14px;border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden;background:#fff}
+.postcode-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 6px 6px 16px;border-bottom:1px solid var(--line);background:var(--soft)}
+.postcode-hd b{font-size:17px}
+.postcode-body{height:470px}
+.ferr{margin:0;font-size:16px;line-height:1.5;color:var(--warn);font-weight:600}
+.agree{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:#fff}
+.agree > * + *{border-top:1px solid var(--line)}
+.ck{display:flex;align-items:center;gap:14px;min-height:60px;padding:8px 18px;cursor:pointer}
+.ck.all{background:var(--soft);border-radius:16px 16px 0 0;font-weight:700}
+.ck .grow{flex:1;font-size:17px}
+.ck a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;min-width:48px;font-size:16px;font-weight:600;color:var(--green);text-decoration:underline;text-underline-offset:4px}
+.ck input{appearance:none;flex:none;width:26px;height:26px;margin:0;border:2px solid var(--ink-3);border-radius:7px;background:#fff;display:grid;place-content:center;cursor:pointer}
+.ck input::before{content:"";width:12px;height:7px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+.ck input:checked{background:var(--green);border-color:var(--green)}
+.ck input:checked::before{opacity:1}
+.consent{padding:4px 18px 12px 58px}
+.consent summary{display:inline-flex;align-items:center;min-height:48px;cursor:pointer;font-size:16px;font-weight:600;color:var(--ink-2)}
+.consent summary::after{content:"+";margin-left:8px;color:var(--green)}
+.consent[open] summary::after{content:"−"}
+.consent .tbl{margin-top:4px;font-size:15.5px}
+.todo{padding:1px 6px;border-radius:5px;background:#fff4d6;color:#5a4300;font-weight:700}
+
+/* ── 결과(결제 끝 · 실패) · 조회 ── */
+.result{max-width:720px}
+.result h1{font-size:clamp(28px,3.4vw,38px);font-weight:700;line-height:1.3;letter-spacing:-.02em}
+.result .msg{margin:12px 0 22px;font-size:18px}
+.kv{margin:0 0 22px;border-top:2px solid var(--ink)}
+.kv > div{display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:17px}
+.kv dt{color:var(--ink-2);font-weight:600}
+.kv dd{margin:0}
+.kv .mono{font-family:var(--f-mono);font-size:16.5px;letter-spacing:.02em}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.status{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;padding:6px 14px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:18px;font-weight:700}
+.status.wait{background:#fff4d6;color:#5a4300}
+.spin{display:inline-block;width:18px;height:18px;margin-right:10px;border:3px solid var(--line-2);border-top-color:var(--green);border-radius:50%;vertical-align:-3px;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lookup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:16px;align-items:end;max-width:880px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--soft)}
+.panel{margin-top:24px}
+.panel .result{max-width:none;padding:24px;border:1px solid var(--line);border-radius:18px}
+.req-form{display:flex;flex-direction:column;gap:14px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.radio{display:flex;flex-wrap:wrap;gap:10px}
+.radio label{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 18px;border:2px solid var(--line-2);border-radius:12px;font-size:17px;font-weight:600;cursor:pointer}
+.radio input{width:20px;height:20px;accent-color:var(--green)}
+
+/* ── 약관 글(초안) ── */
+.draft{display:inline-flex;margin-bottom:12px;padding:4px 12px;border-radius:999px;background:#fff4d6;color:#5a4300;font-size:15px;font-weight:700}
+.meta{margin-top:8px;font-size:16px;color:var(--ink-2)}
+.doc-wrap{display:grid;grid-template-columns:240px minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.toc{position:sticky;top:96px;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--soft);font-size:16px}
+.toc ol,.toc ul{margin:0;padding-left:20px}
+.toc a{display:inline-flex;align-items:center;min-height:48px;color:var(--ink-2)}
+.toc a:hover{color:var(--green);text-decoration:underline;text-underline-offset:4px}
+.doc{max-width:760px;font-size:18px;line-height:1.85}
+.doc h2{margin:36px 0 10px;padding-top:8px;font-size:22px;font-weight:700;line-height:1.4;scroll-margin-top:96px}
+.doc h2:first-child{margin-top:0}
+.doc h3{margin:22px 0 6px;font-size:19px;font-weight:700}
+.doc p,.doc li{color:var(--ink)}
+.doc p{margin:10px 0}
+.doc ol,.doc ul{margin:10px 0;padding-left:24px}
+.doc li{margin:6px 0}
+.doc .tbl{font-size:16.5px}
+.ph{display:inline-block;padding:0 6px;border-radius:5px;background:#fff4d6;font-family:var(--f-mono);font-size:15px;color:#5a4300}
+
+/* ── 너비 ── */
+@media (max-width:1000px){
+  .split{grid-template-columns:minmax(0,1fr)}
+  .summary{position:static}
+  .doc-wrap{grid-template-columns:minmax(0,1fr)}
+  .toc{position:static}
+}
+@media (max-width:760px){
+  .item{grid-template-columns:minmax(0,1fr)}
+  .gallery{margin:0 calc(-1 * var(--gut))}
+  .gallery .pic,.shots{border-radius:0;border-left:0;border-right:0}
+  .fitbox{padding:18px}
+  .fit-cols{grid-template-columns:minmax(0,1fr)}
+  .tbl th{width:36%}
+  .chip{padding:0 14px;font-size:16px}
+  .c-row{grid-template-columns:84px minmax(0,1fr);gap:14px;align-items:start}
+  .c-row .ctl{grid-column:2;justify-content:space-between;flex-wrap:wrap;gap:10px 14px}
+  .c-row .lp{min-width:0;margin-left:auto}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .consent{padding:4px 14px 12px}
+  .kv > div{grid-template-columns:110px minmax(0,1fr)}
+  .lookup{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  .shots{scroll-behavior:auto}
+  .spin{animation:none}
+  .chip{transition:none}
+}

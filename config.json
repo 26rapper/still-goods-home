@@ -1,5 +1,30 @@
 {
   "coupang_url": "#",
   "naver_url": "#",
-  "seller_public": false
+  "seller_public": false,
+  "seller": {
+    "name": "",
+    "ceo": "",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "biz_no": "",
+    "mail_order_no": "",
+    "hosting": "",
+    "privacy_officer": ""
+  },
+  "shop_enabled": true,
+  "shop_api_base": "http://localhost:8780",
+  "home_hide": [
+    "SG-0004",
+    "SG-0015",
+    "SG-0016"
+  ],
+  "contact": {
+    "kakao": "",
+    "naver": "",
+    "email": "",
+    "phone": "",
+    "hours": ""
+  }
 }

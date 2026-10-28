@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>상품 — Still Goods 스틸 굿즈</title>
+<meta name="description" content="Still Goods 스틸 굿즈 상품 상세 — 사진 · 옵션 · 배송과 교환 · 반품 · 상품 정보 제공 고시.">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<!-- 가게 — 상품 상세(사진 → 이름 → 값 → 담기 → 세 줄 → 맞아요/안 맞아요 → 설명 · 고시 · 폰 아래 고정 띠) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/shop.css">
+</head>
+<body data-page="item">
+
+<header class="hd">
+  <div class="wrap hd-row">
+    <a class="wm" href="index.html" aria-label="Still Goods 스틸 굿즈 처음으로" data-copy-aria="brand.home_aria"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a>
+    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria"><a href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a href="cart.html" data-nav="cart"><span data-icon="cart"></span><span data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a></nav>
+  </div>
+</header>
+
+<main class="page" id="top">
+  <div class="wrap">
+    <nav class="crumb" aria-label="위치" data-copy-aria="crumb.aria"><a href="shop.html" data-copy="crumb.shop">상품</a><span aria-hidden="true">›</span><span id="crumbNiche">—</span></nav>
+    <p class="example-note" id="exNote" hidden></p>
+    <div class="item" id="itemMain">
+      <div class="gallery" id="gallery"><div class="pic"></div></div>
+      <!-- 실측 한 줄 — 데이터(measure)가 있을 때만 -->
+      <p class="measure" id="itemMeasure" hidden></p>
+      <div class="buybox">
+        <h1 id="itemName" data-copy="item.loading">불러오는 중이에요</h1>
+        <div class="price-row"><span class="bigprice" id="itemPrice"></span><span class="chip-ok" id="itemFree" data-copy="badge.free_ship" aria-label="배송비는 상품 가격에 포함되어 있어요." data-copy-aria="item.ship_1" hidden>배송비 포함</span></div>
+        <p class="unit" id="itemUnit" hidden></p>
+        <div class="tags" id="itemTag"></div>
+        <div class="field" id="optField" hidden>
+          <label for="opt" data-copy="item.option_label">옵션</label>
+          <select class="select" id="opt"></select>
+        </div>
+        <div class="field">
+          <span class="lab" id="qtyLab" data-copy="item.qty">수량</span>
+          <div class="buy">
+            <div class="line">
+              <div class="qty" role="group" aria-labelledby="qtyLab"><button type="button" id="qtyMinus" aria-label="하나 줄이기" data-copy-aria="qty.minus">−</button><output id="qtyV">1</output><button type="button" id="qtyPlus" aria-label="하나 늘리기" data-copy-aria="qty.plus">+</button></div>
+              <span class="sum" id="itemSum"></span>
+            </div>
+            <button type="button" class="btn wide big" id="addCart" disabled data-copy="item.add">장바구니 담기</button>
+            <p class="msg" id="addMsg" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+        <!-- 구성 — 세트(data unit.parts 둘 이상)일 때만, 없으면 숨김 -->
+        <section class="parts" id="itemParts" aria-labelledby="partsH" hidden>
+          <h2 id="partsH" data-copy="parts.title">구성</h2>
+          <ul class="parts-list" id="partsList"></ul>
+          <p class="parts-market" id="partsMarket" hidden></p>
+        </section>
+        <!-- 사기 단추 바로 아래 — 배송 · 반품 · 결제 세 줄 -->
+        <ul class="three" id="itemThree"></ul>
+      </div>
+    </div>
+
+    <div class="narrow-col">
+      <!-- 맞아요 · 안 맞아요 — data/guides.json 의 products 에 있을 때만 -->
+      <section class="fitbox" id="fitSec" aria-labelledby="fitH" hidden>
+        <h2 class="h2" id="fitH" data-copy="fit.title">맞는 곳인지 확인해요</h2>
+        <div class="fit-cols">
+          <div class="fit-col yes"><b data-copy="fit.yes">이런 곳에 맞아요</b><ul id="fitYes"></ul></div>
+          <div class="fit-col no"><b data-copy="fit.no">이런 곳엔 안 맞아요</b><ul id="fitNo"></ul></div>
+        </div>
+      </section>
+
+      <section class="detail" id="detailSec" aria-labelledby="detailH" hidden>
+        <h2 class="h2" id="detailH" data-copy="item.detail_title">상품 설명</h2>
+        <div class="detail-body" id="detailBody"></div>
+      </section>
+      <section class="detail" id="gosiSec" aria-label="상품정보 안내" data-copy-aria="item.gosi_title" hidden>
+        <details class="fold"><summary data-copy="item.gosi_title">상품정보 안내</summary><div id="gosiBox"></div></details>
+      </section>
+
+    <section class="sec" id="ask" aria-labelledby="askH" hidden>
+      <div class="ask"><span class="ask-ic" data-icon="chat"></span><div class="ask-t"><b id="askH" data-copy="ask.title">궁금한 점이 있으세요?</b><p data-copy="ask.body">편한 방법으로 물어보세요. 확인하고 답해 드려요.</p><p class="note" id="askHours" hidden></p></div><div class="ask-btns" id="askBtns"></div></div>
+    </section>
+    </div>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top"><a class="wm" href="index.html"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a></div>
+    <nav class="ft-links" aria-label="약관과 안내" data-copy-aria="footer.links_aria"><a href="policy/terms.html" data-copy="footer.terms">이용약관</a><a href="policy/privacy.html"><b data-copy="footer.privacy">개인정보처리방침</b></a><a href="policy/refund.html" data-copy="footer.refund">교환·반품·환불</a><a href="order.html" data-copy="nav.order">주문 조회</a><a href="#ask" data-contact hidden data-copy="nav.inquiry">문의하기</a><a href="LICENSES.md" data-copy="footer.info_link">이용 안내</a></nav>
+    <dl class="biz" id="biz" hidden></dl>
+    <p class="copy" data-copy="footer.copyright">© 2026 Still Goods</p>
+  </div>
+</footer>
+
+<script src="assets/copy.ko.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/shop.js"></script>
+</body>
+</html>

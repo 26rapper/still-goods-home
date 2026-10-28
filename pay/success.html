@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>결제 확인 — Still Goods 스틸 굿즈</title>
+<meta name="description" content="Still Goods 스틸 굿즈 결제 확인.">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<!-- 결제 끝(successUrl) — 서버에 승인 확인 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/shop.css">
+</head>
+<body data-page="success">
+
+<header class="hd">
+  <div class="wrap hd-row">
+    <a class="wm" href="../index.html" aria-label="Still Goods 스틸 굿즈 처음으로" data-copy-aria="brand.home_aria"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a>
+    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria"><a href="../shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a href="../order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a href="../cart.html" data-nav="cart"><span data-icon="cart"></span><span data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a></nav>
+  </div>
+</header>
+
+<main class="page" id="top">
+  <div class="wrap">
+    <ol class="steps" aria-label="주문 단계" data-copy-aria="steps.aria"><li class="done" data-copy="steps.cart">장바구니</li><li class="done" data-copy="steps.checkout">주문서</li><li aria-current="step" data-copy="steps.pay">결제</li></ol>
+    <div class="result rise" aria-live="polite">
+      <h1 id="resTitle" data-copy="success.checking">결제를 확인하고 있어요</h1>
+      <p class="msg" id="resMsg" role="status"></p>
+      <dl class="kv" id="resKv"></dl>
+      <div class="acts" id="resActs"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top"><a class="wm" href="../index.html"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a></div>
+    <nav class="ft-links" aria-label="약관과 안내" data-copy-aria="footer.links_aria"><a href="../policy/terms.html" data-copy="footer.terms">이용약관</a><a href="../policy/privacy.html"><b data-copy="footer.privacy">개인정보처리방침</b></a><a href="../policy/refund.html" data-copy="footer.refund">교환·반품·환불</a><a href="../order.html" data-copy="nav.order">주문 조회</a><a href="../index.html#ask" data-contact hidden data-copy="nav.inquiry">문의하기</a><a href="../LICENSES.md" data-copy="footer.info_link">이용 안내</a></nav>
+    <dl class="biz" id="biz" hidden></dl>
+    <p class="copy" data-copy="footer.copyright">© 2026 Still Goods</p>
+  </div>
+</footer>
+
+<script src="../assets/copy.ko.js"></script>
+<script src="../assets/ui.js"></script>
+<script src="../assets/shop.js"></script>
+</body>
+</html>

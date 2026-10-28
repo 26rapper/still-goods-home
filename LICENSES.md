@@ -1,46 +1,43 @@
-# LICENSES — brand/ (Still Goods · 스틸 굿즈 브랜드 홈페이지 · GROO STUDIO 002 · 2026-10-25)
+# 이용 안내 — Still Goods 스틸 굿즈 사이트가 쓰는 글꼴 · 그림 · 스크립트
 
-`brand/` 가 쓰는 남의 글꼴 · 재질 · 그림 · 라이브러리와 그 라이선스. 쓴 것은 전부 적는다. 여기 없는 것은 쓰지 않았다.
-(기록 페이지는 `site/LICENSES.md`, 디자인 시안은 `design/LICENSES.md`, 엔진 라이브러리는 저장소 뿌리 `LICENSES.md`.)
+이 사이트(홈 · 가게 · 약관)가 쓰는 남의 글꼴 · 재질 · 그림 · 스크립트와 그 라이선스입니다. 쓴 것은 전부 적습니다. 여기 없는 것은 쓰지 않았습니다.
 
 ## 글꼴 — 전부 SIL Open Font License 1.1
 
 | 이름 | 받는 곳 | 라이선스 | 쓴 자리 |
 |---|---|---|---|
-| IBM Plex Mono(400 · 500) | Google Fonts CDN — https://fonts.google.com/specimen/IBM+Plex+Mono | OFL 1.1 — https://openfontlicense.org/open-font-license-official-text/ | `index.html` 영문 이름 "Still Goods" · 머리 줄 각인 "GROO STUDIO 002" · 절 눈썹(PICKS · STORES · HOW · SELLER) · 틀 안 번호 01~12 · 줄 번호 · 화살표 · 자리표시 글자 · 바닥 각인 |
-| IBM Plex Sans KR(400 · 500) | Google Fonts CDN — https://fonts.google.com/specimen/IBM+Plex+Sans+KR | OFL 1.1 | `index.html` 한글 전부(작은 이름 · 첫 줄 · 소개 · 제목 · 규칙 줄 · 단추 · 세 줄 · 판매자 정보 · 바닥 줄) |
+| Instrument Serif(보통 · 기울임) | Google Fonts — https://fonts.google.com/specimen/Instrument+Serif | OFL 1.1 — https://openfontlicense.org/open-font-license-official-text/ | 워드마크 "Still Goods" |
+| IBM Plex Sans KR(400 · 500 · 600 · 700) | Google Fonts — https://fonts.google.com/specimen/IBM+Plex+Sans+KR | OFL 1.1 | 한글 전부(제목 · 본문 · 단추 · 값 · 주문서 · 약관) |
+| IBM Plex Mono(400 · 500) | Google Fonts — https://fonts.google.com/specimen/IBM+Plex+Mono | OFL 1.1 | 주문번호 · 결제 코드 같은 값 · 약관의 빈 자리 표시 |
 
-- 글꼴 파일을 저장소에 넣지 않았다. 기록 페이지 · 001 문로그와 같이 `fonts.googleapis.com` 한 줄로 받는다(`display=swap`). 못 받으면 시스템 글꼴(Malgun Gothic · Apple SD Gothic Neo · 모노는 Consolas · Menlo)로 선다 — 시스템 글꼴은 각 OS 의 것이라 여기 적지 않는다.
-- 방문자 브라우저가 바깥에서 받는 것은 이 글꼴 둘뿐이다(그 밖의 바깥 요청 0 · 스크립트 0 · 쿠키 0 · 브라우저 저장 0 — `check.py` 가 본다).
-- OFL 은 글꼴 자체를 따로 파는 것만 막는다. 공개 사이트에 쓰는 것은 된다.
+- 글꼴 파일은 사이트에 넣지 않고 Google Fonts 에서 받습니다(`display=swap`). 받지 못하면 각 기기의 기본 글꼴로 보입니다.
+- 글꼴을 받는 동안 방문하신 분 브라우저의 IP 주소가 Google 에 전해집니다(개인정보처리방침 7절).
+- OFL 은 글꼴 자체를 따로 파는 것만 막습니다. 사이트에 쓰는 것은 됩니다.
 
-## 재질(텍스처) — CC0 자리
+## 재질(텍스처)
 
 | 이름 | 만든 곳 | 라이선스 | 쓴 자리 |
 |---|---|---|---|
-| (없음) | — | — | 바깥 재질 파일을 쓰지 않았다 |
+| (없음) | — | — | 바깥 재질 파일을 쓰지 않았습니다 |
 
-- **필름 결**(화면 전체 4%)은 `index.html` 안의 SVG `feTurbulence` 로, **종이 결**(흰 틀 위)은 `assets/style.css` 의 `.tile::before` 에 넣은 SVG `feTurbulence` 데이터 주소로 화면 안에서 만든다. 파일도, 바깥 출처도 없다.
-- 뒤에 CC0 재질(ambientCG · Poly Haven 등)을 쓰게 되면 이 표에 이름 · 주소 · 쓴 자리를 줄로 더한다.
+- 바탕은 단색(흰색 · 옅은 회색)입니다. 재질 파일도, 바깥 출처도 없습니다.
 
-## 그림 · 도형 — 스튜디오 안에서 그린 것
+## 그림 · 도형
 
 | 것 | 출처 | 비고 |
 |---|---|---|
-| `assets/icon.svg`(탭 아이콘 — 흑연 바탕 · 선반 한 줄 · 흰 틀 한 점) | 이 세션이 SVG 로 직접 그림(`design/icon-1024.svg` 와 같은 결) | 바깥 그림 · 글꼴 0. 바탕 `#121418` = 기록 페이지 `accent` |
-| 정물 프레임(흰 틀 · 8% 여백 선 · 윗선 하이라이트 · 그림자 한 결 · 선반 한 줄 · 뒤의 은은한 빛) | CSS 로 그림 | 바깥 그림 0. 아이콘 · 스토어 배너와 같은 결 |
-| 상품 사진(`assets/picks/*`) | **아직 없다.** 들어오면 사진마다 출처(도매처 이미지 사용 허용 · 우리 촬영 · AI 로 바꾼 것)를 이 표에 줄로 더한다 | 도매처 사진은 엔진이 사용 허용 플래그를 확인한 것만. AI 로 바꾼 사진은 그 줄에 표시 |
-| `캡처/*.png` | 이 페이지를 헤드리스 크롬으로 찍은 확인용 그림 | 공개 저장소에는 올리지 않는다 |
+| 탭 아이콘(회벽 위 아치 벽감 하나) | 이 사이트가 SVG 로 직접 그림 | 바깥 그림 · 글꼴 0 |
+| 선 아이콘(분야 · 배송 · 반품 · 결제 · 문의 · 장바구니) | 이 사이트가 SVG 선으로 직접 그림(assets/ui.js) | 바깥 그림 · 아이콘 묶음 0 |
+| 상품 사진 | 상품을 보내는 협력 배송처가 쓰도록 허락한 사진 | 사진의 권리는 협력 배송처 등 권리자에게 있습니다. 화면에서는 크기와 자리만 맞추고 사진은 고치지 않습니다 |
 
-## 라이브러리
+## 스크립트
 
 | 이름 | 버전 | 라이선스 | 쓰는 곳 |
 |---|---|---|---|
-| (페이지 안) 없음 | — | — | `index.html` · `assets/style.css` · `assets/app.js` 는 순수 HTML · CSS · JS. 바깥 스크립트 0 |
-| 파이썬 표준 라이브러리 | 3.12 ~ 3.14 | PSF | `check.py` · `tools/capture.py`(도구 — 페이지에 실리지 않음) |
-| Pillow | 12.1.1(이 PC 시스템 파이썬) | MIT-CMU(HPND 계열) — https://github.com/python-pillow/Pillow/blob/main/LICENSE | `tools/capture.py` — 폰 폭 캡처를 390×844 로 잘라 낼 때만(페이지에 실리지 않음) |
-| Google Chrome(헤드리스, 이 PC 에 깔린 것) | 이 PC 의 버전 | 찍는 도구로만 쓴다 | `캡처/` 를 만들 때만. 저장소에 넣지 않는다 |
+| (사이트 안) 없음 | — | — | 쪽 · 스타일 · 스크립트는 바깥 라이브러리 없이 썼습니다 |
+| 토스페이먼츠 결제창 JavaScript SDK | v2 standard — `https://js.tosspayments.com/v2/standard`(토스페이먼츠가 주는 주소 그대로) | 토스페이먼츠 이용약관 | 결제가 열린 때의 주문서에서만 받습니다. 그 밖의 쪽에서는 받지 않습니다 |
+| 카카오 우편번호 서비스(postcode.v2.js) | `https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js`(공식 안내의 주소 그대로) | 무료 · 열쇠 없음 · 상업 이용 가능 — 공식 안내 https://postcode.map.kakao.com/guide (2026-10-25 열람). 아래 로고를 가리거나 스크립트를 고치면 이용이 제한될 수 있다고 적혀 있어 둘 다 하지 않습니다 | 주문서에서 손님이 '주소 찾기'를 누를 때만 받아 주소 칸 아래 상자에 띄웁니다. 누르기 전 · 그 밖의 쪽에서는 받지 않습니다. 고른 우편번호 · 주소는 이 쪽 입력 칸에만 채웁니다 |
 
-## 우리가 내는 것
+## 이 사이트의 글
 
-- 이 페이지의 글(고정 문구)과 CSS 로 그린 틀 · 아이콘은 GROO STUDIO 의 것이다. 상품 사진은 위 표의 줄마다 출처를 따른다.
+- 가게의 글 · 화면 디자인은 Still Goods 의 것입니다. 상품 사진은 위 표를 따릅니다.

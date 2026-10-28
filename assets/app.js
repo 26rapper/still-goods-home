@@ -1,138 +1,284 @@
-/* Still Goods · 스틸 굿즈 — 브랜드 홈페이지(GROO STUDIO 002)
-   하는 일 넷뿐이다.
-   1. data/picks.json 의 물건을 data-slot 자리에 채운다(사진 · 이름 · 규격 한 줄). 글은 전부 textContent 로만 넣는다(HTML 글자 끼워 넣기 0).
-      격자는 8자리로 시작하고, 항목의 자리 번호가 8을 넘으면 4개씩 늘린다(최대 40). 꼴이 어긋난 항목(자리 번호 밖 · 사진 경로가
-      assets/picks/ 밖 · 글이 너무 긺)은 건너뛴다. 셈 0.
-   2. config.json 의 스토어 주소 둘을 단추에 건다. https 주소일 때만 살아난다(아니면 '준비 중' 그대로, 누를 수 없음).
-   3. config.json 의 seller_public 이 true 일 때만 판매자 정보 절을 보인다(기본 숨김 — 자리표시가 화면에 안 나오게).
-   4. 화면에 들어오는 덩어리를 부드럽게 보인다(IntersectionObserver). 움직임 줄이기면 CSS 가 끈다.
-   바깥 요청 0(두 JSON 은 이 사이트 안 파일). 브라우저 저장 0. */
+/* Still Goods · 스틸 굿즈 — 홈 스크립트(3판: 시안 B 의 흐름 + 시안 A 의 모양)
+   하는 일
+   1. 무엇을 바꾸고 싶으세요? — data/products.json 의 분야(niche) 값으로 칸을 만든다. 팔 수 있는 상품 수를 적고, 0 개 분야는 칸을 만들지 않는다.
+   2. 이렇게 고르세요 — data/guides.json 의 분야(domains) 중 지금 팔 수 있는 상품이 있는 분야만 단추로, 고른 분야의 세 단계(없으면 절째 숨김).
+   3. 지금 파는 상품 — 팔고 있고 사진 있는 상품 앞에서부터 8개(config.json home_hide 뺌 · 같은 이름은 하나). 모두 배송비 포함일 때만 그 한 줄.
+   4. 문의 — config.json contact(카카오톡 · 네이버 · 이메일 · 전화)가 하나라도 있을 때만 단추. 비면 문의 절 · 바닥 '문의하기' 숨김.
+   5. config.json: 장터 주소(https 일 때만 '다른 곳에서도') · 판매자 정보(seller_public true 일 때 바닥) · shop_enabled false 면 가게 링크([data-shop]) 숨김.
+   손님에게 보이는 글은 assets/copy.ko.js(SG_COPY)에서, 아이콘 · 사진 칸은 assets/ui.js(SG_UI)에서. 글은 전부 textContent(HTML 끼워 넣기 0).
+   바깥 요청 0(JSON 은 이 사이트 안 파일) · 브라우저 저장 0. */
 (function () {
   'use strict';
 
-  document.documentElement.classList.add('js');
-
-  var PICKS_URL = 'data/picks.json';
-  var CONFIG_URL = 'config.json';
-  var SLOT_BASE = 8;      /* HTML 에 있는 자리 수 */
-  var SLOT_STEP = 4;      /* 넘치면 이만큼씩 */
-  var SLOT_MAX = 40;
-  var io = null;          /* 등장 관찰자(reveal 에서 만든다) */
+  var MAX_GRID = 8;
+  var RE_ID = /^[A-Za-z0-9_-]{1,40}$/;
+  var RE_PRODUCT_IMG = /^img\/[A-Za-z0-9_\-\/]+\.(jpe?g|png|webp|avif)$/i;
+  var shopOff = false;
 
   function $(sel, root) { return (root || document).querySelector(sel); }
-  function pad2(n) { return (n < 10 ? '0' : '') + n; }
-
+  function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
   function okText(v, max) { return typeof v === 'string' && v.length > 0 && v.length <= max && !/[<>]/.test(v); }
-  function okImg(u) {
-    return typeof u === 'string' &&
-      (/^assets\/picks\/[A-Za-z0-9_.-]+\.(webp|jpe?g|png|avif)$/i.test(u) || /^https:\/\/[^\s"'<>]+$/.test(u));
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined && text !== null) e.textContent = text;
+    return e;
   }
-  function okSlot(s) { return s === 'hero' || (typeof s === 'number' && Number.isInteger(s) && s >= 1 && s <= SLOT_MAX); }
-
-  /* 격자 자리 늘리기 — 마지막 자리를 복제해 비운다(HTML 글자 0) */
-  function ensureSlots(needed) {
-    var grid = $('#grid');
-    if (!grid) return;
-    var n = grid.children.length;
-    while (n < needed) {
-      var li = grid.lastElementChild.cloneNode(true);
-      n += 1;
-      li.setAttribute('data-slot', String(n));
-      li.style.setProperty('--i', String((n - 1) % SLOT_STEP));
-      li.classList.remove('has-img', 'in');
-      var img = $('img', li), idx = $('.idx', li), name = $('.name', li), spec = $('.spec', li);
-      if (img) { img.removeAttribute('src'); img.alt = ''; img.hidden = true; }
-      if (idx) idx.textContent = pad2(n);
-      if (name) name.textContent = '';
-      if (spec) spec.textContent = '';
-      grid.appendChild(li);
-      if (io) io.observe(li); else li.classList.add('in');
-    }
+  function won(n) { return Number(n).toLocaleString('ko-KR') + '원'; }
+  function getJSON(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
   }
 
-  /* 자리 하나 채우기 — 사진은 틀 안 8% 여백 안에, 이름 · 규격은 선반 아래 */
-  function fill(item) {
-    var box = document.querySelector('[data-slot="' + item.slot + '"]');
+  /* 손님에게 보이는 글 — assets/copy.ko.js 의 SG_COPY 한 곳에서 읽는다(키 = 문구 통합본 이름표). 없는 키는 키 그대로(check.py 가 막는다) */
+  var COPY = window.SG_COPY && typeof window.SG_COPY === 'object' ? window.SG_COPY : {};
+  function hasCopy(k) { return Object.prototype.hasOwnProperty.call(COPY, k) && typeof COPY[k] === 'string'; }
+  function T(k, v) {
+    var s = hasCopy(k) ? COPY[k] : k;
+    return v ? s.replace(/\{(\w+)\}/g, function (m, n) { return Object.prototype.hasOwnProperty.call(v, n) ? String(v[n]) : m; }) : s;
+  }
+  /* 쪽에 박힌 기본 글을 copy.ko.js 값으로 — data-copy(글) · data-copy-ph(placeholder) · data-copy-aria(aria-label) */
+  function applyCopy() {
+    $$('[data-copy]').forEach(function (e) { var k = e.getAttribute('data-copy'); if (hasCopy(k)) e.textContent = COPY[k]; });
+    $$('[data-copy-ph]').forEach(function (e) { var k = e.getAttribute('data-copy-ph'); if (hasCopy(k)) e.setAttribute('placeholder', COPY[k]); });
+    $$('[data-copy-aria]').forEach(function (e) { var k = e.getAttribute('data-copy-aria'); if (hasCopy(k)) e.setAttribute('aria-label', COPY[k]); });
+  }
+  var UI = window.SG_UI || null;
+  function icon(name) { return UI ? UI.icon(name) : el('span'); }
+
+  var NICHE_LABEL = {};   /* 옛 분야(방한 · 자동차) 이름은 쉬는 키 — 분야 값 그대로(감사 5차 B1) */
+  /* 분야 아이콘 — 새 분야 여섯(리서치 1차) + 지금 데이터의 분야. 모르는 분야는 꼬리표 아이콘 */
+  var CAT_ICON = { '욕실': 'bath', '셀프 집수리': 'tools', '수납정리': 'shelf', '세탁/빨래': 'shirt', '주방 정리': 'kitchen', '현관/신발': 'shoe' };
+  var CAT_ORDER = ['욕실', '셀프 집수리', '수납정리', '세탁/빨래', '주방 정리', '현관/신발'];
+  var BIZ = [['name', T('biz.name')], ['ceo', T('biz.ceo')], ['address', T('biz.address')], ['phone', T('biz.phone')], ['email', T('biz.email')],
+             ['biz_no', T('biz.biz_no')], ['mail_order_no', T('biz.mail_order_no')], ['hosting', T('biz.hosting')], ['privacy_officer', T('biz.privacy_officer')]];
+
+  /* 세트인가 — unit.parts 가 둘 이상이고 모두 이름 · 수량이 맞으면(shop.js cleanParts 와 같은 규칙). 카드 이름을 제목 + 구성 작은 줄로 나눌 때만 쓴다 */
+  function isSet(u) {
+    var raw = u && typeof u === 'object' && Array.isArray(u.parts) ? u.parts : [];
+    return raw.length >= 2 && raw.length <= 12 && raw.every(function (x) { return x && okText(x.name, 100) && typeof x.qty === 'number' && Number.isInteger(x.qty) && x.qty >= 1; });
+  }
+  /* 세트 카드 이름 — '욕실 벽 붙이는 4종(샤워기 거치대 · …)' 을 제목 + 작은 줄로 나눠 폰에서도 다 보이게(글자는 그대로, 괄호만 뺌) */
+  function nameParts(name, isSet) {
+    var a = name.indexOf('('), b = name.lastIndexOf(')');
+    if (!isSet || a < 1 || b !== name.length - 1) return [name, ''];
+    return [name.slice(0, a).trim(), name.slice(a + 1, b).trim()];
+  }
+  /* products.json 항목 → 보일 것(팔고 있는 것만) */
+  function fromProduct(it) {
+    if (!it || typeof it !== 'object' || typeof it.id !== 'string' || !RE_ID.test(it.id) || !okText(it.name, 100)) return null;
+    if (it.on_sale !== true || it.stock === 'out') return null;
+    var price = typeof it.price === 'number' && Number.isInteger(it.price) && it.price >= 0 ? it.price : null;
+    if (price === null) return null;
+    var thumb = typeof it.thumb === 'string' && RE_PRODUCT_IMG.test(it.thumb) ? 'data/' + it.thumb : null;
+    var sh = it.shipping && typeof it.shipping === 'object' ? it.shipping : {};
+    var rows = [];
+    (Array.isArray(it.detail) ? it.detail : []).forEach(function (b) {
+      if (b && b.type === 'table' && Array.isArray(b.rows)) b.rows.forEach(function (r) { if (Array.isArray(r) && r.length === 2 && okText(r[0], 40) && okText(r[1], 200)) rows.push(r); });
+    });
+    return { id: it.id, name: it.name, price: price, img: thumb, niche: okText(it.niche, 12) ? it.niche : '', free: sh.fee === 0, rows: rows, set: isSet(it.unit) };
+  }
+  function spec(p, k) { for (var i = 0; i < p.rows.length; i++) if (p.rows[i][0] === k) return p.rows[i][1]; return ''; }
+  /* 1m당 값 — '크기 Nm' 와 '수량 N개'(같은 것 여러 개, 구성에 ×)일 때만 */
+  function perMeter(p) {
+    var m = /^(\d+(?:\.\d+)?)m$/.exec(spec(p, '크기')), n = /^(\d+)개$/.exec(spec(p, '수량'));
+    if (!m || !n || spec(p, '구성').indexOf('×') < 0) return null;
+    var total = Number(m[1]) * Number(n[1]);
+    return total > 0 ? Math.round(p.price / total / 10) * 10 : null;
+  }
+
+  /* 1 분야 칸 */
+  function paintCats(items) {
+    var box = $('#cats');
     if (!box) return;
-    var img = $('img', box), name = $('.name', box), spec = $('.spec', box);
-    if (!img || !okImg(item.img)) return;   /* 사진 경로가 어긋나면 항목째 건너뛴다(빈 틀 아래 글만 남지 않게) */
-    img.alt = okText(item.alt, 120) ? item.alt : '';
-    img.src = item.img;
-    img.hidden = false;
-    box.classList.add('has-img');
-    if (name && okText(item.name, 40)) name.textContent = item.name;
-    if (spec && okText(item.spec, 60)) spec.textContent = item.spec;
+    var count = {};
+    items.forEach(function (p) { if (p.niche) count[p.niche] = (count[p.niche] || 0) + 1; });
+    var names = Object.keys(count).sort(function (a, b) {
+      var ia = CAT_ORDER.indexOf(a), ib = CAT_ORDER.indexOf(b);
+      if (ia >= 0 || ib >= 0) return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+      return count[b] - count[a];
+    });
+    while (box.firstChild) box.removeChild(box.firstChild);
+    names.forEach(function (n, i) {
+      var li = el('li'), a = el('a', 'tile rise');
+      a.style.setProperty('--i', String(i));
+      a.href = 'shop.html?niche=' + encodeURIComponent(n);
+      var ic = el('span', 'tile-ic'); ic.appendChild(icon(CAT_ICON[n] || 'tag')); a.appendChild(ic);
+      a.appendChild(el('b', 'tile-name', NICHE_LABEL[n] || n));
+      var go = el('span', 'tile-go'); go.appendChild(el('span', null, T('cats.count', { n: count[n] }))); go.appendChild(icon('arrow')); a.appendChild(go);
+      li.appendChild(a);
+      box.appendChild(li);
+    });
+    box.hidden = names.length === 0 || shopOff;
   }
 
-  function loadPicks() {
-    fetch(PICKS_URL, { cache: 'no-store' }).then(function (r) {
-      return r.ok ? r.json() : [];
-    }).then(function (list) {
-      if (!Array.isArray(list)) return;
-      var items = list.filter(function (it) { return it && typeof it === 'object' && okSlot(it.slot) && okImg(it.img); });
-      var top = SLOT_BASE;
-      items.forEach(function (it) { if (typeof it.slot === 'number' && it.slot > top) top = it.slot; });
-      ensureSlots(Math.min(SLOT_MAX, Math.ceil(top / SLOT_STEP) * SLOT_STEP));
-      items.forEach(fill);
-    }).catch(function () { /* 못 읽으면 빈 틀 그대로 */ });
+  /* 2 이렇게 고르세요(guides.json domains — 리서치 꼴) */
+  function cleanSteps(v) {
+    var out = [];
+    (Array.isArray(v) ? v : []).slice(0, 5).forEach(function (s) {
+      if (s && okText(s.title, 40)) out.push({ title: s.title, desc: okText(s.text, 160) ? s.text : '' });
+    });
+    return out;
+  }
+  /* 고를 때 이런 점도(domains[].cautions — 많이 나온 차례로 옮겨 둠) 1~3줄 */
+  function cleanCautions(v) {
+    var out = [];
+    (Array.isArray(v) ? v : []).forEach(function (c) { if (out.length < 3 && c && okText(c.text, 120) && out.indexOf(c.text) < 0) out.push(c.text); });
+    return out;
+  }
+  function paintGuide(g, items) {
+    var ol = $('#guideSteps'), sec = $('#guide'), tabs = $('#guideTabs'), go = $('#guideGo');
+    if (!sec || !ol) return;
+    var count = {};
+    items.forEach(function (p) { if (p.niche) count[p.niche] = (count[p.niche] || 0) + 1; });
+    var list = (g && Array.isArray(g.domains) ? g.domains : []).filter(function (d) {
+      return d && typeof d.id === 'string' && count[d.id] && cleanSteps(d.steps).length;
+    }).sort(function (a, b) {
+      var ia = CAT_ORDER.indexOf(a.id), ib = CAT_ORDER.indexOf(b.id);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+    sec.hidden = list.length === 0;
+    if (!list.length) return;
+    function show(d) {
+      while (ol.firstChild) ol.removeChild(ol.firstChild);
+      cleanSteps(d.steps).forEach(function (s, i) {
+        var li = el('li');
+        li.appendChild(el('span', 'num', String(i + 1)));
+        var box = el('div'); box.appendChild(el('b', null, s.title)); if (s.desc) box.appendChild(el('p', null, s.desc));
+        li.appendChild(box);
+        ol.appendChild(li);
+      });
+      var cbox = $('#guideCautions'), cul = $('#guideCautionList');
+      if (cbox && cul) {
+        while (cul.firstChild) cul.removeChild(cul.firstChild);
+        var cs = cleanCautions(d.cautions);
+        cs.forEach(function (t) { cul.appendChild(el('li', null, t)); });
+        cbox.hidden = cs.length === 0;
+      }
+      $$('button', tabs).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-id') === d.id)); });
+      if (go && !shopOff) {
+        go.href = 'shop.html?niche=' + encodeURIComponent(d.id);
+        while (go.firstChild) go.removeChild(go.firstChild);
+        go.appendChild(el('span', null, T('guide.go', { cat: NICHE_LABEL[d.id] || d.id })));
+        go.appendChild(icon('arrow'));
+        go.hidden = false;
+      }
+    }
+    while (tabs.firstChild) tabs.removeChild(tabs.firstChild);
+    if (list.length > 1) {
+      list.forEach(function (d) {
+        var b = el('button', 'chip', NICHE_LABEL[d.id] || d.id);
+        b.type = 'button';
+        b.setAttribute('data-id', d.id);
+        b.addEventListener('click', function () { show(d); });
+        tabs.appendChild(b);
+      });
+    }
+    tabs.hidden = list.length < 2;
+    show(list[0]);
   }
 
-  /* 스토어 단추 — https 주소일 때만 켠다 */
+  /* 3 지금 파는 상품 */
+  function card(p, i) {
+    var li = el('li'), a = el('a', 'card rise');
+    a.style.setProperty('--i', String(i % 4));
+    a.href = shopOff ? '#top' : 'item.html?id=' + encodeURIComponent(p.id);
+    a.appendChild(UI ? UI.pic(p.img, p.name, { lazy: i > 3 }) : el('div', 'pic'));
+    var info = el('div', 'card-info');
+    var nm = nameParts(p.name, p.set);
+    info.appendChild(el('span', 'card-name', nm[0]));
+    if (nm[1]) info.appendChild(el('span', 'card-sub', nm[1]));
+    var pr = el('div', 'card-price');
+    pr.appendChild(el('b', null, won(p.price)));
+    if (p.free) pr.appendChild(el('span', 'chip-ok', T('badge.free_ship')));
+    info.appendChild(pr);
+    var pm = perMeter(p);
+    if (pm) info.appendChild(el('span', 'card-unit', T('price.unit', { p: pm.toLocaleString('ko-KR') })));
+    a.appendChild(info);
+    li.appendChild(a);
+    return li;
+  }
+  function paintGrid(items, hide) {
+    var grid = $('#grid'), seen = {}, list = [];
+    items.forEach(function (p) {
+      if (!p.img || hide.indexOf(p.id) >= 0 || seen[p.name] || list.length >= MAX_GRID) return;
+      seen[p.name] = 1; list.push(p);
+    });
+    while (grid.firstChild) grid.removeChild(grid.firstChild);
+    list.forEach(function (p, i) { grid.appendChild(card(p, i)); });
+    $('#picks').hidden = list.length === 0;
+    $('#gridSub').hidden = !(list.length && list.every(function (p) { return p.free; }));
+  }
+
+  /* 4 문의 — config.json contact */
+  function paintContact(c) {
+    var ct = c && c.contact && typeof c.contact === 'object' ? c.contact : {};
+    var box = $('#askBtns'), ways = [];
+    if (/^https:\/\/[^\s"'<>]+$/.test(ct.kakao || '')) ways.push([ct.kakao, 'chat', T('ask.kakao'), true]);
+    if (/^https:\/\/[^\s"'<>]+$/.test(ct.naver || '')) ways.push([ct.naver, 'chat', T('ask.naver'), true]);
+    if (/^[^\s@<>"']+@[^\s@<>"']+\.[A-Za-z]{2,}$/.test(ct.email || '')) ways.push(['mailto:' + ct.email, 'mail', T('ask.email'), false]);
+    if (/^[0-9][0-9-]{7,14}$/.test(ct.phone || '')) ways.push(['tel:' + ct.phone.replace(/-/g, ''), 'phone', T('ask.phone'), false]);
+    if (box) {
+      while (box.firstChild) box.removeChild(box.firstChild);
+      ways.forEach(function (w) {
+        var a = el('a', 'btn ghost'); a.href = w[0];
+        if (w[3]) { a.target = '_blank'; a.rel = 'noopener'; }
+        a.appendChild(icon(w[1])); a.appendChild(el('span', null, w[2]));
+        box.appendChild(a);
+      });
+    }
+    var hours = $('#askHours');
+    if (hours) { hours.hidden = !(ways.length && okText(ct.hours, 40)); if (!hours.hidden) hours.textContent = T('ask.hours', { h: ct.hours }); }
+    if ($('#ask')) $('#ask').hidden = ways.length === 0;
+    $$('[data-contact]').forEach(function (e) { e.hidden = ways.length === 0; });
+  }
+
+  /* 5 장터 단추 · 판매자 정보 · 가게 링크 */
   function arm(a, url) {
-    if (!a) return;
-    if (/^https:\/\/[^\s"'<>]+$/.test(url || '')) {
-      a.href = url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.classList.remove('is-off');
-      a.removeAttribute('aria-disabled');
-      var pend = $('.pend', a), arrow = $('.arrow', a);
-      if (pend) pend.hidden = true;
-      if (arrow) arrow.hidden = false;
+    if (!a || !/^https:\/\/[^\s"'<>]+$/.test(url || '')) return false;
+    a.href = url; a.target = '_blank'; a.rel = 'noopener';
+    a.classList.remove('is-off'); a.removeAttribute('aria-disabled'); a.hidden = false;
+    return true;
+  }
+  function paintBiz(c) {
+    var box = $('#biz');
+    if (!box || c.seller_public !== true) return;
+    var s = c.seller && typeof c.seller === 'object' ? c.seller : {}, n = 0;
+    while (box.firstChild) box.removeChild(box.firstChild);
+    BIZ.forEach(function (f) {
+      var v = s[f[0]];
+      if (!okText(v, 120) || !v.trim()) return;
+      var row = el('div'); row.appendChild(el('dt', null, f[1])); row.appendChild(el('dd', null, v)); box.appendChild(row);
+      n += 1;
+    });
+    box.hidden = n === 0;
+  }
+  function paintConfig(c) {
+    var a = arm($('#goCoupang'), c.coupang_url), b = arm($('#goNaver'), c.naver_url);
+    if (a || b) $('#stores').hidden = false;
+    paintBiz(c);
+    paintContact(c);
+    if (c.shop_enabled === false) {
+      shopOff = true;
+      $$('[data-shop]').forEach(function (e) { e.hidden = true; });
     }
   }
-  function loadConfig() {
-    var links = [$('#goCoupang'), $('#goNaver')];
-    links.forEach(function (a) {
-      if (a) a.addEventListener('click', function (e) { if (a.classList.contains('is-off')) e.preventDefault(); });
-    });
-    fetch(CONFIG_URL, { cache: 'no-store' }).then(function (r) {
-      return r.ok ? r.json() : null;
-    }).then(function (c) {
-      if (!c || typeof c !== 'object') return;
-      arm(links[0], c.coupang_url);
-      arm(links[1], c.naver_url);
-      /* 판매자 정보 — true 일 때만. 안에 든 .reveal 은 바로 보인다(숨겨져 있던 동안 관찰되지 않았으므로) */
-      var seller = $('#seller');
-      if (seller && c.seller_public === true) {
-        seller.hidden = false;
-        Array.prototype.forEach.call(seller.querySelectorAll('.reveal'), function (el) {
-          if (io) io.observe(el); else el.classList.add('in');
-        });
-      }
-    }).catch(function () { /* 못 읽으면 '준비 중' · 숨김 그대로 */ });
-  }
+  /* 숨긴 단추가 눌리지 않게 */
+  $$('#goCoupang, #goNaver').forEach(function (a) {
+    a.addEventListener('click', function (e) { if (a.classList.contains('is-off')) e.preventDefault(); });
+  });
 
-  /* 부드러운 등장 — 한 번만. 관찰이 안 되는 브라우저면 바로 다 보인다 */
-  function reveal() {
-    var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-    if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
-    /* 처음부터 화면 안에 있는 것은 관찰자를 기다리지 않고 바로 보인다(첫 화면이 타이밍에 기대지 않게) */
-    var vh = window.innerHeight || document.documentElement.clientHeight;
-    els = els.filter(function (el) {
-      var r = el.getBoundingClientRect();
-      if (r.top < vh && r.bottom > 0) { el.classList.add('in'); return false; }
-      return true;
-    });
-    io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    els.forEach(function (el) { io.observe(el); });
-  }
-
-  reveal();
-  loadConfig();
-  loadPicks();
+  applyCopy();
+  /* 한 줄 약속 — 통합본에서 문구가 오기 전(빈 값)엔 숨김 */
+  var pledge = $('#pledge');
+  if (pledge) pledge.hidden = !(hasCopy('home.pledge') && COPY['home.pledge'].trim());
+  Promise.all([getJSON('config.json'), getJSON('data/products.json'), getJSON('data/guides.json')]).then(function (r) {
+    var conf = r[0] && typeof r[0] === 'object' ? r[0] : {};
+    paintConfig(conf);
+    var items = [];
+    (r[1] && Array.isArray(r[1].items) ? r[1].items : []).slice(0, 500).forEach(function (it) { var p = fromProduct(it); if (p) items.push(p); });
+    var hide = Array.isArray(conf.home_hide) ? conf.home_hide.filter(function (x) { return typeof x === 'string' && RE_ID.test(x); }) : [];
+    paintCats(items);
+    paintGuide(r[2], items);
+    paintGrid(items, hide);
+  });
 })();

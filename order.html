@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>주문 조회 — Still Goods 스틸 굿즈</title>
+<meta name="description" content="Still Goods 스틸 굿즈 주문 조회 — 주문번호와 휴대폰 번호로 찾고, 취소 · 반품 · 교환을 신청합니다.">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<!-- 가게 — 주문 조회 · 취소 · 반품 신청(조회는 POST) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/shop.css">
+</head>
+<body data-page="order">
+
+<header class="hd">
+  <div class="wrap hd-row">
+    <a class="wm" href="index.html" aria-label="Still Goods 스틸 굿즈 처음으로" data-copy-aria="brand.home_aria"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a>
+    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria"><a href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a href="cart.html" data-nav="cart"><span data-icon="cart"></span><span data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a></nav>
+  </div>
+</header>
+
+<main class="page" id="top">
+  <div class="wrap">
+    <div class="page-head rise">
+      <h1 data-copy="order.title">주문 조회</h1>
+      <p class="lede" data-copy="order.sub">주문번호와 휴대폰 번호로 주문 내역을 확인할 수 있어요.</p>
+      <p class="note" id="orderMode"></p>
+    </div>
+    <form class="lookup" id="lookForm" novalidate>
+      <div class="field"><label for="o-id" data-copy="order.id_label">주문번호</label><input class="input" id="o-id" name="orderId" autocomplete="off" spellcheck="false" maxlength="64" placeholder="결제 완료 화면의 주문번호" data-copy-ph="order.id_placeholder"></div>
+      <div class="field"><label for="o-ph" data-copy="phone.label">휴대폰 번호</label><input class="input" id="o-ph" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="숫자만 입력해 주세요" data-copy-ph="order.phone_placeholder"></div>
+      <button type="submit" class="btn" data-copy="order.submit">조회하기</button>
+    </form>
+    <p class="msg" id="lookMsg" role="status" aria-live="polite" style="margin-top:16px"></p>
+    <div class="panel" id="lookOut" hidden></div>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top"><a class="wm" href="index.html"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a></div>
+    <nav class="ft-links" aria-label="약관과 안내" data-copy-aria="footer.links_aria"><a href="policy/terms.html" data-copy="footer.terms">이용약관</a><a href="policy/privacy.html"><b data-copy="footer.privacy">개인정보처리방침</b></a><a href="policy/refund.html" data-copy="footer.refund">교환·반품·환불</a><a href="order.html" data-copy="nav.order">주문 조회</a><a href="index.html#ask" data-contact hidden data-copy="nav.inquiry">문의하기</a><a href="LICENSES.md" data-copy="footer.info_link">이용 안내</a></nav>
+    <dl class="biz" id="biz" hidden></dl>
+    <p class="copy" data-copy="footer.copyright">© 2026 Still Goods</p>
+  </div>
+</footer>
+
+<script src="assets/copy.ko.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/shop.js"></script>
+</body>
+</html>

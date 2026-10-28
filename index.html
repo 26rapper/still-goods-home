@@ -4,143 +4,102 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Still Goods 스틸 굿즈</title>
-<meta name="description" content="Still Goods · 스틸 굿즈 — 생활 소도구를 골라 흰 바탕에 놓고 보여 드립니다. 재고 없이 도매처에서 직접 보냅니다. 판매는 쿠팡 · 네이버 스마트스토어에서만.">
-<meta name="theme-color" content="#0a0a0b">
-<meta property="og:title" content="Still Goods 스틸 굿즈">
-<meta property="og:description" content="흰 바탕에 가만히 놓인 물건. 판매는 쿠팡 · 네이버 스마트스토어에서만.">
-<meta property="og:type" content="website">
+<meta name="description" content="Still Goods 스틸 굿즈 — 집을 직접 관리할 때 필요한 생활용품을 분야별로 골라 보세요.">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-<!--
-  Still Goods · 스틸 굿즈 — 브랜드 홈페이지(팔지 않는 얼굴). GROO STUDIO 002.
-  이 폴더(brand/)가 뿌리인 독립 정적 사이트다. 바깥 요청은 Google Fonts(OFL 1.1) 하나뿐 — 스크립트 · 분석 도구 · 쿠키 0.
-  글: 데이터와 고정 문구만(느낌표 · 이모지 · 말 걸기 · 과장 · 가격 · '구매' · '할인' 0). 숫자 셈 0.
-  채우는 자리
-    data/picks.json   — 고른 물건: [{"slot": 1~40 또는 "hero", "img": "assets/picks/01.webp", "alt": "…", "name": "이름", "spec": "규격 한 줄"}]
-                        격자는 8자리로 시작하고 항목이 8을 넘으면 4개씩 늘어난다(data/picks.example.json · README 3절)
-    config.json       — 스토어 주소: {"coupang_url": "https://…", "naver_url": "https://…"}  (https 가 아니면 '준비 중' 으로 선다)
-                        판매자 정보: "seller_public": true 일 때만 ⑥ 절을 보인다(기본 false — 자리표시가 화면에 안 보인다)
-    판매자 정보       — 아래 {{…}} 자리표시 일곱(전자상거래법 제13조 칸)을 글자로 바꾼다(README 5절 · check.py 가 남은 자리를 센다)
--->
+<!-- 홈(3판) — 무엇을 바꾸고 싶으세요?(분야 칸 — data/products.json 의 분야 값) → 이렇게 고르세요(data/guides.json) → 지금 파는 상품 → 주문 전에 알아 두세요 → 문의(config.json contact) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/shop.css">
 </head>
-<body>
-<svg class="grain" aria-hidden="true"><filter id="grainF"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence></filter><rect width="100%" height="100%" filter="url(#grainF)"></rect></svg>
+<body data-page="home">
 
-<header class="top">
-  <div class="wrap row">
-    <h1 class="wm"><a href="#top" class="wm-a"><span class="en">Still Goods</span><span class="ko">스틸 굿즈</span></a></h1>
-    <span class="mark" aria-label="GROO STUDIO 002"><span class="g">GROO</span><span class="s">STUDIO</span><span class="n">002</span></span>
+<header class="hd">
+  <div class="wrap hd-row">
+    <a class="wm" href="index.html" aria-label="Still Goods 스틸 굿즈 처음으로" data-copy-aria="brand.home_aria"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a>
+    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria" data-shop><a href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a href="cart.html" data-nav="cart"><span data-icon="cart"></span><span data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a></nav>
   </div>
 </header>
 
 <main id="top">
-
-  <!-- ② 첫 화면 — 1024 이상은 두 단(왼쪽 글 · 오른쪽 정물 프레임), 그 아래는 세로 -->
-  <section class="hero" aria-labelledby="lead">
-    <div class="wrap hero-grid">
-      <div class="hero-text">
-        <p class="eyebrow">흰 바탕 · 한 점 · 그림자 한 결</p>
-        <h2 class="lead" id="lead">흰 바탕에 가만히 놓인 물건</h2>
-        <p class="sub">생활 소도구를 골라 흰 바탕에 놓고 보여 드립니다. 재고 없이 도매처에서 직접 보냅니다.</p>
-        <span class="cue" aria-hidden="true"></span>
-      </div>
-      <figure class="frame frame-hero reveal" data-slot="hero">
-        <div class="pedestal">
-          <div class="tile"><img alt="" hidden decoding="async"></div>
-          <span class="ground" aria-hidden="true"></span>
-        </div>
-        <span class="shelf" aria-hidden="true"></span>
-        <figcaption class="cap"><span class="name"></span><span class="spec"></span></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ③ 고른 물건 — 흰 정물 프레임 8자리로 시작(data/picks.json 이 채우고, 8을 넘으면 app.js 가 4개씩 늘린다) -->
-  <section class="picks" id="picks" aria-labelledby="picks-h">
+  <section class="ask-hero" aria-labelledby="qH">
     <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="eyebrow">PICKS</span>
-        <h2 id="picks-h">고른 물건</h2>
-        <p class="rule">흰 바탕에 한 점씩. 이름과 규격만 적는다.</p>
-      </div>
-      <ol class="grid" id="grid">
-        <li class="frame reveal" data-slot="1" style="--i:0"><div class="pedestal"><div class="tile"><img alt="" hidden loading="lazy" decoding="async"><span class="idx" aria-hidden="true">01</span></div><span class="ground" aria-hidden="true"></span></div><span class="shelf" aria-hidden="true"></span><div class="cap"><span class="name"></span><span class="spec"></span></div></li>
-        <li class="frame reveal" data-slot="2" style="--i:1"><div class="pedestal"><div class="tile"><img alt="" hidden loading="lazy" decoding="async"><span class="idx" aria-hidden="true">02</span></div><span class="ground" aria-hidden="true"></span></div><span class="shelf" aria-hidden="true"></span><div class="cap"><span class="name"></span><span class="spec"></span></div></li>
-        <li class="frame reveal" data-slot="3" style="--i:2"><div class="pedestal"><div class="tile"><img alt="" hidden loading="lazy" decoding="async"><span class="idx" aria-hidden="true">03</span></div><span class="ground" aria-hidden="true"></span></div><span class="shelf" aria-hidden="true"></span><div class="cap"><span class="name"></span><span class="spec"></span></div></li>
-        <li class="frame reveal" data-slot="4" style="--i:3"><div class="pedestal"><div class="tile"><img alt="" hidden loading="lazy" decoding="async"><span class="idx" aria-hidden="true">04</span></div><span class="ground" aria-hidden="true"></span></div><span class="shelf" aria-hidden="true"></span><div class="cap"><span class="name"></span><span class="spec"></span></div></li>
-        <li class="frame reveal" data-slot="5" style="--i:4"><div class="pedestal"><div class="tile"><img alt="" hidden loading="lazy" decoding="async"><span class="idx" aria-hidden="true">05</span></div><span class="ground" aria-hidden="true"></span></div><span class="shelf" aria-hidden="true"></span><div class="cap"><span class="name"></span><span class="spec"></span></div></li>
-        <li class="frame reveal" data-slot="6" style="--i:5"><div class="pedestal"><div class="tile"><img alt="" hidden loading="lazy" decoding="async"><span class="idx" aria-hidden="true">06</span></div><span class="ground" aria-hidden="true"></span></div><span class="shelf" aria-hidden="true"></span><div class="cap"><span class="name"></span><span class="spec"></span></div></li>
-        <li class="frame reveal" data-slot="7" style="--i:6"><div class="pedestal"><div class="tile"><img alt="" hidden loading="lazy" decoding="async"><span class="idx" aria-hidden="true">07</span></div><span class="ground" aria-hidden="true"></span></div><span class="shelf" aria-hidden="true"></span><div class="cap"><span class="name"></span><span class="spec"></span></div></li>
-        <li class="frame reveal" data-slot="8" style="--i:7"><div class="pedestal"><div class="tile"><img alt="" hidden loading="lazy" decoding="async"><span class="idx" aria-hidden="true">08</span></div><span class="ground" aria-hidden="true"></span></div><span class="shelf" aria-hidden="true"></span><div class="cap"><span class="name"></span><span class="spec"></span></div></li>
-      </ol>
+      <p class="pledge" id="pledge" data-copy="home.pledge" hidden>집을 조금 더 편하게.</p>
+      <h1 id="qH" data-copy="home.q_title">무엇을 바꾸고 싶으세요?</h1>
+      <p class="lede" data-copy="home.q_sub">바꾸고 싶은 곳을 고르면 그 분야 상품을 보여 드려요.</p>
+      <ul class="tiles" id="cats" aria-label="분야" data-copy-aria="filter.aria" data-shop></ul>
     </div>
   </section>
 
-  <!-- ④ 스토어로 가기 — 주소는 config.json. https 가 아니면 '준비 중' -->
-  <section class="stores" id="stores" aria-labelledby="stores-h">
+  <!-- 이렇게 고르세요 — data/guides.json 의 분야(domains) 중 지금 상품이 있는 분야의 세 단계(없으면 숨김) + 그 분야 cautions 1~3줄(없으면 그 상자만 숨김) -->
+  <section class="sec" id="guide" aria-labelledby="guideH" hidden>
     <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="eyebrow">STORES</span>
-        <h2 id="stores-h">스토어로 가기</h2>
-        <p class="rule">판매는 두 장터 안에서만 한다.</p>
+      <h2 class="h2" id="guideH" data-copy="guide.title">이렇게 고르세요</h2>
+      <div class="filters guide-tabs" id="guideTabs" role="group" aria-label="분야 고르기" data-copy-aria="guide.tabs_aria"></div>
+      <ol class="guide-steps" id="guideSteps"></ol>
+      <div class="cautions" id="guideCautions" hidden>
+        <h3 data-copy="guide.cautions_title">고를 때 이런 점도 봐 주세요</h3>
+        <ul id="guideCautionList"></ul>
       </div>
-      <div class="btns reveal">
-        <a class="go is-off" id="goCoupang" href="#" aria-disabled="true"><span class="t">쿠팡</span><span class="pend">준비 중</span><span class="arrow" aria-hidden="true" hidden>→</span></a>
-        <a class="go is-off" id="goNaver" href="#" aria-disabled="true"><span class="t">네이버 스마트스토어</span><span class="pend">준비 중</span><span class="arrow" aria-hidden="true" hidden>→</span></a>
-      </div>
+      <a class="textlink" id="guideGo" href="shop.html" data-shop hidden></a>
     </div>
   </section>
 
-  <!-- ⑤ 어떻게 고르나 — 사실 세 줄 -->
-  <section class="how" id="how" aria-labelledby="how-h">
+  <section class="sec" id="picks" aria-labelledby="picksH">
     <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="eyebrow">HOW</span>
-        <h2 id="how-h">어떻게 고르나</h2>
+      <div class="sec-head">
+        <div><h2 class="h2" id="picksH" data-copy="home.grid_title">지금 파는 상품</h2><p class="sub" id="gridSub" data-copy="home.grid_sub" hidden>모두 배송비가 포함된 가격이에요.</p></div>
+        <a class="btn ghost small" href="shop.html" data-shop data-copy="home.all">전체 상품 보기</a>
       </div>
-      <ol class="lines reveal">
-        <li><span class="n" aria-hidden="true">01</span><p>재고를 두지 않는다. 주문이 오면 도매처에서 직접 보낸다.</p></li>
-        <li><span class="n" aria-hidden="true">02</span><p>사진은 흰 바탕에 한 점. 글자와 장식을 넣지 않는다.</p></li>
-        <li><span class="n" aria-hidden="true">03</span><p>품절과 가격은 매시간 도매처에 맞춘다.</p></li>
-      </ol>
+      <ul class="grid" id="grid"></ul>
     </div>
   </section>
 
-  <!-- ⑥ 판매자 정보 — 전자상거래법 제13조 칸. config.json 의 seller_public 이 true 일 때만 보인다(기본 숨김). {{…}} 는 자리표시(공개 전 글자로 바꾼다) -->
-  <section class="seller" id="seller" aria-labelledby="seller-h" hidden>
+  <section class="sec" id="promise" aria-labelledby="promiseH">
     <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="eyebrow">SELLER</span>
-        <h2 id="seller-h">판매자 정보</h2>
+      <div class="promise">
+        <h2 class="h2" id="promiseH" data-copy="promise.title">주문 전에 알아 두세요</h2>
+        <ul class="three">
+          <li><span class="three-ic" data-icon="truck"></span><div><b data-copy="home.trust_1.title">배송비 포함</b><span data-copy="home.trust_1.desc">상품 가격에 배송비가 포함되어 있어요.</span></div></li>
+          <li><span class="three-ic" data-icon="box"></span><div><b data-copy="home.trust_2.title">2영업일 안에 출고</b><span data-copy="home.trust_2.desc">결제 확인 후 2영업일 안에 출고해요.</span></div></li>
+          <li><span class="three-ic" data-icon="back"></span><div><b data-copy="home.trust_3.title">7일 안 교환·반품</b><span data-copy="home.trust_3.desc">상품을 받은 날부터 7일 안에 신청할 수 있어요.</span></div></li>
+          <li><span class="three-ic" data-icon="card"></span><div><b data-copy="three.pay">결제</b><span data-copy="checkout.real_note">결제는 토스페이먼츠 결제창에서 해요. 카드 정보는 가게에 저장되지 않아요.</span></div></li>
+        </ul>
       </div>
-      <dl class="info reveal">
-        <div><dt>상호</dt><dd><span class="ph">{{상호}}</span></dd></div>
-        <div><dt>대표</dt><dd><span class="ph">{{대표}}</span></dd></div>
-        <div><dt>주소</dt><dd><span class="ph">{{주소}}</span></dd></div>
-        <div><dt>전화</dt><dd><span class="ph">{{전화}}</span></dd></div>
-        <div><dt>이메일</dt><dd><span class="ph">{{이메일}}</span></dd></div>
-        <div><dt>사업자등록번호</dt><dd><span class="ph">{{사업자등록번호}}</span></dd></div>
-        <div><dt>통신판매업 신고번호</dt><dd><span class="ph">{{통신판매업신고번호}}</span></dd></div>
-      </dl>
     </div>
   </section>
 
+  <div class="wrap">
+    <section class="sec" id="ask" aria-labelledby="askH" hidden>
+      <div class="ask"><span class="ask-ic" data-icon="chat"></span><div class="ask-t"><b id="askH" data-copy="ask.title">궁금한 점이 있으세요?</b><p data-copy="ask.body">편한 방법으로 물어보세요. 확인하고 답해 드려요.</p><p class="note" id="askHours" hidden></p></div><div class="ask-btns" id="askBtns"></div></div>
+    </section>
+  </div>
+
+  <!-- 다른 곳에서도 — config.json 에 장터 주소(https)가 있을 때만 -->
+  <section class="sec stores" id="stores" aria-labelledby="storesH" hidden>
+    <div class="wrap">
+      <div class="sec-head"><div><h2 class="h2" id="storesH" data-copy="home.stores_title">다른 곳에서도</h2><p class="sub" data-copy="home.stores_sub">같은 상품을 장터에서도 팔아요.</p></div></div>
+      <div class="btns">
+        <a class="btn ghost go is-off" id="goCoupang" href="#" aria-disabled="true" hidden><span data-copy="home.store_coupang">쿠팡</span><span data-icon="arrow"></span></a>
+        <a class="btn ghost go is-off" id="goNaver" href="#" aria-disabled="true" hidden><span data-copy="home.store_naver">네이버 스마트스토어</span><span data-icon="arrow"></span></a>
+      </div>
+    </div>
+  </section>
 </main>
 
-<!-- ⑦ 바닥 — 기록 페이지 링크 · 라이선스 줄 · 각인 -->
-<footer class="foot">
+<footer class="ft">
   <div class="wrap">
-    <span class="foot-line" aria-hidden="true"></span>
-    <a class="rec" href="https://26rapper.github.io/still-goods/" rel="noopener"><span>판매 기록 보기</span><span class="arrow" aria-hidden="true">→</span></a>
-    <p class="license">글꼴 IBM Plex Mono · IBM Plex Sans KR(OFL 1.1) · 바깥 스크립트 0 · 쿠키 0</p>
-    <p class="copy">© 2026 Still Goods</p>
-    <span class="lock" aria-label="GROO STUDIO"><span class="t"><span class="g">GROO</span><span class="s">STUDIO</span></span></span>
+    <div class="ft-top"><a class="wm" href="index.html"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a></div>
+    <nav class="ft-links" aria-label="약관과 안내" data-copy-aria="footer.links_aria" data-shop><a href="policy/terms.html" data-copy="footer.terms">이용약관</a><a href="policy/privacy.html"><b data-copy="footer.privacy">개인정보처리방침</b></a><a href="policy/refund.html" data-copy="footer.refund">교환·반품·환불</a><a href="order.html" data-copy="nav.order">주문 조회</a><a href="#ask" data-contact hidden data-copy="nav.inquiry">문의하기</a><a href="LICENSES.md" data-copy="footer.info_link">이용 안내</a></nav>
+    <dl class="biz" id="biz" hidden></dl>
+    <p class="copy" data-copy="footer.copyright">© 2026 Still Goods</p>
   </div>
 </footer>
 
+<script src="assets/copy.ko.js"></script>
+<script src="assets/ui.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

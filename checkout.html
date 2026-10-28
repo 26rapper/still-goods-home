@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>주문서 — Still Goods 스틸 굿즈</title>
+<meta name="description" content="Still Goods 스틸 굿즈 주문서 — 회원 가입 없이 주문, 결제는 토스페이먼츠 결제창.">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<!-- 가게 — 주문서(받는 칸 다섯 · 동의 셋 · 결제창은 서버가 만든 주문으로만) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/shop.css">
+</head>
+<body data-page="checkout">
+
+<header class="hd">
+  <div class="wrap hd-row">
+    <a class="wm" href="index.html" aria-label="Still Goods 스틸 굿즈 처음으로" data-copy-aria="brand.home_aria"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a>
+    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria"><a href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a href="cart.html" data-nav="cart"><span data-icon="cart"></span><span data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a></nav>
+  </div>
+</header>
+
+<main class="page" id="top">
+  <div class="wrap">
+    <ol class="steps" aria-label="주문 단계" data-copy-aria="steps.aria"><li class="done" data-copy="steps.cart">장바구니</li><li aria-current="step" data-copy="steps.checkout">주문서</li><li data-copy="steps.pay">결제</li></ol>
+    <div class="page-head rise">
+      <h1 data-copy="checkout.title">주문하기</h1>
+      <p class="lede" data-copy="checkout.sub">회원가입 없이 주문할 수 있어요. 상품을 받을 분의 정보를 입력해 주세요. 카드 정보는 가게에 저장되지 않아요.</p>
+    </div>
+    <div class="empty" id="coEmpty" hidden><span data-copy="checkout.cart_empty">장바구니가 비어 있어요. 상품을 먼저 담아주세요.</span> <a href="shop.html" data-copy="cart.empty_cta">상품 보기</a></div>
+
+    <form class="split" id="orderForm" novalidate>
+      <div class="form" id="coWrap">
+        <fieldset class="fset">
+          <legend data-copy="checkout.legend_buyer">받는 분 정보</legend>
+          <div class="grid2">
+            <div class="field"><label for="f-name"><span data-copy="name.label">받는 분</span><span class="req" data-copy="form.required">필수</span></label><input class="input" id="f-name" name="name" autocomplete="name" maxlength="30" required placeholder="이름을 입력해 주세요" data-copy-ph="name.placeholder" aria-describedby="e-name"><p class="ferr" id="e-name" hidden></p></div>
+            <div class="field"><label for="f-phone"><span data-copy="phone.label">휴대폰 번호</span><span class="req" data-copy="form.required">필수</span></label><input class="input" id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="휴대폰 번호를 입력해 주세요" data-copy-ph="phone.placeholder" required aria-describedby="e-phone"><p class="ferr" id="e-phone" hidden></p></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend data-copy="checkout.legend_ship">배송지</legend>
+          <div class="grid2">
+            <div class="field"><label for="f-zip"><span data-copy="zip.label">우편번호</span><span class="req" data-copy="form.required">필수</span></label><div class="zip-row"><input class="input" id="f-zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="우편번호를 입력해 주세요" data-copy-ph="zip.placeholder" required aria-describedby="h-zip e-zip"><button type="button" class="btn line zip-btn" id="zipFind" aria-controls="zipLayer" aria-expanded="false" data-copy="zip.find" hidden>주소 찾기</button></div><p class="hint" id="h-zip" data-copy="zip.hint">우편번호는 숫자 5자리예요.</p><p class="ferr" id="e-zip" hidden></p></div>
+          </div>
+          <p class="ferr" id="zipMsg" role="status" hidden></p>
+          <!-- 주소 찾기 — '주소 찾기'를 누를 때만 카카오 우편번호 서비스를 받아 이 상자 안에 띄운다(다른 쪽 · 누르기 전에는 바깥 요청 0) -->
+          <div class="postcode" id="zipLayer" hidden>
+            <div class="postcode-hd"><b data-copy="zip.find">주소 찾기</b><button type="button" class="btn ghost" id="zipClose" data-copy="zip.close">닫기</button></div>
+            <div class="postcode-body" id="zipWrap"></div>
+          </div>
+          <div class="field"><label for="f-addr1"><span data-copy="addr1.label">주소</span><span class="req" data-copy="form.required">필수</span></label><input class="input" id="f-addr1" name="addr1" autocomplete="address-line1" maxlength="100" required placeholder="주소를 입력해 주세요" data-copy-ph="addr1.placeholder" aria-describedby="e-addr1"><p class="ferr" id="e-addr1" hidden></p></div>
+          <div class="field"><label for="f-addr2" data-copy="addr2.label">상세 주소</label><input class="input" id="f-addr2" name="addr2" autocomplete="address-line2" maxlength="100" placeholder="상세 주소를 입력해 주세요" data-copy-ph="addr2.placeholder" aria-describedby="e-addr2"><p class="ferr" id="e-addr2" hidden></p></div>
+          <div class="field"><label for="f-memo" data-copy="memo.label">배송 요청사항</label><input class="input" id="f-memo" name="memo" autocomplete="off" maxlength="100" placeholder="배송 시 요청할 내용을 적어주세요" data-copy-ph="memo.placeholder" aria-describedby="e-memo"><p class="ferr" id="e-memo" hidden></p></div>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend data-copy="checkout.legend_agree">동의</legend>
+          <div class="agree">
+            <label class="ck all"><input type="checkbox" id="agreeAll"><span class="grow" data-copy="agree.all">전체 동의하기</span></label>
+            <label class="ck"><input type="checkbox" name="terms" data-agree><span class="grow"><span data-copy="agree.terms">이용약관에 동의해요</span><span class="req" data-copy="form.required">필수</span></span><a href="policy/terms.html" target="_blank" rel="noopener" data-copy="agree.view">보기</a></label>
+            <label class="ck"><input type="checkbox" name="privacy" data-agree><span class="grow"><span data-copy="agree.privacy">개인정보 수집·이용에 동의해요</span><span class="req" data-copy="form.required">필수</span></span><a href="policy/privacy.html" target="_blank" rel="noopener" data-copy="agree.view">보기</a></label>
+            <details class="consent">
+              <summary data-copy="agree.detail">수집·이용 내용</summary>
+              <table class="tbl">
+                <tbody>
+                  <tr><th>목적</th><td>주문 접수 · 결제 확인 · 배송 · 주문 조회 · 취소 · 반품 · 교환 처리 · 문의 응대</td></tr>
+                  <tr><th>항목</th><td>이름 · 휴대폰 번호 · 우편번호 · 주소(기본 · 상세) · 배송 요청</td></tr>
+                  <tr><th>보유 기간</th><td>결제하지 않은 주문은 24시간 뒤 자동으로 지웁니다. 결제된 주문은 법령이 정한 거래 기록 보존 기간 동안 보존한 뒤 지웁니다(기간 <span class="todo">확인 필요</span>).</td></tr>
+                  <tr><th>배송을 위해 넘기는 곳</th><td>상품을 보내는 협력 배송처 — 이름 · 휴대폰 번호 · 주소 · 배송 요청(제3자 제공 · 처리 위탁 구분 <span class="todo">확인 필요</span>)</td></tr>
+                  <tr><th>동의하지 않을 권리</th><td>동의하지 않을 수 있습니다. 그 경우 주문할 수 없습니다.</td></tr>
+                </tbody>
+              </table>
+            </details>
+            <label class="ck"><input type="checkbox" name="payment" data-agree><span class="grow"><span data-copy="agree.payment">결제 및 주문 진행에 동의해요</span><span class="req" data-copy="form.required">필수</span></span><a href="policy/refund.html" target="_blank" rel="noopener" data-copy="agree.refund_link">환불 규정</a></label>
+            <!-- 배송을 위한 공급사 제공 동의 — 개인정보 보호법 제17조 2항 다섯 가지(받는 자 · 목적 · 항목 · 보유 기간 · 거부할 권리). 문구는 통합본 2판 · 자문 뒤(빈 키라 숨김). 보이면 체크해야 결제로 간다 -->
+            <div class="supplier-consent" data-slot hidden>
+              <label class="ck"><input type="checkbox" name="supplier" data-agree-slot><span class="grow"><span data-copy="agree.supplier"></span><span class="req" data-copy="form.required">필수</span></span></label>
+              <details class="consent">
+                <summary data-copy="agree.supplier_detail"></summary>
+                <table class="tbl">
+                  <tbody>
+                    <tr><th>받는 자</th><td data-copy="agree.supplier_to"></td></tr>
+                    <tr><th>목적</th><td data-copy="agree.supplier_purpose"></td></tr>
+                    <tr><th>항목</th><td data-copy="agree.supplier_items"></td></tr>
+                    <tr><th>보유 기간</th><td data-copy="agree.supplier_period"></td></tr>
+                    <tr><th>거부할 권리</th><td data-copy="agree.supplier_refuse"></td></tr>
+                  </tbody>
+                </table>
+              </details>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <aside class="summary" aria-labelledby="coSumH">
+        <h2 id="coSumH" data-copy="checkout.sum_title">주문 요약</h2>
+        <ul class="mini" id="coMini"></ul>
+        <dl class="sum-rows" id="coSum"></dl>
+        <p class="note split-note" id="coSplit" data-copy="cart.split_note" hidden>상품마다 보내는 곳이 달라 따로 도착할 수 있어요.</p>
+        <button type="submit" class="btn wide" id="payBtn" disabled data-copy="checkout.pay_preparing">결제 준비 중</button>
+        <p class="msg" id="payMsg" role="status" aria-live="polite"></p>
+        <p class="note" id="modeNote"></p>
+      </aside>
+    </form>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top"><a class="wm" href="index.html"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a></div>
+    <nav class="ft-links" aria-label="약관과 안내" data-copy-aria="footer.links_aria"><a href="policy/terms.html" data-copy="footer.terms">이용약관</a><a href="policy/privacy.html"><b data-copy="footer.privacy">개인정보처리방침</b></a><a href="policy/refund.html" data-copy="footer.refund">교환·반품·환불</a><a href="order.html" data-copy="nav.order">주문 조회</a><a href="index.html#ask" data-contact hidden data-copy="nav.inquiry">문의하기</a><a href="LICENSES.md" data-copy="footer.info_link">이용 안내</a></nav>
+    <dl class="biz" id="biz" hidden></dl>
+    <p class="copy" data-copy="footer.copyright">© 2026 Still Goods</p>
+  </div>
+</footer>
+
+<script src="assets/copy.ko.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/shop.js"></script>
+</body>
+</html>
