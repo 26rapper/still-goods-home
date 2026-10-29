@@ -452,7 +452,10 @@
     var pr = el('div', 'card-price');
     pr.appendChild(el('b', null, won(p.price)));
     if (p.shipping.fee === 0) pr.appendChild(el('span', 'card-ship', T('badge.free_ship')));   /* 4판: 배지 아님 — 값 옆 작은 회색 글 */
-    else if (p.shipping.fee !== null) pr.appendChild(el('span', 'card-ship', shipLabel(p.shipping.fee)));   /* 5판: '배송비 3,000원'(데이터) */
+    else if (p.shipping.fee !== null) {
+      pr.appendChild(el('span', 'card-ship', shipLabel(p.shipping.fee)));   /* 5판: '배송비 3,000원'(데이터) */
+      if (p.shipping.free_over !== null) pr.appendChild(el('span', 'card-ship', T('card.free_over', { amount: won(p.shipping.free_over) })));   /* '20,000원 이상 무료'(데이터 + 기능 표시) — 진열장에서 숨기지 않는다(총액 먼저, 전자상거래법 순차공개 금지) */
+    }
     info.appendChild(pr);
     var pm = perMeter(p);
     if (pm) info.appendChild(el('span', 'card-unit', T('price.unit', { p: pm.toLocaleString('ko-KR') })));

@@ -84,7 +84,8 @@
     var score = -1;
     (Array.isArray(it.image_scores) ? it.image_scores : []).forEach(function (v) { if (typeof v === 'number' && isFinite(v) && v > score) score = v; });
     var fee = typeof sh.fee === 'number' && Number.isInteger(sh.fee) && sh.fee >= 0 && sh.fee <= 200000 ? sh.fee : null;
-    return { id: it.id, name: it.name, price: price, img: thumb, niche: okText(it.niche, 12) ? it.niche : '', free: fee === 0, fee: fee, rows: rows, set: isSet(it.unit),
+    var freeOver = typeof sh.free_over === 'number' && Number.isInteger(sh.free_over) && sh.free_over > 0 && sh.free_over <= 100000000 ? sh.free_over : null;
+    return { id: it.id, name: it.name, price: price, img: thumb, niche: okText(it.niche, 12) ? it.niche : '', free: fee === 0, fee: fee, freeOver: freeOver, rows: rows, set: isSet(it.unit),
              face: it.face === true, score: score, white: Array.isArray(it.image_bg) && it.image_bg[0] === 'white' };
   }
   function spec(p, k) { for (var i = 0; i < p.rows.length; i++) if (p.rows[i][0] === k) return p.rows[i][1]; return ''; }
@@ -251,7 +252,10 @@
     if (nm[1]) info.appendChild(el('span', 'card-sub', nm[1]));
     var pr = el('div', 'card-price');
     pr.appendChild(el('b', null, won(p.price)));   /* 배지 0 — '배송비 포함'은 격자 위 한 줄(모두 무료일 때) */
-    if (p.fee) pr.appendChild(el('span', 'card-ship', T('sum.ship') + ' ' + won(p.fee)));   /* 5판: '배송비 3,000원'(데이터) — 목록 카드와 같은 꼴 */
+    if (p.fee) {
+      pr.appendChild(el('span', 'card-ship', T('sum.ship') + ' ' + won(p.fee)));   /* 5판: '배송비 3,000원'(데이터) — 목록 카드와 같은 꼴 */
+      if (p.freeOver !== null) pr.appendChild(el('span', 'card-ship', T('card.free_over', { amount: won(p.freeOver) })));   /* '20,000원 이상 무료' — 진열장에서도 조건을 같이 보인다 */
+    }
     info.appendChild(pr);
     var pm = perMeter(p);
     if (pm) info.appendChild(el('span', 'card-unit', T('price.unit', { p: pm.toLocaleString('ko-KR') })));
