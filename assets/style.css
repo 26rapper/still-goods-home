@@ -39,7 +39,8 @@ h1,h2,h3,p{margin:0}
 /* ── 머리 ── */
 .hd{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
 .hd-row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px}
-.wm{display:inline-flex;align-items:baseline;gap:10px;min-height:48px;white-space:nowrap}   /* 5판 3차: 위 12px 밀던 것 없앰 — 오른쪽 아이콘 · 메뉴와 같은 높이(오너 "아이콘이 위로 올라간 느낌") */
+.wm{display:inline-flex;align-items:baseline;gap:10px;white-space:nowrap}   /* min-height 48 을 없앰 — baseline 정렬 상자는 글을 위쪽에 붙여 줄 중심보다 11.5px 떠 있었다(재서 확인 2026-10-30). 줄 중심 맞춤은 .hd-row 가 한다 */
+.nav-cart [data-icon],.nav-menu [data-icon]{display:flex}   /* 아이콘 svg 아래 글꼴 여백(baseline) 때문에 4.6px 떠 보이던 것 */
 .wm-en{font-family:var(--f-display);font-size:28px;line-height:1;letter-spacing:-.01em;color:var(--ink)}
 .wm-en i{font-style:italic}
 .wm-ko{font-size:16px;font-weight:600;color:var(--ink-2)}

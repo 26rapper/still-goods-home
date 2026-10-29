@@ -780,7 +780,7 @@
     }
     var s = p.shipping;
     var fee = s.fee === null ? T('item.ship_unknown') + ' '
-      : (s.fee === 0 ? '' : T('item.ship_fee', { fee: won(s.fee) }) + (s.free_over !== null ? ' ' + T('item.ship_free_over', { amount: won(s.free_over) }) : '') + ' ');
+      : (s.fee === 0 ? '' : shipLabel(s.fee) + (s.free_over !== null ? ' · ' + T('card.free_over', { amount: won(s.free_over) }) : '') + '. ');   /* 데이터 + 기능 표시만('배송비 3,000원 · 20,000원 이상 무료.') — 문장은 오너 몫(copy-needed 4절). 5판 1차의 문장 둘은 2026-10-30 뺌 */
     line('truck', T('item.fact_ship'), fee + T('item.ship_2') + (s.days ? ' ' + T('item.ship_days', { d: s.days }) : ''));
     if (p.ship_from && filled('item.ship_from')) three.lastChild.lastChild.appendChild(el('span', 'ship-from', T('item.ship_from', { name: p.ship_from })));   /* '배송' 줄 아래 보내는 곳 */
     line('back', T('item.fact_return'), T('item.ship_3') + (p.return_fee !== null ? ' ' + T('item.return_fee', { fee: won(p.return_fee) }) : ''));   /* 반품 배송비는 데이터가 있을 때만 */

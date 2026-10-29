@@ -231,8 +231,6 @@ window.SG_COPY = {
   "item.fact_ship": "배송",
   "item.fact_return": "교환·반품",
   "three.pay": "결제",
-  "item.ship_fee": "배송비 {fee}이 따로 있어요.",
-  "item.ship_free_over": "{amount} 이상 주문하면 배송비가 없어요.",
   "item.ship_unknown": "배송비는 주문서에서 확인할 수 있어요.",
   "item.ship_days": "받기까지 {d}일 걸려요.",
   "item.photos_aria": "상품 사진 {n}장",
