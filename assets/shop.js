@@ -304,25 +304,33 @@
     c.push({ id: id, option: opt || '', qty: qty });
     return writeCart(c);
   }
-  /* calc:start — 배송비 셈 한 곳(규격 5판 · 서버 catalog.shipping_total 과 같은 규칙). 장바구니 · 주문서(맨 위 amount) · 요약이 모두 cartView → 이 함수를 쓴다.
-     상품마다 fee(그 상품 소계가 free_over 이상이면 0) → 같은 공급사 가명(key)이고 묶음배송(bundle true)이면 그 묶음에서 한 번(가장 큰 값),
-     bundle false · 공급사 모름이면 상품마다. fee 모름(null)이 하나라도 있으면 known false(그 묶음은 합에서 빠짐 — 화면은 '주문서에서 확인해요').
-     rows [{id, key, bundle, fee, free_over, sub}](장바구니 줄마다) → {groups [{ids, fee, sub}], of(줄마다 묶음 차례), ship, known}. check.py 가 이 덩어리를 node 로 시험한다 */
+  /* calc:start — 배송비 셈 한 곳(규격 5판 · 조건부 무료배송 2026-10-29 밤 — 서버 catalog.shipping_total 과 같은 규칙이어야 함). 장바구니 · 주문서(맨 위 amount) · 요약이 모두 cartView → 이 함수를 쓴다.
+     묶음 = 같은 공급사 가명(key)이고 묶음배송(bundle true)인 상품들, 아니면(bundle false · 공급사 모름) 상품 하나.
+     묶음 배송비 = 묶음 안 가장 큰 fee. 무료 기준 = 묶음 안 모든 상품에 free_over 가 있을 때 그중 가장 큰 값(하나라도 null 이면 기준 없음) —
+     묶음 상품값 합(sub) ≥ 기준이면 0. fee 모름(null)이 하나라도 있으면 known false(그 묶음은 합에서 빠짐 — 화면은 '주문서에서 확인해요').
+     rows [{id, key, bundle, fee, free_over, sub}](장바구니 줄마다) → {groups [{ids, fee, sub, over, left}], of(줄마다 묶음 차례), ship, known}.
+     over = 무료 기준(없으면 null) · left = 무료까지 남은 상품값(배송비가 붙을 때만, 아니면 0). check.py 가 이 덩어리를 node 로 시험한다 */
   function shipCalc(rows) {
-    var groups = [], at = {}, of = [], ship = 0, known = true, psub = {};
-    rows.forEach(function (r) { psub[r.id] = (psub[r.id] || 0) + r.sub; });   /* 같은 상품의 옵션 줄은 소계를 합쳐 free_over 와 견줌 */
+    var groups = [], at = {}, of = [], ship = 0, known = true;
     rows.forEach(function (r) {
       var g = r.key && r.bundle ? 's:' + r.key : 'p:' + r.id;
-      if (at[g] === undefined) { at[g] = groups.length; groups.push({ ids: [], fee: 0, sub: 0 }); }
+      if (at[g] === undefined) { at[g] = groups.length; groups.push({ ids: [], fees: [], overs: [], sub: 0 }); }
       var x = groups[at[g]];
       if (x.ids.indexOf(r.id) < 0) x.ids.push(r.id);
-      x.sub += r.sub;
+      x.fees.push(r.fee); x.overs.push(r.free_over); x.sub += r.sub;
       of.push(at[g]);
-      if (r.fee === null) { known = false; x.fee = null; return; }
-      var f = r.free_over !== null && psub[r.id] >= r.free_over ? 0 : r.fee;
-      if (x.fee !== null && f > x.fee) x.fee = f;
     });
-    groups.forEach(function (x) { if (x.fee !== null) ship += x.fee; });
+    groups.forEach(function (x) {
+      x.over = x.overs.every(function (o) { return o !== null; }) ? Math.max.apply(null, x.overs) : null;
+      x.left = 0;
+      if (x.fees.some(function (f) { return f === null; })) { known = false; x.fee = null; }
+      else {
+        x.fee = x.over !== null && x.sub >= x.over ? 0 : Math.max.apply(null, x.fees);
+        if (x.fee > 0 && x.over !== null) x.left = x.over - x.sub;
+        ship += x.fee;
+      }
+      delete x.fees; delete x.overs;
+    });
     return { groups: groups, of: of, ship: ship, known: known };
   }
   /* calc:end */
@@ -949,7 +957,9 @@
       });
       var firstLoose = box.firstChild;   /* 주문할 수 없는 줄(있으면) — 묶음은 그 앞에 */
       groupBox.forEach(function (w, gi) {
-        w.appendChild(el('p', 'c-group-ship', shipLabel(v.groups[gi].fee)));
+        var g = v.groups[gi], gs = el('p', 'c-group-ship', g.over !== null && g.fee !== null ? T('sum.ship') + ' ' + won(g.fee) : shipLabel(g.fee));   /* 무료 기준이 있으면 0 도 '배송비 0원' */
+        if (g.left > 0) gs.appendChild(doc.createTextNode(' · ' + T('cart.free_left', { n: won(g.left) })));   /* '무료배송까지 7,000원'(데이터) */
+        w.appendChild(gs);
         box.insertBefore(w, firstLoose);
       });
       sums(sumBox, v);
@@ -976,7 +986,7 @@
     clear(dl);
     function row(k, val, cls) { var d = el('div', cls); d.appendChild(el('dt', null, k)); d.appendChild(el('dd', null, val)); dl.appendChild(d); }
     row(T('sum.goods', { n: v.count }), won(v.goods));
-    row(T('sum.ship'), v.shipKnown ? (v.ship === 0 ? T('sum.ship_included') : won(v.ship)) : T('sum.ship_unknown'));   /* 4판 엔진 상품은 fee 0 · 5판은 공급사 묶음마다 한 번 */
+    row(T('sum.ship'), v.shipKnown ? (v.ship === 0 && !v.v5 ? T('sum.ship_included') : won(v.ship)) : T('sum.ship_unknown'));   /* 5판(공급사 칸) 무료는 '0원' */   /* 4판 엔진 상품은 fee 0 · 5판은 공급사 묶음마다 한 번 */
     if (v.v5 && v.groups.length > 1) dl.lastChild.firstChild.appendChild(el('small', 'sum-n', T('sum.groups', { n: v.groups.length })));   /* '배송 2건'(데이터) */
     row(T('sum.total'), won(v.total), 'total');
   }

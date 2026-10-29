@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-29T21:53:27+09:00",
+ "as_of": "2026-10-29T22:22:35+09:00",
  "items": [
   {
    "id": "SG-H0002",
@@ -38,7 +38,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -161,7 +161,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -248,7 +248,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -361,7 +361,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -452,7 +452,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -547,7 +547,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -634,7 +634,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -735,7 +735,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -866,7 +866,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -960,7 +960,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -1058,7 +1058,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -1249,7 +1249,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -1343,7 +1343,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -1437,7 +1437,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -1532,7 +1532,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -1633,7 +1633,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -1724,7 +1724,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -1838,7 +1838,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2029,7 +2029,7 @@
    "return_fee": null,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2123,7 +2123,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2225,7 +2225,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2320,7 +2320,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2427,7 +2427,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2611,7 +2611,7 @@
    "return_fee": null,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2710,7 +2710,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2808,7 +2808,7 @@
    "return_fee": 5500,
    "shipping": {
     "fee": 2500,
-    "free_over": null,
+    "free_over": 20000,
     "days": "1~3"
    },
    "detail": [
@@ -2908,7 +2908,7 @@
    "return_fee": 6500,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -2999,7 +2999,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3212,7 +3212,7 @@
    "return_fee": 7000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3295,7 +3295,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3382,7 +3382,7 @@
    "return_fee": null,
    "shipping": {
     "fee": 4000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3477,7 +3477,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3575,7 +3575,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3679,7 +3679,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3761,7 +3761,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3852,7 +3852,7 @@
    "return_fee": null,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -3968,7 +3968,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4054,7 +4054,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4162,7 +4162,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4270,7 +4270,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4353,7 +4353,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4453,7 +4453,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4543,7 +4543,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4674,7 +4674,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4775,7 +4775,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4869,7 +4869,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -4966,7 +4966,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5060,7 +5060,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5154,7 +5154,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5264,7 +5264,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5362,7 +5362,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5460,7 +5460,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5553,7 +5553,7 @@
    "return_fee": 5750,
    "shipping": {
     "fee": 2750,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5653,7 +5653,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5739,7 +5739,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5826,7 +5826,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -5921,7 +5921,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6029,7 +6029,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6131,7 +6131,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6218,7 +6218,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6307,7 +6307,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6402,7 +6402,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6603,7 +6603,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6719,7 +6719,7 @@
    "return_fee": 7000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6808,7 +6808,7 @@
    "return_fee": 5600,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -6926,7 +6926,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7029,7 +7029,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7119,7 +7119,7 @@
    "return_fee": null,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7218,7 +7218,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7339,7 +7339,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7429,7 +7429,7 @@
    "return_fee": null,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7519,7 +7519,7 @@
    "return_fee": 5750,
    "shipping": {
     "fee": 2750,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7605,7 +7605,7 @@
    "return_fee": 5600,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7720,7 +7720,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7823,7 +7823,7 @@
    "return_fee": 6500,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -7913,7 +7913,7 @@
    "return_fee": 5600,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8012,7 +8012,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8111,7 +8111,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8206,7 +8206,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8293,7 +8293,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8380,7 +8380,7 @@
    "return_fee": 5750,
    "shipping": {
     "fee": 2750,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8471,7 +8471,7 @@
    "return_fee": 7000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8558,7 +8558,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8694,7 +8694,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8781,7 +8781,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8880,7 +8880,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -8975,7 +8975,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9095,7 +9095,7 @@
    "return_fee": 7000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9182,7 +9182,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9274,7 +9274,7 @@
    "return_fee": 5600,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9370,7 +9370,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9469,7 +9469,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9556,7 +9556,7 @@
    "return_fee": null,
    "shipping": {
     "fee": 2500,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9641,7 +9641,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9728,7 +9728,7 @@
    "return_fee": 5600,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9823,7 +9823,7 @@
    "return_fee": 5500,
    "shipping": {
     "fee": 2500,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -9931,7 +9931,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -10029,7 +10029,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -10120,7 +10120,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -10215,7 +10215,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -10334,7 +10334,7 @@
    "return_fee": 6500,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -10535,7 +10535,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -10629,7 +10629,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -10734,7 +10734,7 @@
    "return_fee": 5750,
    "shipping": {
     "fee": 2750,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -10847,7 +10847,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -11035,7 +11035,7 @@
    "return_fee": 5500,
    "shipping": {
     "fee": 2500,
-    "free_over": null,
+    "free_over": 20000,
     "days": "1~3"
    },
    "detail": [
@@ -11139,7 +11139,7 @@
    "return_fee": 7500,
    "shipping": {
     "fee": 3500,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -11215,7 +11215,7 @@
    "return_fee": 6500,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -11593,7 +11593,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -11693,7 +11693,7 @@
    "return_fee": 7500,
    "shipping": {
     "fee": 3500,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -11805,7 +11805,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -11893,7 +11893,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -11993,7 +11993,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -12196,7 +12196,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -12346,7 +12346,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -12474,7 +12474,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -12561,7 +12561,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -12648,7 +12648,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -12747,7 +12747,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -12861,7 +12861,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -12958,7 +12958,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13096,7 +13096,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13195,7 +13195,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13327,7 +13327,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13452,7 +13452,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13585,7 +13585,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13706,7 +13706,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13801,7 +13801,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13892,7 +13892,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -13983,7 +13983,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14084,7 +14084,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14209,7 +14209,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14304,7 +14304,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14395,7 +14395,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14499,7 +14499,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14596,7 +14596,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14737,7 +14737,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14869,7 +14869,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -14973,7 +14973,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -15073,7 +15073,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -15159,7 +15159,7 @@
    "return_fee": 5600,
    "shipping": {
     "fee": 2800,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -15277,7 +15277,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -15360,7 +15360,7 @@
    "return_fee": 7000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -15635,7 +15635,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -15770,7 +15770,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -15914,7 +15914,7 @@
    "return_fee": 6400,
    "shipping": {
     "fee": 2900,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16009,7 +16009,7 @@
    "return_fee": 5800,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16123,7 +16123,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16220,7 +16220,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16310,7 +16310,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16412,7 +16412,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16499,7 +16499,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16590,7 +16590,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16681,7 +16681,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16803,7 +16803,7 @@
    "return_fee": 6000,
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -16934,7 +16934,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -17095,7 +17095,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -17238,7 +17238,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -17429,7 +17429,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -17583,7 +17583,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -17724,7 +17724,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -17865,7 +17865,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -18027,7 +18027,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -18168,7 +18168,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -18309,7 +18309,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -18454,7 +18454,7 @@
    "price_basis": "하한",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -18595,7 +18595,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -18749,7 +18749,7 @@
    "price_basis": "하한",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -18890,7 +18890,7 @@
    "price_basis": "하한",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -19035,7 +19035,7 @@
    "price_basis": "하한",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -19176,7 +19176,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [
@@ -19358,7 +19358,7 @@
    "price_basis": "시장 90%",
    "shipping": {
     "fee": 3000,
-    "free_over": null,
+    "free_over": 20000,
     "days": "2~4"
    },
    "detail": [

@@ -204,6 +204,7 @@ window.SG_COPY = {
   "item.together_add": "담기",
   "item.together_note": "",
   "cart.group": "묶음 {n}",
+  "cart.free_left": "무료배송까지 {n}",
   "cart.bundle_note": "",
   "sum.groups": "배송 {n}건",
   "parts.market": "",
