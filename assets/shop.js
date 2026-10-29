@@ -27,6 +27,7 @@
   var RE_ID = /^[A-Za-z0-9_-]{1,40}$/;
   var RE_GUIDE = /^[HS][0-9]{3,4}$/;   /* guides.json items[].id(낱개 후보번호 H · 세트 번호 S) */
   var RE_OPT = /^[A-Za-z0-9_-]{1,20}$/;
+  var RE_SUP = /^s[0-9]{1,4}$/;   /* 공급사 가명(s1 …, 규격 5판) — 실제 id 는 data/ 에만. 장바구니 묶음 셈에만 쓰고 화면 · 주소 · 저장에 0 */
   var RE_IMG = /^img\/[A-Za-z0-9_\-\/]+\.(jpe?g|png|webp|avif)$/i;      /* '.' 은 끝 확장자에만 — '..' 이 들어갈 수 없다 */
   var RE_ORDER = /^[A-Za-z0-9_=-]{6,64}$/;                              /* 토스 orderId 꼴 */
   var RE_PAYKEY = /^[A-Za-z0-9_=-]{1,200}$/;
@@ -162,6 +163,11 @@
     if (!isSet || a < 1 || b !== name.length - 1) return [name, ''];
     return [name.slice(0, a).trim(), name.slice(a + 1, b).trim()];
   }
+  /* 공급사(규격 5판) — key(가명) · fee(공급사 배송비) · bundle(묶음배송). 꼴이 어긋나면 null(그 상품은 배송비를 상품마다) */
+  function cleanSupplier(s) {
+    if (!s || typeof s !== 'object' || typeof s.key !== 'string' || !RE_SUP.test(s.key)) return null;
+    return { key: s.key, fee: int(s.fee, 0, 200000), bundle: s.bundle === true };
+  }
   function cleanItem(x) {
     if (!x || typeof x !== 'object') return null;
     var id = typeof x.id === 'string' && RE_ID.test(x.id) ? x.id : null;
@@ -177,11 +183,20 @@
       market_total: int(x.market_parts_total, 1, 100000000),   /* 세트 구성품을 따로 살 때 시장 합 — 판매가보다 클 때만 '따로 사면' */
       return_fee: int(x.return_fee, 0, 100000),   /* 단순 변심 반품 배송비(처음 배송비 + 돌려보내는 배송비) — 없으면 null(줄 숨김) */
       measure: str(x.measure, 80) || '',
-      ship_from: str(x.ship_from, 40) || '',   /* 보내는 곳(공급사 표시 이름) — 감사 5차 A1, 데이터 · 문구가 다 있을 때만 */   /* 실측 한 줄(엔진 · 리서치가 잰 값) — 없으면 자리 숨김 */
+      ship_from: str(x.ship_from, 40) || '',   /* 보내는 곳(공급사 표시 이름) — 감사 5차 A1, 데이터 · 문구가 다 있을 때만 */
+      /* 5판 칸(규격 '5판 칸') — 없으면 null · false · [] */
+      supplier: cleanSupplier(x.supplier),
+      gate_mode: x.gate_mode === 'single' || x.gate_mode === 'bundle' ? x.gate_mode : null,   /* 자사몰 표시는 같다 — 읽어만 둔다 */
+      face: x.face === true,   /* 첫 화면 '고른 상품' */
+      white: Array.isArray(x.image_bg) && x.image_bg[0] === 'white',   /* 대표 사진 흰 배경 — 목록 차례 */
+      together: [],   /* 함께 담기 — 같은 공급사 · 묶음배송 상품번호 최대 3 */
       thumb: img(x.thumb),
       images: [], imgScore: [], options: [], detail: [], gosi: [],
       shipping: { fee: null, free_over: null, days: null }
     };
+    (Array.isArray(x.together) ? x.together : []).forEach(function (t) {
+      if (typeof t === 'string' && RE_ID.test(t) && t !== id && p.together.length < 3 && p.together.indexOf(t) < 0) p.together.push(t);
+    });
     var sc = Array.isArray(x.image_scores) && Array.isArray(x.images) && x.image_scores.length === x.images.length ? x.image_scores : null;
     (Array.isArray(x.images) ? x.images : []).slice(0, 12).forEach(function (s, i) {
       var u = img(s), v = sc ? sc[i] : null;
@@ -217,13 +232,18 @@
     S.items = []; S.byId = {}; S.example = !!example;
     var list = d && typeof d === 'object' && Array.isArray(d.items) ? d.items : [];
     list.slice(0, 500).forEach(function (x) {
+      if (x && x.hidden === true) return;   /* hidden(세트 사진 미정 등) — 데이터에만, 어디에도 그리지 않는다(목록 · 상세 · 함께 담기 · 장바구니) */
+      if (x && (x.gate_mode === 'hold' || x.on_sale !== true)) return;   /* 관문 보류 · 판매 아님도 그리지 않는다(규격 5판 칸 2026-10-29) */
       var p = cleanItem(x);
-      if (p && !S.byId[p.id]) { S.items.push(p); S.byId[p.id] = p; }
+      if (p && !S.byId[p.id]) { p.i = S.items.length; S.items.push(p); S.byId[p.id] = p; }
     });
     S.asOf = d && typeof d.as_of === 'string' ? ymd(d.as_of) : null;
   }
+  /* ?fx=bundle · ?fx=many — 이 PC(localhost)에서만 본보기 데이터(data/fixtures/)를 읽는다(5판 화면 시험 · 캡처용, 공개 화면은 늘 products.json) */
+  var FX = { bundle: 'data/fixtures/bundle_sample.json', many: 'data/fixtures/many_local.json' };
   function loadProducts() {
-    return getFile('data/products.json').then(function (d) {
+    var fx = isLocal() && Object.prototype.hasOwnProperty.call(FX, params.get('fx')) ? FX[params.get('fx')] : null;
+    return getFile(fx || 'data/products.json').then(function (d) {
       if (!d || !Array.isArray(d.items)) throw new Error('shape');
       ingest(d, false);
     }).catch(function () {
@@ -284,6 +304,28 @@
     c.push({ id: id, option: opt || '', qty: qty });
     return writeCart(c);
   }
+  /* calc:start — 배송비 셈 한 곳(규격 5판 · 서버 catalog.shipping_total 과 같은 규칙). 장바구니 · 주문서(맨 위 amount) · 요약이 모두 cartView → 이 함수를 쓴다.
+     상품마다 fee(그 상품 소계가 free_over 이상이면 0) → 같은 공급사 가명(key)이고 묶음배송(bundle true)이면 그 묶음에서 한 번(가장 큰 값),
+     bundle false · 공급사 모름이면 상품마다. fee 모름(null)이 하나라도 있으면 known false(그 묶음은 합에서 빠짐 — 화면은 '주문서에서 확인해요').
+     rows [{id, key, bundle, fee, free_over, sub}](장바구니 줄마다) → {groups [{ids, fee, sub}], of(줄마다 묶음 차례), ship, known}. check.py 가 이 덩어리를 node 로 시험한다 */
+  function shipCalc(rows) {
+    var groups = [], at = {}, of = [], ship = 0, known = true, psub = {};
+    rows.forEach(function (r) { psub[r.id] = (psub[r.id] || 0) + r.sub; });   /* 같은 상품의 옵션 줄은 소계를 합쳐 free_over 와 견줌 */
+    rows.forEach(function (r) {
+      var g = r.key && r.bundle ? 's:' + r.key : 'p:' + r.id;
+      if (at[g] === undefined) { at[g] = groups.length; groups.push({ ids: [], fee: 0, sub: 0 }); }
+      var x = groups[at[g]];
+      if (x.ids.indexOf(r.id) < 0) x.ids.push(r.id);
+      x.sub += r.sub;
+      of.push(at[g]);
+      if (r.fee === null) { known = false; x.fee = null; return; }
+      var f = r.free_over !== null && psub[r.id] >= r.free_over ? 0 : r.fee;
+      if (x.fee !== null && f > x.fee) x.fee = f;
+    });
+    groups.forEach(function (x) { if (x.fee !== null) ship += x.fee; });
+    return { groups: groups, of: of, ship: ship, known: known };
+  }
+  /* calc:end */
   /* 줄마다 상품을 붙여 값 · 팔 수 있나를 셈한다(화면에 보이는 예상 — 결제 금액은 서버가 다시 계산) */
   function cartView() {
     var lines = readCart().map(function (l) {
@@ -293,21 +335,18 @@
       var ok = !!p && okOpt && sellable(p, o);
       return { line: l, p: p, o: o, ok: ok, sum: p && okOpt ? unitPrice(p, o) * l.qty : 0 };
     });
-    var goods = 0, ship = 0, byP = {}, count = 0;
+    var goods = 0, count = 0, rows = [], okLines = [];
     lines.forEach(function (v) {
+      v.group = -1;
       if (!v.ok) return;
       goods += v.sum; count += v.line.qty;
-      var k = v.p.id;
-      byP[k] = byP[k] || { p: v.p, sub: 0 };
-      byP[k].sub += v.sum;
+      var sp = v.p.supplier;
+      rows.push({ id: v.p.id, key: sp ? sp.key : null, bundle: !!(sp && sp.bundle), fee: v.p.shipping.fee, free_over: v.p.shipping.free_over, sub: v.sum });
+      okLines.push(v);
     });
-    var shipKnown = true;
-    Object.keys(byP).forEach(function (k) {
-      var s = byP[k].p.shipping;
-      if (s.fee === null) { shipKnown = false; return; }
-      ship += s.free_over !== null && byP[k].sub >= s.free_over ? 0 : s.fee;
-    });
-    return { lines: lines, goods: goods, ship: ship, shipKnown: shipKnown, total: goods + ship, count: count,
+    var sc = shipCalc(rows);
+    okLines.forEach(function (v, i) { v.group = sc.of[i]; });
+    return { lines: lines, goods: goods, ship: sc.ship, shipKnown: sc.known, groups: sc.groups, v5: rows.some(function (r) { return !!r.key; }), total: goods + sc.ship, count: count,
              allOk: lines.length > 0 && lines.every(function (v) { return v.ok; }) };
   }
   function paintCount() {
@@ -386,6 +425,12 @@
     var total = Number(m[1]) * Number(n[1]);
     return total > 0 ? Math.round(p.price / total / 10) * 10 : null;
   }
+  function shipLabel(fee) { return T('sum.ship') + ' ' + (fee === null ? T('sum.ship_unknown') : fee === 0 ? T('sum.ship_included') : won(fee)); }
+  /* 목록 차례(5판) — 얼굴 → 흰 배경 → 사진 점수 높은 것(같으면 원래 차례). 사진 없는 상품은 맨 뒤 */
+  function topScore(p) { var m = -1; p.imgScore.forEach(function (v) { if (v !== null && v > m) m = v; }); return m; }
+  function better(a, b) {
+    return (Number(!!b.thumb) - Number(!!a.thumb)) || (Number(b.face) - Number(a.face)) || (Number(b.white) - Number(a.white)) || (topScore(b) - topScore(a)) || (a.i - b.i);
+  }
   function card(p, i) {
     var li = el('li'), a = el('a', 'card rise');
     a.style.setProperty('--i', String(i % 4));
@@ -399,6 +444,7 @@
     var pr = el('div', 'card-price');
     pr.appendChild(el('b', null, won(p.price)));
     if (p.shipping.fee === 0) pr.appendChild(el('span', 'card-ship', T('badge.free_ship')));   /* 4판: 배지 아님 — 값 옆 작은 회색 글 */
+    else if (p.shipping.fee !== null) pr.appendChild(el('span', 'card-ship', shipLabel(p.shipping.fee)));   /* 5판: '배송비 3,000원'(데이터) */
     info.appendChild(pr);
     var pm = perMeter(p);
     if (pm) info.appendChild(el('span', 'card-unit', T('price.unit', { p: pm.toLocaleString('ko-KR') })));
@@ -520,7 +566,7 @@
     var grid = $('#pGrid'), bar = $('#filters'), asOf = $('#asOf');
     exampleNote($('#exNote'));
     if (asOf) asOf.textContent = S.asOf ? T('shop.as_of', { t: S.asOf.md + (S.asOf.hm ? ' ' + S.asOf.hm : '') }) : '';
-    var shown = S.items.filter(function (p) { return p.on_sale; });   /* 판매 안 함은 목록 · 분야 수 · 거르기 칩에서 뺀다(홈과 같음). 상세는 주소로 열면 '주문할 수 없음' */
+    var shown = S.items.filter(function (p) { return p.on_sale; }).sort(better);   /* 판매 안 함은 목록 · 분야 수 · 거르기 칩에서 뺀다(홈과 같음). 상세는 주소로 열면 '주문할 수 없음' */
     var niches = [], count = {};
     shown.forEach(function (p) {
       if (!p.niche) return;
@@ -531,6 +577,8 @@
     niches.sort(function (a, b) { var ia = ORDER.indexOf(a), ib = ORDER.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || count[b] - count[a]; });
     var cur = niches.indexOf(params.get('niche')) >= 0 ? params.get('niche') : '';
     var attr = '';
+    var PAGE = 24, limit = PAGE, list = [];   /* 5판: 150개 안팎 — 24개씩 그리고 '더 보기'(라이브러리 0) */
+    var moreBox = $('#moreBox'), moreBtn = $('#moreBtn'), moreN = $('#moreN');
 
     function guide() {
       var sec = $('#catGuide'), ol = $('#catSteps');
@@ -571,13 +619,28 @@
       });
       box.hidden = chipsOk.length === 0;
     }
+    function more() {
+      if (!moreBox) return;
+      moreBox.hidden = list.length <= limit;
+      if (moreN) moreN.textContent = Math.min(limit, list.length) + ' / ' + list.length;
+    }
     function render() {
       clear(grid);
-      var list = shown.filter(function (p) { return (!cur || p.niche === cur) && (!attr || chipHit(p, attr)); });
-      if (!list.length) { grid.parentNode.replaceChild(emptyBlock(T('shop.empty'), T('shop.empty_cta'), rel('index.html')), grid); return; }
-      list.forEach(function (p, i) { grid.appendChild(card(p, i)); });
+      limit = PAGE;
+      list = shown.filter(function (p) { return (!cur || p.niche === cur) && (!attr || chipHit(p, attr)); });
+      if (!list.length) { grid.parentNode.replaceChild(emptyBlock(T('shop.empty'), T('shop.empty_cta'), rel('index.html')), grid); if (moreBox) moreBox.hidden = true; return; }
+      list.slice(0, limit).forEach(function (p, i) { grid.appendChild(card(p, i)); });
+      more();
       guide();
     }
+    if (moreBtn) moreBtn.addEventListener('click', function () {
+      var from = limit;
+      limit += PAGE;
+      list.slice(from, limit).forEach(function (p, i) { grid.appendChild(card(p, from + i)); });
+      var first = grid.children[from] && grid.children[from].querySelector('a');
+      if (first) first.focus({ preventScroll: true });   /* 새로 열린 첫 카드로(키보드 · 화면 읽기) */
+      more();
+    });
     function chips() {
       clear(bar);
       var listSub = $('#listSub');
@@ -670,6 +733,8 @@
     nameEl.textContent = p.name;
     $('#itemPrice').textContent = won(p.price);
     $('#itemFree').hidden = p.shipping.fee !== 0;
+    var shipEl = $('#itemShip');   /* 5판: 값 옆 '배송비 3,000원'(데이터) — fee 0 이면 '배송비 포함' 그대로 */
+    if (shipEl) { shipEl.hidden = !(p.shipping.fee > 0); if (!shipEl.hidden) shipEl.textContent = shipLabel(p.shipping.fee); }
     var pm = perMeter(p), unit = $('#itemUnit');
     if (pm) { unit.textContent = T('price.unit', { p: pm.toLocaleString('ko-KR') }); unit.hidden = false; }
 
@@ -761,17 +826,48 @@
     minus.addEventListener('click', function () { if (qty > 1) { qty -= 1; paint(); } });
     plus.addEventListener('click', function () { if (qty < QTY_MAX) { qty += 1; paint(); } });
     sel.addEventListener('change', function () { setMsg(msg, ''); paint(); });
-    add.addEventListener('click', function () {
-      var o = cur();
-      if (!sellable(p, o)) { paint(); return; }
-      addCart(p.id, o ? o.code : '', qty);
+    function added() {
       clear(msg);
       msg.classList.remove('err');
       msg.appendChild(doc.createTextNode(T('item.added') + ' '));
       var a = el('a', null, T('item.added_link') + ' →'); a.href = rel('cart.html');
       msg.appendChild(a);
+    }
+    add.addEventListener('click', function () {
+      var o = cur();
+      if (!sellable(p, o)) { paint(); return; }
+      addCart(p.id, o ? o.code : '', qty);
+      added();
     });
     paint();
+
+    /* 함께 담기(5판) — together 의 상품 중 같은 공급사 · 둘 다 묶음배송 · 팔고 있고 사진 있고 옵션 없는 것 최대 3. 담기는 위 담기와 같은 addCart */
+    var tbox = $('#together'), tlist = $('#togetherList');
+    if (tbox && tlist) {
+      clear(tlist);
+      var sp = p.supplier, names = [p.name];
+      var tw = p.together.map(function (k) { return S.byId[k]; }).filter(function (q) {
+        var ok = q && sp && sp.bundle && q.supplier && q.supplier.bundle && q.supplier.key === sp.key && sellable(q, null) && !q.options.length && q.thumb && names.indexOf(q.name) < 0;
+        if (ok) names.push(q.name);   /* 같은 이름은 한 번(홈 격자와 같은 규칙) */
+        return ok;
+      }).slice(0, 3);
+      tw.forEach(function (q, i) {
+        var li = el('li', 'tg');
+        var a = el('a', 'tg-link'); a.href = rel('item.html?id=' + encodeURIComponent(q.id));
+        a.appendChild(pic(q.thumb, q.name, true));
+        var t = el('span', 'tg-t'), nm = el('span', 'tg-name', q.name);
+        nm.id = 'tgName' + i;
+        t.appendChild(nm); t.appendChild(el('b', 'tg-price', won(q.price)));
+        a.appendChild(t);
+        li.appendChild(a);
+        var b = el('button', 'btn line small tg-add', T('item.together_add')); b.type = 'button';
+        b.setAttribute('aria-describedby', nm.id);
+        b.addEventListener('click', function () { addCart(q.id, '', 1); added(); });
+        li.appendChild(b);
+        tlist.appendChild(li);
+      });
+      tbox.hidden = tw.length === 0;
+    }
 
     /* 맞아요 · 안 맞아요 — guides.json items[guide_id] */
     var gp = guideItem(p);
@@ -819,6 +915,12 @@
         var e = $('#cartEmpty'); e.hidden = false;
         return;
       }
+      /* 5판: 배송 묶음마다 줄을 나눈다(묶음이 둘 이상이면 '묶음 n' — 공급사 이름 · 가명 0), 묶음 아래 그 묶음 배송비(데이터). 주문할 수 없는 줄은 맨 뒤 */
+      var groupBox = v.v5 ? v.groups.map(function (g, gi) {   /* 공급사 칸이 없는 4판 데이터는 묶음 줄 없이 예전처럼 */
+        var w = el('div', 'c-group');
+        if (v.groups.length > 1) w.appendChild(el('h2', 'c-group-h', T('cart.group', { n: gi + 1 })));
+        return w;
+      }) : [];
       v.lines.forEach(function (x, idx) {
         var row = el('div', 'c-row');
         var thumbLink = el('a'); thumbLink.href = x.p ? rel('item.html?id=' + encodeURIComponent(x.p.id)) : rel('shop.html');
@@ -842,10 +944,16 @@
         ctl.appendChild(rm);
         ctl.appendChild(el('span', 'lp', x.ok ? won(x.sum) : '—'));
         row.appendChild(ctl);
-        box.appendChild(row);
+        if (x.group >= 0 && groupBox[x.group]) groupBox[x.group].appendChild(row);
+        else box.appendChild(row);
+      });
+      var firstLoose = box.firstChild;   /* 주문할 수 없는 줄(있으면) — 묶음은 그 앞에 */
+      groupBox.forEach(function (w, gi) {
+        w.appendChild(el('p', 'c-group-ship', shipLabel(v.groups[gi].fee)));
+        box.insertBefore(w, firstLoose);
       });
       sums(sumBox, v);
-      var split = $('#cartSplit'); if (split) split.hidden = v.lines.length < 2;
+      var split = $('#cartSplit'); if (split) split.hidden = v.groups.length < 2;   /* 보내는 곳이 둘 이상일 때만 */
       var go = $('#toCheckout');
       if (v.allOk) { go.removeAttribute('aria-disabled'); go.href = rel('checkout.html'); }
       else { go.setAttribute('aria-disabled', 'true'); go.removeAttribute('href'); }
@@ -868,7 +976,8 @@
     clear(dl);
     function row(k, val, cls) { var d = el('div', cls); d.appendChild(el('dt', null, k)); d.appendChild(el('dd', null, val)); dl.appendChild(d); }
     row(T('sum.goods', { n: v.count }), won(v.goods));
-    row(T('sum.ship'), v.shipKnown ? (v.ship === 0 ? T('sum.ship_included') : won(v.ship)) : T('sum.ship_unknown'));   /* 엔진 상품은 배송비를 값에 넣어 fee 0 */
+    row(T('sum.ship'), v.shipKnown ? (v.ship === 0 ? T('sum.ship_included') : won(v.ship)) : T('sum.ship_unknown'));   /* 4판 엔진 상품은 fee 0 · 5판은 공급사 묶음마다 한 번 */
+    if (v.v5 && v.groups.length > 1) dl.lastChild.firstChild.appendChild(el('small', 'sum-n', T('sum.groups', { n: v.groups.length })));   /* '배송 2건'(데이터) */
     row(T('sum.total'), won(v.total), 'total');
   }
 
@@ -937,7 +1046,7 @@
         mini.appendChild(li);
       });
       sums($('#coSum'), w);
-      var split = $('#coSplit'); if (split) split.hidden = w.lines.length < 2;
+      var split = $('#coSplit'); if (split) split.hidden = w.groups.length < 2;
       return w;
     }
     summary();
@@ -1318,7 +1427,15 @@
   /* ?sample=1 — 이 PC(localhost)에서만: 팔고 있는 상품 둘을 이 쪽 안 장바구니에만 넣는다(저장 0 · 캡처용) */
   prodP.then(function () {
     if (params.get('sample') === '1' && isLocal() && S.items.length) {
-      memCart = S.items.filter(function (p) { return p.on_sale && p.stock !== 'out'; }).slice(0, 2).map(function (p) {
+      var can = S.items.filter(function (p) { return p.on_sale && p.stock !== 'out'; }), pick = can.slice(0, 2);
+      /* 공급사 칸이 있으면(5판) 같은 묶음 둘 + 다른 묶음 하나 — 장바구니 묶음 줄을 보이게 */
+      var a0 = can.filter(function (p) { return p.supplier && p.supplier.bundle; })[0];
+      if (a0) {
+        var same = can.filter(function (p) { return p !== a0 && p.supplier && p.supplier.bundle && p.supplier.key === a0.supplier.key; })[0];
+        var other = can.filter(function (p) { return p.supplier && p.supplier.key !== a0.supplier.key; })[0];
+        pick = [a0, same, other].filter(Boolean);
+      }
+      memCart = pick.map(function (p) {
         var o = p.options.filter(function (x) { return x.on_sale; })[0];
         return { id: p.id, option: o ? o.code : '', qty: 1 };
       });

@@ -37,7 +37,7 @@
       <p class="measure" id="itemMeasure" hidden></p>
       <div class="buybox">
         <h1 id="itemName" data-copy="item.loading">불러오는 중이에요</h1>
-        <div class="price-row"><span class="bigprice" id="itemPrice"></span><span class="chip-ok" id="itemFree" data-copy="badge.free_ship" aria-label="배송비는 상품 가격에 포함되어 있어요." data-copy-aria="item.ship_1" hidden>배송비 포함</span></div>
+        <div class="price-row"><span class="bigprice" id="itemPrice"></span><span class="chip-ok" id="itemFree" data-copy="badge.free_ship" aria-label="배송비는 상품 가격에 포함되어 있어요." data-copy-aria="item.ship_1" hidden>배송비 포함</span><span class="ship-fee" id="itemShip" hidden></span></div>
         <p class="unit" id="itemUnit" hidden></p>
         <div class="tags" id="itemTag"></div>
         <div class="field" id="optField" hidden>
@@ -63,6 +63,12 @@
         </section>
         <!-- 사기 단추 바로 아래 — 배송 · 반품 · 결제 세 줄 -->
         <ul class="three" id="itemThree"></ul>
+        <!-- 함께 담기(5판) — 같은 공급사 · 묶음배송 낱개(data together, 최대 3). 없으면 숨김. 설명 문장은 copy-needed 4절(비면 숨김) -->
+        <section class="together" id="together" aria-labelledby="togetherH" hidden>
+          <h2 id="togetherH" data-copy="item.together">함께 담기</h2>
+          <p class="note" data-slot hidden><span data-copy="item.together_note"></span></p>
+          <ul class="tg-list" id="togetherList"></ul>
+        </section>
       </div>
     </div>
 

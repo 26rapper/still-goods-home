@@ -1,10 +1,11 @@
 /* Still Goods · 스틸 굿즈 — 홈 스크립트(4판: 브랜드 첫인상 → 분야 → 상품 → 문제 → 해결 → 고르는 법, docs/자사몰_디자인_방향_4판.md 3절)
    하는 일
    0. 첫인상 — 글 + 여백. config.json hero_photo(쓰는 장면 사진, 예: assets/hero.jpg)가 있을 때만 큰 사진 한 장(4판 2차 — 상품 사진 셋은 뺌).
-   홈에 보이는 상품 사진(분야 칸 · 지금 파는 상품 · 문제 카드)은 흰 배경(image_bg[0] "white" — tools/photo_bg.py) 먼저, 그다음 face → image_scores.
-   1. 분야 — data/products.json 의 분야(niche) 값으로 사진 칸(대표 상품 사진 + 분야 이름)을 만든다. 0 개 분야는 칸을 만들지 않는다. 개수는 적지 않는다.
+   홈에 보이는 상품 사진(분야 칸 · 지금 파는 상품 · 문제 카드)은 흰 배경(image_bg[0] "white" — 엔진 칸) 먼저, 그다음 face → image_scores.
+   1. 분야 — data/products.json 의 분야(niche) 값으로 사진 칸(대표 상품 사진 + 분야 이름)을 만든다(상품 있는 분야 전부, 6까지). 0 개 분야는 칸을 만들지 않는다. 개수는 적지 않는다.
    2. 고르는 법 — data/guides.json 의 분야(domains) 중 지금 팔 수 있는 상품이 있는 분야만 단추로, 고른 분야의 세 단계(없으면 절째 숨김). 접힌 카드 안.
-   3. 지금 파는 상품 — 팔고 있고 사진 있는 상품 앞에서부터 8개(config.json home_hide 뺌 · 같은 이름은 하나). 모두 배송비 포함일 때만 그 한 줄. 카드에 배지 0.
+   3. 고른 상품(5판) — 엔진 face: true 상품만 12개까지(face 가 하나도 없으면 팔고 있는 상품 앞에서부터 — 빈 격자 0. home_hide 뺌 · 같은 이름은 하나).
+      모두 배송비 포함일 때만 격자 위 그 한 줄, 아니면 카드마다 '배송비 n원'(데이터). 카드에 배지 0. hidden: true 는 어디에도 0.
    3b. 문제 → 해결 — copy.ko.js 의 home.problem.<분야> 문장이 있고 그 분야 상품이 있을 때만 카드(대표 사진 + 문장 + 화살) → 목록의 그 분야.
    4. 문의 — config.json contact(카카오톡 · 네이버 · 이메일 · 전화)가 하나라도 있을 때만 단추. 비면 문의 절 · 바닥 '문의하기' 숨김.
    5. config.json: 장터 주소(https 일 때만 '다른 곳에서도') · 판매자 정보(seller_public true 일 때 바닥) · shop_enabled false 면 가게 링크([data-shop]) 숨김.
@@ -13,7 +14,8 @@
 (function () {
   'use strict';
 
-  var MAX_GRID = 8;
+  var MAX_GRID = 12;   /* 5판: 얼굴 12 */
+  var MAX_CATS = 6;
   var RE_ID = /^[A-Za-z0-9_-]{1,40}$/;
   var RE_PRODUCT_IMG = /^img\/[A-Za-z0-9_\-\/]+\.(jpe?g|png|webp|avif)$/i;
   var shopOff = false;
@@ -68,6 +70,8 @@
   /* products.json 항목 → 보일 것(팔고 있는 것만) */
   function fromProduct(it) {
     if (!it || typeof it !== 'object' || typeof it.id !== 'string' || !RE_ID.test(it.id) || !okText(it.name, 100)) return null;
+    if (it.hidden === true) return null;   /* 5판 hidden — 데이터에만, 어디에도 그리지 않는다 */
+    if (it.gate_mode === 'hold' || it.on_sale !== true) return null;   /* 관문 보류 · 판매 아님도 그리지 않는다(규격 5판 칸 2026-10-29) */
     if (it.on_sale !== true || it.stock === 'out') return null;
     var price = typeof it.price === 'number' && Number.isInteger(it.price) && it.price >= 0 ? it.price : null;
     if (price === null) return null;
@@ -79,7 +83,8 @@
     });
     var score = -1;
     (Array.isArray(it.image_scores) ? it.image_scores : []).forEach(function (v) { if (typeof v === 'number' && isFinite(v) && v > score) score = v; });
-    return { id: it.id, name: it.name, price: price, img: thumb, niche: okText(it.niche, 12) ? it.niche : '', free: sh.fee === 0, rows: rows, set: isSet(it.unit),
+    var fee = typeof sh.fee === 'number' && Number.isInteger(sh.fee) && sh.fee >= 0 && sh.fee <= 200000 ? sh.fee : null;
+    return { id: it.id, name: it.name, price: price, img: thumb, niche: okText(it.niche, 12) ? it.niche : '', free: fee === 0, fee: fee, rows: rows, set: isSet(it.unit),
              face: it.face === true, score: score, white: Array.isArray(it.image_bg) && it.image_bg[0] === 'white' };
   }
   function spec(p, k) { for (var i = 0; i < p.rows.length; i++) if (p.rows[i][0] === k) return p.rows[i][1]; return ''; }
@@ -133,7 +138,7 @@
   function paintCats(items) {
     var box = $('#cats');
     if (!box) return;
-    var names = nicheOrder(items);
+    var names = nicheOrder(items).slice(0, MAX_CATS);
     while (box.firstChild) box.removeChild(box.firstChild);
     names.forEach(function (n, i) {
       var li = el('li'), a = el('a', 'cat rise'), p = lead(items, n, SHOWN);
@@ -246,6 +251,7 @@
     if (nm[1]) info.appendChild(el('span', 'card-sub', nm[1]));
     var pr = el('div', 'card-price');
     pr.appendChild(el('b', null, won(p.price)));   /* 배지 0 — '배송비 포함'은 격자 위 한 줄(모두 무료일 때) */
+    if (p.fee) pr.appendChild(el('span', 'card-ship', T('sum.ship') + ' ' + won(p.fee)));   /* 5판: '배송비 3,000원'(데이터) — 목록 카드와 같은 꼴 */
     info.appendChild(pr);
     var pm = perMeter(p);
     if (pm) info.appendChild(el('span', 'card-unit', T('price.unit', { p: pm.toLocaleString('ko-KR') })));
@@ -255,7 +261,8 @@
   }
   function paintGrid(items, hide) {
     var grid = $('#grid'), seen = {}, list = [];
-    items.slice().sort(better).forEach(function (p) {   /* 흰 배경 먼저(모자라면 other 로 채움) — 고르기 규칙은 그대로 */
+    var faces = items.filter(function (p) { return p.face; });
+    (faces.length ? faces : items).slice().sort(better).forEach(function (p) {   /* 5판: 엔진 face 만(curated.csv · curate.py 은퇴) */   /* 흰 배경 먼저(모자라면 other 로 채움) — 고르기 규칙은 그대로 */
       if (!p.img || hide.indexOf(p.id) >= 0 || seen[p.name] || list.length >= MAX_GRID) return;
       seen[p.name] = 1; list.push(p);
     });
@@ -324,7 +331,11 @@
   });
 
   applyCopy();
-  Promise.all([getJSON('config.json'), getJSON('data/products.json'), getJSON('data/guides.json')]).then(function (r) {
+  /* ?fx=bundle · ?fx=many — 이 PC(localhost)에서만 본보기 데이터(data/fixtures/)를 읽는다(5판 화면 시험 · 캡처용) */
+  var FX = { bundle: 'data/fixtures/bundle_sample.json', many: 'data/fixtures/many_local.json' };
+  var fx = new URLSearchParams(location.search).get('fx');
+  var prodURL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && Object.prototype.hasOwnProperty.call(FX, fx) ? FX[fx] : 'data/products.json';
+  Promise.all([getJSON('config.json'), getJSON(prodURL), getJSON('data/guides.json')]).then(function (r) {
     var conf = r[0] && typeof r[0] === 'object' ? r[0] : {};
     paintConfig(conf);
     paintHeroPhoto(conf);

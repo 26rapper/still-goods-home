@@ -130,6 +130,27 @@
 .parts-list .pn{font-size:16.5px;line-height:1.5}
 .parts-list .pq{font-size:16px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
 .parts-market{margin-top:4px;padding-top:10px;border-top:1px solid var(--line);font-size:15px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+/* 5판 골라 담기 — 장바구니 배송 묶음 · 상세 배송비 · 함께 담기 · 목록 더 보기 */
+.c-group + .c-group{margin-top:10px}
+.c-group-h{margin:0;padding:18px 0 4px;font-size:17px;font-weight:700;color:var(--ink-2)}
+.c-group-ship{margin:0;padding:12px 0 14px;text-align:right;font-size:16px;color:var(--ink-2);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--line)}
+.ship-fee{font-size:16px;font-weight:500;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.sum-n{margin-left:8px;font-size:15px;font-weight:500;color:var(--ink-3)}
+.together{margin-top:18px;padding:16px 20px 18px;border-radius:var(--r);background:var(--soft)}
+.together h2{font-size:18px;font-weight:700}
+.together > .note{margin-top:4px}
+.tg-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}
+.tg{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
+.tg-link{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:center;min-width:0}
+.tg-link .pic{border-radius:10px;background:#fff}
+.tg-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tg-name{font-size:16px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tg-link:hover .tg-name{text-decoration:underline;text-underline-offset:4px}
+.tg-price{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.tg-add{padding:0 16px;white-space:nowrap}
+.more{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:36px}
+.more .btn{min-width:200px}
+.more .note{font-variant-numeric:tabular-nums}
 /* 실측 한 줄 — 상세 사진 바로 아래 */
 .ship-from{margin-top:2px}
 .supplier-consent .ck{border-top:0}
