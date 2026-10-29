@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-29T21:50:19+09:00",
+ "as_of": "2026-10-29T21:53:27+09:00",
  "items": [
   {
    "id": "SG-H0002",
@@ -1524,9 +1524,9 @@
     "other"
    ],
    "together": [
-    "SG-H0469",
-    "SG-H0476",
-    "SG-H0480"
+    "SG-H0142",
+    "SG-H0224",
+    "SG-H0469"
    ],
    "unit": null,
    "return_fee": 6000,
@@ -5420,6 +5420,104 @@
    ]
   },
   {
+   "id": "SG-H0117",
+   "guide_id": "H117",
+   "name": "키친타올걸이 주방 2개",
+   "price": 2500,
+   "on_sale": true,
+   "stock": "in",
+   "supplier": {
+    "key": "s1",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "주방 정리",
+   "thumb": "img/SG-H0117/thumb.jpg",
+   "images": [
+    "img/SG-H0117/1.jpg"
+   ],
+   "options": [],
+   "image_scores": [
+    85
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [
+    "SG-H0007",
+    "SG-H0035",
+    "SG-H0116"
+   ],
+   "unit": {
+    "pieces": 2,
+    "per_piece": 1250
+   },
+   "return_fee": 6000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "text",
+     "text": "한 번에 2개가 들어 있어요."
+    },
+    {
+     "type": "image",
+     "src": "img/SG-H0117/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "2개"
+      ],
+      [
+       "구성",
+       "키친타올걸이 주방 × 2개"
+      ],
+      [
+       "색상",
+       "단일(사진과 같음)"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "키친타올걸이 주방 2개 / 모델명 RD-11034"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "다데"
+    }
+   ]
+  },
+  {
    "id": "SG-H0120",
    "guide_id": "H120",
    "name": "주방 서랍 칸막이 바스켓(대) 1개",
@@ -6079,6 +6177,97 @@
     {
      "k": "제조자, 수입품의 경우 수입자를 함께 표기",
      "v": "아카시아리빙"
+    }
+   ]
+  },
+  {
+   "id": "SG-H0142",
+   "guide_id": "H142",
+   "name": "목욕바구니 욕실 1개",
+   "price": 3900,
+   "on_sale": true,
+   "stock": "in",
+   "supplier": {
+    "key": "s5",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "욕실",
+   "thumb": "img/SG-H0142/thumb.jpg",
+   "images": [
+    "img/SG-H0142/1.jpg"
+   ],
+   "options": [],
+   "image_scores": [
+    70
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [
+    "SG-H0022",
+    "SG-H0224",
+    "SG-H0469"
+   ],
+   "unit": null,
+   "return_fee": 6000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "image",
+     "src": "img/SG-H0142/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "1개"
+      ],
+      [
+       "구성",
+       "목욕바구니 욕실 × 1개"
+      ],
+      [
+       "색상",
+       "목욕바구니"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "목욕바구니 욕실 1개 / 모델명 5627"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "중국OEM"
     }
    ]
   },
@@ -7624,6 +7813,7 @@
    ],
    "together": [
     "SG-H0448",
+    "SG-H0272",
     "SG-H0478"
    ],
    "unit": {
@@ -7864,6 +8054,105 @@
     {
      "k": "품명 및 모델명",
      "v": "사각 손잡이 수납 바구니 16×24.5cm 2개 세트 / 모델명 1374291"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "YIWU CITY ZHEJIANG PROVINCE CHINA"
+    }
+   ]
+  },
+  {
+   "id": "SG-H0181",
+   "guide_id": "H181",
+   "name": "사각 손잡이 수납바구니 2p세트 1개",
+   "price": 4400,
+   "on_sale": true,
+   "stock": "in",
+   "supplier": {
+    "key": "s3",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "수납정리",
+   "thumb": "img/SG-H0181/thumb.jpg",
+   "images": [
+    "img/SG-H0181/1.jpg"
+   ],
+   "options": [],
+   "image_scores": [
+    89
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [
+    "SG-H0046",
+    "SG-H0165",
+    "SG-H0010"
+   ],
+   "unit": null,
+   "return_fee": 6000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "image",
+     "src": "img/SG-H0181/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "1개"
+      ],
+      [
+       "구성",
+       "사각 손잡이 수납바구니 2p세트 × 1개"
+      ],
+      [
+       "크기",
+       "image"
+      ],
+      [
+       "무게",
+       "image"
+      ],
+      [
+       "색상",
+       "단일(사진과 같음)"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "사각 손잡이 수납바구니 2p세트 1개 / 모델명 1374294"
     },
     {
      "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
@@ -8455,6 +8744,204 @@
    ]
   },
   {
+   "id": "SG-H0209",
+   "guide_id": "H209",
+   "name": "사각 손잡이 수납바구니 1개",
+   "price": 3700,
+   "on_sale": true,
+   "stock": "in",
+   "supplier": {
+    "key": "s3",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "수납정리",
+   "thumb": "img/SG-H0209/thumb.jpg",
+   "images": [
+    "img/SG-H0209/1.jpg"
+   ],
+   "options": [],
+   "image_scores": [
+    79
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [
+    "SG-H0046",
+    "SG-H0165",
+    "SG-H0010"
+   ],
+   "unit": null,
+   "return_fee": 6000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "image",
+     "src": "img/SG-H0209/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "1개"
+      ],
+      [
+       "구성",
+       "사각 손잡이 수납바구니 × 1개"
+      ],
+      [
+       "크기",
+       "image"
+      ],
+      [
+       "무게",
+       "image"
+      ],
+      [
+       "색상",
+       "단일(사진과 같음)"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "사각 손잡이 수납바구니 1개 / 모델명 1374295"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "YIWU CITY ZHEJIANG PROVINCE CHINA"
+    }
+   ]
+  },
+  {
+   "id": "SG-H0210",
+   "guide_id": "H210",
+   "name": "사각 손잡이 수납바구니 1개",
+   "price": 3700,
+   "on_sale": true,
+   "stock": "in",
+   "supplier": {
+    "key": "s3",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "수납정리",
+   "thumb": "img/SG-H0210/thumb.jpg",
+   "images": [
+    "img/SG-H0210/1.jpg"
+   ],
+   "options": [],
+   "image_scores": [
+    70
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [
+    "SG-H0046",
+    "SG-H0165",
+    "SG-H0010"
+   ],
+   "unit": null,
+   "return_fee": 6000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "image",
+     "src": "img/SG-H0210/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "1개"
+      ],
+      [
+       "구성",
+       "사각 손잡이 수납바구니 × 1개"
+      ],
+      [
+       "크기",
+       "image"
+      ],
+      [
+       "무게",
+       "image"
+      ],
+      [
+       "색상",
+       "단일(사진과 같음)"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "사각 손잡이 수납바구니 1개 / 모델명 1374289"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "YIWU CITY ZHEJIANG PROVINCE CHINA"
+    }
+   ]
+  },
+  {
    "id": "SG-H0212",
    "guide_id": "H212",
    "name": "부착식 행주걸이 1개",
@@ -8546,6 +9033,209 @@
     {
      "k": "제조자, 수입품의 경우 수입자를 함께 표기",
      "v": "reference to image"
+    }
+   ]
+  },
+  {
+   "id": "SG-H0213",
+   "guide_id": "H213",
+   "name": "싱크대스토리지 싱크대수납함 욕실정리함 1개",
+   "price": 2900,
+   "on_sale": true,
+   "stock": "in",
+   "supplier": {
+    "key": "s27",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "욕실",
+   "thumb": "img/SG-H0213/thumb.jpg",
+   "images": [
+    "img/SG-H0213/1.jpg"
+   ],
+   "options": [
+    {
+     "code": "00",
+     "label": "핑크",
+     "add_price": 0,
+     "on_sale": true
+    },
+    {
+     "code": "01",
+     "label": "그린",
+     "add_price": 0,
+     "on_sale": false
+    },
+    {
+     "code": "02",
+     "label": "브라운",
+     "add_price": 0,
+     "on_sale": true
+    },
+    {
+     "code": "03",
+     "label": "블루",
+     "add_price": 0,
+     "on_sale": false
+    }
+   ],
+   "image_scores": [
+    89
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [],
+   "unit": null,
+   "return_fee": 7000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "image",
+     "src": "img/SG-H0213/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "1개"
+      ],
+      [
+       "구성",
+       "싱크대스토리지 싱크대수납함 욕실정리함 × 1개"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "싱크대스토리지 싱크대수납함 욕실정리함 1개 / 모델명 없음(일반 상품)"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "포엘마켓"
+    }
+   ]
+  },
+  {
+   "id": "SG-H0224",
+   "guide_id": "H224",
+   "name": "2단 싱크대 하부 1개",
+   "price": 7300,
+   "on_sale": true,
+   "stock": "in",
+   "supplier": {
+    "key": "s5",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "주방 정리",
+   "thumb": "img/SG-H0224/thumb.jpg",
+   "images": [
+    "img/SG-H0224/1.jpg"
+   ],
+   "options": [],
+   "image_scores": [
+    70
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [
+    "SG-H0022",
+    "SG-H0142",
+    "SG-H0469"
+   ],
+   "unit": null,
+   "return_fee": 6000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "image",
+     "src": "img/SG-H0224/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "1개"
+      ],
+      [
+       "구성",
+       "2단 싱크대 하부 × 1개"
+      ],
+      [
+       "크기",
+       "2단"
+      ],
+      [
+       "색상",
+       "싱크대하단수납장"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "2단 싱크대 하부 1개 / 모델명 (BD-2167)"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "중국OEM"
     }
    ]
   },
@@ -9796,6 +10486,113 @@
    ]
   },
   {
+   "id": "SG-H0258",
+   "guide_id": "H258",
+   "name": "논슬립 치마옷걸이 PVC 3개",
+   "price": 2900,
+   "on_sale": false,
+   "stock": "in",
+   "supplier": {
+    "key": "s21",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "수납정리",
+   "thumb": "img/SG-H0258/thumb.jpg",
+   "images": [
+    "img/SG-H0258/1.jpg"
+   ],
+   "options": [
+    {
+     "code": "00",
+     "label": "그레이",
+     "add_price": 0,
+     "on_sale": true
+    },
+    {
+     "code": "01",
+     "label": "블랙",
+     "add_price": 0,
+     "on_sale": true
+    }
+   ],
+   "image_scores": [
+    88
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [],
+   "unit": {
+    "pieces": 3,
+    "per_piece": 967
+   },
+   "return_fee": 6000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "text",
+     "text": "한 번에 3개가 들어 있어요."
+    },
+    {
+     "type": "image",
+     "src": "img/SG-H0258/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "3개"
+      ],
+      [
+       "구성",
+       "논슬립 치마옷걸이 PVC × 3개"
+      ],
+      [
+       "재질",
+       "PVC"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "논슬립 치마옷걸이 PVC 3개 / 모델명 CN21-14"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "케이제이다온"
+    }
+   ]
+  },
+  {
    "id": "SG-H0263",
    "guide_id": "H263",
    "name": "플라스틱 구둣주걱 23cm 3개",
@@ -9991,6 +10788,123 @@
    ]
   },
   {
+   "id": "SG-H0272",
+   "guide_id": "H272",
+   "name": "냄비뚜껑 거치대 2개",
+   "price": 3000,
+   "on_sale": true,
+   "stock": "in",
+   "supplier": {
+    "key": "s11",
+    "fee": 3000,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "주방 정리",
+   "thumb": "img/SG-H0272/thumb.jpg",
+   "images": [
+    "img/SG-H0272/1.jpg"
+   ],
+   "options": [
+    {
+     "code": "00",
+     "label": "화이트",
+     "add_price": 0,
+     "on_sale": true
+    },
+    {
+     "code": "01",
+     "label": "아이보리",
+     "add_price": 0,
+     "on_sale": true
+    },
+    {
+     "code": "02",
+     "label": "그린",
+     "add_price": 0,
+     "on_sale": true
+    }
+   ],
+   "image_scores": [
+    73
+   ],
+   "image_bg": [
+    "white"
+   ],
+   "together": [
+    "SG-H0448",
+    "SG-H0170",
+    "SG-H0478"
+   ],
+   "unit": {
+    "pieces": 2,
+    "per_piece": 1500
+   },
+   "return_fee": 6000,
+   "shipping": {
+    "fee": 3000,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "text",
+     "text": "한 번에 2개가 들어 있어요."
+    },
+    {
+     "type": "image",
+     "src": "img/SG-H0272/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "2개"
+      ],
+      [
+       "구성",
+       "냄비뚜껑 거치대 × 2개"
+      ],
+      [
+       "재질",
+       "플라스틱"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "냄비뚜껑 거치대 2개 / 모델명 상세정보참조"
+    },
+    {
+     "k": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+     "v": "해당 없음"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
+    },
+    {
+     "k": "제조자, 수입품의 경우 수입자를 함께 표기",
+     "v": "상세정보참조"
+    }
+   ]
+  },
+  {
    "id": "SG-H0277",
    "guide_id": "H277",
    "name": "검정 집게 바지걸이 30개",
@@ -10175,6 +11089,94 @@
     {
      "k": "제조자, 수입품의 경우 수입자를 함께 표기",
      "v": "위드윈"
+    }
+   ]
+  },
+  {
+   "id": "SG-H0283",
+   "guide_id": "H283",
+   "name": "1014276 접이식 클립행주걸이 1개",
+   "price": 2700,
+   "on_sale": false,
+   "stock": "in",
+   "supplier": {
+    "key": "s31",
+    "fee": 3500,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "주방 정리",
+   "thumb": "img/SG-H0283/thumb.jpg",
+   "images": [
+    "img/SG-H0283/1.jpg"
+   ],
+   "options": [
+    {
+     "code": "00",
+     "label": "카카오",
+     "add_price": 0,
+     "on_sale": true
+    },
+    {
+     "code": "01",
+     "label": "크림",
+     "add_price": 0,
+     "on_sale": true
+    }
+   ],
+   "image_scores": [
+    89
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [],
+   "unit": null,
+   "return_fee": 7500,
+   "shipping": {
+    "fee": 3500,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "image",
+     "src": "img/SG-H0283/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "1개"
+      ],
+      [
+       "구성",
+       "1014276 접이식 클립행주걸이 × 1개"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "1014276 접이식 클립행주걸이 1개 / 모델명 없음(일반 상품)"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
     }
    ]
   },
@@ -10641,6 +11643,94 @@
     {
      "k": "제조자, 수입품의 경우 수입자를 함께 표기",
      "v": "도매신"
+    }
+   ]
+  },
+  {
+   "id": "SG-H0295",
+   "guide_id": "H295",
+   "name": "1014276 접이식 클립행주걸이 1개",
+   "price": 2100,
+   "on_sale": false,
+   "stock": "in",
+   "supplier": {
+    "key": "s31",
+    "fee": 3500,
+    "bundle": true
+   },
+   "gate_mode": "bundle",
+   "hidden": false,
+   "face": false,
+   "install": null,
+   "market_volatility": null,
+   "niche": "주방 정리",
+   "thumb": "img/SG-H0295/thumb.jpg",
+   "images": [
+    "img/SG-H0295/1.jpg"
+   ],
+   "options": [
+    {
+     "code": "00",
+     "label": "카카오",
+     "add_price": 0,
+     "on_sale": true
+    },
+    {
+     "code": "01",
+     "label": "크림",
+     "add_price": 0,
+     "on_sale": true
+    }
+   ],
+   "image_scores": [
+    77
+   ],
+   "image_bg": [
+    "other"
+   ],
+   "together": [],
+   "unit": null,
+   "return_fee": 7500,
+   "shipping": {
+    "fee": 3500,
+    "free_over": null,
+    "days": "2~4"
+   },
+   "detail": [
+    {
+     "type": "image",
+     "src": "img/SG-H0295/1.jpg"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "수량",
+       "1개"
+      ],
+      [
+       "구성",
+       "1014276 접이식 클립행주걸이 × 1개"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
+    }
+   ],
+   "gosi": [
+    {
+     "k": "품명 및 모델명",
+     "v": "1014276 접이식 클립행주걸이 1개 / 모델명 없음(일반 상품)"
+    },
+    {
+     "k": "제조국 또는 원산지",
+     "v": "중국"
+    },
+    {
+     "k": "제조국",
+     "v": "중국"
     }
    ]
   },
@@ -11860,6 +12950,7 @@
     "white"
    ],
    "together": [
+    "SG-H0272",
     "SG-H0170",
     "SG-H0478"
    ],
@@ -13401,8 +14492,8 @@
    ],
    "together": [
     "SG-H0022",
-    "SG-H0476",
-    "SG-H0480"
+    "SG-H0142",
+    "SG-H0224"
    ],
    "unit": null,
    "return_fee": 6000,
@@ -13497,6 +14588,7 @@
     "other"
    ],
    "together": [
+    "SG-H0272",
     "SG-H0170",
     "SG-H0478"
    ],
@@ -13874,8 +14966,8 @@
    ],
    "together": [
     "SG-H0022",
-    "SG-H0469",
-    "SG-H0480"
+    "SG-H0142",
+    "SG-H0224"
    ],
    "unit": null,
    "return_fee": 6000,
@@ -13974,6 +15066,7 @@
    ],
    "together": [
     "SG-H0448",
+    "SG-H0272",
     "SG-H0170"
    ],
    "unit": null,
@@ -14177,8 +15270,8 @@
    ],
    "together": [
     "SG-H0022",
-    "SG-H0469",
-    "SG-H0476"
+    "SG-H0142",
+    "SG-H0224"
    ],
    "unit": null,
    "return_fee": 6000,
@@ -15581,8 +16674,8 @@
    ],
    "together": [
     "SG-H0022",
-    "SG-H0469",
-    "SG-H0476"
+    "SG-H0142",
+    "SG-H0224"
    ],
    "unit": null,
    "return_fee": 6000,
