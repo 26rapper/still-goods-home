@@ -269,7 +269,10 @@
     while (grid.firstChild) grid.removeChild(grid.firstChild);
     list.forEach(function (p, i) { grid.appendChild(card(p, i)); });
     $('#picks').hidden = list.length === 0;
-    $('#gridSub').hidden = !(list.length && list.every(function (p) { return p.free; }));
+    var allFree = !!(list.length && list.every(function (p) { return p.free; }));
+    $('#gridSub').hidden = !allFree;
+    var trustShip = $('#trustShip');   /* '주문 전에 알아 두세요 — 배송비 포함' 줄도 모두 배송비 포함일 때만(5판: 상품값 + 배송비라 평소엔 숨김 — 사실 문장) */
+    if (trustShip) trustShip.hidden = !allFree;
   }
 
   /* 4 문의 — config.json contact */
