@@ -11746,7 +11746,7 @@
     "fee": 3000,
     "bundle": true
    },
-   "gate_mode": "single",
+   "gate_mode": "hold",
    "hidden": false,
    "face": false,
    "install": null,
@@ -15134,7 +15134,7 @@
     "fee": 2800,
     "bundle": true
    },
-   "gate_mode": "single",
+   "gate_mode": "hold",
    "hidden": false,
    "face": false,
    "install": null,

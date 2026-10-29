@@ -446,16 +446,12 @@
     a.href = rel('item.html?id=' + encodeURIComponent(p.id));
     a.appendChild(pic(p.thumb, p.name, i > 3));
     var info = el('div', 'card-info');
-    var nm = nameParts(p.name, p.parts.length > 0);
-    info.appendChild(el('span', 'card-name', nm[0]));
-    if (nm[1]) info.appendChild(el('span', 'card-sub', nm[1]));
+    var nm = nameParts(p.name, p.parts.length > 0), tt = el('div', 'card-t');   /* 이름 칸은 두 줄 높이 고정 → 값 줄이 카드마다 같은 높이(오너 2026-10-30) */
+    tt.appendChild(el('span', 'card-name', nm[0]));
+    if (nm[1]) { tt.appendChild(el('span', 'card-sub', nm[1])); a.classList.add('has-sub'); }
+    info.appendChild(tt);
     var pr = el('div', 'card-price');
-    pr.appendChild(el('b', null, won(p.price)));
-    if (p.shipping.fee === 0) pr.appendChild(el('span', 'card-ship', T('badge.free_ship')));   /* 4판: 배지 아님 — 값 옆 작은 회색 글 */
-    else if (p.shipping.fee !== null) {
-      pr.appendChild(el('span', 'card-ship', shipLabel(p.shipping.fee)));   /* 5판: '배송비 3,000원'(데이터) */
-      if (p.shipping.free_over !== null) pr.appendChild(el('span', 'card-ship', T('card.free_over', { amount: won(p.shipping.free_over) })));   /* '20,000원 이상 무료'(데이터 + 기능 표시) — 진열장에서 숨기지 않는다(총액 먼저, 전자상거래법 순차공개 금지) */
-    }
+    pr.appendChild(el('b', null, won(p.price)));   /* 값만 — 배송비('배송비 포함' 포함) · 무료 기준 글은 카드에 0(오너 2026-10-30). 상세 값 옆 · 배송 줄 · 장바구니 · 주문서에서 보인다 — 결제 단계에서 처음 드러나는 비용은 없다(check 11) */
     info.appendChild(pr);
     var pm = perMeter(p);
     if (pm) info.appendChild(el('span', 'card-unit', T('price.unit', { p: pm.toLocaleString('ko-KR') })));
@@ -745,7 +741,7 @@
     $('#itemPrice').textContent = won(p.price);
     $('#itemFree').hidden = p.shipping.fee !== 0;
     var shipEl = $('#itemShip');   /* 5판: 값 옆 '배송비 3,000원'(데이터) — fee 0 이면 '배송비 포함' 그대로 */
-    if (shipEl) { shipEl.hidden = !(p.shipping.fee > 0); if (!shipEl.hidden) shipEl.textContent = shipLabel(p.shipping.fee); }
+    if (shipEl) { shipEl.hidden = !(p.shipping.fee > 0); if (!shipEl.hidden) shipEl.textContent = shipLabel(p.shipping.fee) + (p.shipping.free_over !== null ? ' · ' + T('card.free_over', { amount: won(p.shipping.free_over) }) : ''); }   /* '배송비 3,000원 · 20,000원 이상 무료' — 카드엔 없고 상세에서(오너 2026-10-30) */
     var pm = perMeter(p), unit = $('#itemUnit');
     if (pm) { unit.textContent = T('price.unit', { p: pm.toLocaleString('ko-KR') }); unit.hidden = false; }
 

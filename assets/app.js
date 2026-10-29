@@ -1,6 +1,6 @@
 /* Still Goods · 스틸 굿즈 — 홈 스크립트(4판: 브랜드 첫인상 → 분야 → 상품 → 문제 → 해결 → 고르는 법, docs/자사몰_디자인_방향_4판.md 3절)
    하는 일
-   0. 첫인상 — 글 + 여백. config.json hero_photo(쓰는 장면 사진, 예: assets/hero.jpg)가 있을 때만 큰 사진 한 장(4판 2차 — 상품 사진 셋은 뺌).
+   0. 첫인상 — 글 + 여백. config.json hero_photo(예: assets/hero.jpg)가 있을 때만 띠 바닥에 사진 한 장, 글은 그 위(2026-10-30 — 폰은 hero_photo_mobile). 4판 2차의 상품 사진 셋은 뺌.
    홈에 보이는 상품 사진(분야 칸 · 지금 파는 상품 · 문제 카드)은 흰 배경(image_bg[0] "white" — 엔진 칸) 먼저, 그다음 face → image_scores.
    1. 분야 — data/products.json 의 분야(niche) 값으로 사진 칸(대표 상품 사진 + 분야 이름)을 만든다(상품 있는 분야 전부, 6까지). 0 개 분야는 칸을 만들지 않는다. 개수는 적지 않는다.
    2. 고르는 법 — data/guides.json 의 분야(domains) 중 지금 팔 수 있는 상품이 있는 분야만 단추로, 고른 분야의 세 단계(없으면 절째 숨김). 접힌 카드 안.
@@ -119,19 +119,25 @@
     return inCat.filter(function (p) { return !(skip && skip[p.id]); })[0] || inCat[0] || null;
   }
 
-  /* 0 첫인상 사진 자리 — config.json 의 hero_photo(예: assets/hero.jpg — 쓰는 장면 사진)가 있을 때만 글 옆(폰은 아래)에 한 장. 비면 요청 0 · 자리째 숨김(글 + 여백만).
-     따로 묻는 요청(HEAD) 0 — 사진을 한 번 읽어 보고 onload 면 보이고, onerror 면 숨긴 채 둔다. 사진 파일 그대로(object-fit:cover, 90% 맞춤 아님) */
+  /* 0 첫인상 사진 — config.json 의 hero_photo(예: assets/hero.jpg)가 있을 때만 머리 아래 띠의 바닥에 한 장(오너 2026-10-30 "상단에 사진"): 글은 그 위.
+     hero_photo_mobile(예: assets/hero-m.jpg, 상품이 아래)이 있으면 폰(760px 아래)은 그 사진. 비면 요청 0 · 자리째 숨김(글 + 여백만).
+     따로 묻는 요청(HEAD) 0 — 사진을 한 번 읽어 보고 onload 면 보이고(#hero.has-photo), onerror 면 숨긴 채 둔다. 사진 파일 그대로(object-fit:cover, 글자 얹기 0) */
   var RE_HERO = /^assets\/[A-Za-z0-9_.-]+\.(jpe?g|png|webp)$/;
   function paintHeroPhoto(conf) {
-    var box = $('#heroPhoto'), row = $('.hero-row');
+    var box = $('#heroPhoto'), sec = $('#hero');
     if (!box) return;
     var src = conf && typeof conf.hero_photo === 'string' ? conf.hero_photo.trim() : '';
+    var srcM = conf && typeof conf.hero_photo_mobile === 'string' ? conf.hero_photo_mobile.trim() : '';
     if (!RE_HERO.test(src)) { box.hidden = true; return; }   /* 비면 요청 0 — 자리째 숨김 */
+    var pic = document.createElement('picture');
+    if (RE_HERO.test(srcM)) { var so = document.createElement('source'); so.media = '(max-width:760px)'; so.srcset = srcM; pic.appendChild(so); }
     var im = new Image();
     im.alt = '';
     im.decoding = 'async';
-    im.onload = function () { box.appendChild(im); box.hidden = false; if (row) row.classList.add('has-photo'); };
-    im.onerror = function () { box.hidden = true; };
+    im.onload = function () { box.hidden = false; if (sec) sec.classList.add('has-photo'); };
+    im.onerror = function () { box.hidden = true; if (sec) sec.classList.remove('has-photo'); };
+    pic.appendChild(im);
+    box.appendChild(pic);   /* 자리는 hidden 인 채 — onload 때만 보인다 */
     im.src = src;
   }
 
@@ -247,15 +253,12 @@
     a.href = shopOff ? '#top' : 'item.html?id=' + encodeURIComponent(p.id);
     a.appendChild(UI ? UI.pic(p.img, p.name, { lazy: i > 3 }) : el('div', 'pic'));
     var info = el('div', 'card-info');
-    var nm = nameParts(p.name, p.set);
-    info.appendChild(el('span', 'card-name', nm[0]));
-    if (nm[1]) info.appendChild(el('span', 'card-sub', nm[1]));
+    var nm = nameParts(p.name, p.set), tt = el('div', 'card-t');   /* 이름 칸은 두 줄 높이 고정 → 값 줄이 카드마다 같은 높이(오너 2026-10-30 "가격 라인") */
+    tt.appendChild(el('span', 'card-name', nm[0]));
+    if (nm[1]) { tt.appendChild(el('span', 'card-sub', nm[1])); a.classList.add('has-sub'); }
+    info.appendChild(tt);
     var pr = el('div', 'card-price');
-    pr.appendChild(el('b', null, won(p.price)));   /* 배지 0 — '배송비 포함'은 격자 위 한 줄(모두 무료일 때) */
-    if (p.fee) {
-      pr.appendChild(el('span', 'card-ship', T('sum.ship') + ' ' + won(p.fee)));   /* 5판: '배송비 3,000원'(데이터) — 목록 카드와 같은 꼴 */
-      if (p.freeOver !== null) pr.appendChild(el('span', 'card-ship', T('card.free_over', { amount: won(p.freeOver) })));   /* '20,000원 이상 무료' — 진열장에서도 조건을 같이 보인다 */
-    }
+    pr.appendChild(el('b', null, won(p.price)));   /* 값만 — 배송비 · 무료 기준 글은 카드에 0, 상세 · 장바구니 · 주문서에서(오너 2026-10-30). '배송비 포함'은 격자 위 한 줄(모두 무료일 때) */
     info.appendChild(pr);
     var pm = perMeter(p);
     if (pm) info.appendChild(el('span', 'card-unit', T('price.unit', { p: pm.toLocaleString('ko-KR') })));
