@@ -247,6 +247,7 @@ h1,h2,h3,p{margin:0}
   body{font-size:17px}
   .hero{padding:40px 0 0}
   .hero-ko{margin-top:14px}
+  .hero-en-l2{display:block}   /* 폰: 쉼표 뒤 둘째 조각을 새 줄로(데스크톱은 한 줄) */
   .hero-go{display:flex;width:100%}
   .h2{font-size:20px}
   .wm{gap:8px}

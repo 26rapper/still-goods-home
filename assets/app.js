@@ -338,6 +338,17 @@
   });
 
   applyCopy();
+  /* 영문 제목 줄바꿈 — 쉼표 뒤에서만(폰). 글은 그대로(textContent 같음): "Small Changes, " + "Better Living." 두 조각, 둘째 조각만 폰에서 block.
+     text-wrap:balance 는 아이폰 사파리에서 안 먹어(오너 캡처 2026-10-30) 조각으로 나눈다. 쉼표가 없으면 아무것도 안 한다 */
+  (function heroLines() {
+    var e = $('.hero-en'); if (!e) return;
+    var t = e.textContent, i = t.indexOf(', ');
+    if (i < 0 || i + 2 >= t.length) return;
+    while (e.firstChild) e.removeChild(e.firstChild);
+    e.appendChild(document.createTextNode(t.slice(0, i + 2)));
+    var l2 = document.createElement('span'); l2.className = 'hero-en-l2'; l2.textContent = t.slice(i + 2);
+    e.appendChild(l2);
+  })();
   /* ?fx=bundle · ?fx=many — 이 PC(localhost)에서만 본보기 데이터(data/fixtures/)를 읽는다(5판 화면 시험 · 캡처용) */
   var FX = { bundle: 'data/fixtures/bundle_sample.json', many: 'data/fixtures/many_local.json' };
   var fx = new URLSearchParams(location.search).get('fx');
