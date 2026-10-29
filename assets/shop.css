@@ -8,7 +8,7 @@
 .example-note{margin:0 0 18px;padding:12px 16px;border-radius:12px;background:#fff4d6;color:#5a4300;font-size:16px;font-weight:600}
 .list-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-bottom:22px}
 .filters{display:flex;flex-wrap:wrap;gap:8px}
-.chip{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:2px solid var(--line);border-radius:999px;background:#fff;font-size:17px;font-weight:600;cursor:pointer;transition:border-color .2s,background .2s}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:2px solid var(--line);border-radius:999px;background:var(--bg);font-size:17px;font-weight:600;cursor:pointer;transition:border-color .2s,background .2s}
 .chip:hover{border-color:var(--green)}
 .chip small{font-size:15px;font-weight:600;color:var(--ink-3)}
 .chip[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff}
@@ -62,7 +62,7 @@
 .msg a{color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:4px}
 .buybox .three{margin-top:16px;padding:2px 18px;border-radius:14px;background:var(--soft)}
 .buybox .three li + li{border-top-color:var(--line-2)}
-.buybox .three-ic{background:#fff}
+.buybox .three-ic{background:var(--bg)}
 .narrow-col{max-width:880px}
 .detail-body figure img{max-width:640px}
 .fitbox{margin-top:clamp(36px,5vw,56px);padding:22px 24px;border-radius:18px;background:var(--soft)}
@@ -92,7 +92,7 @@
 /* 폰: 아래 고정 사기 띠 */
 .buybar{display:none}
 @media (max-width:760px){
-  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:12px;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -10px 24px -18px rgba(0,0,0,.35)}
+  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:12px;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line);box-shadow:0 -10px 24px -18px rgba(0,0,0,.35)}
   .buybar-sum{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
   .buybar .btn{flex:1;min-height:56px;padding:0 16px}
   body.has-buybar{padding-bottom:84px}

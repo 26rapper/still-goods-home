@@ -1,13 +1,15 @@
 /* Still Goods · 스틸 굿즈 — 4판 디자인 체계(docs/자사몰_디자인_방향_4판.md — 3판의 색 · 글꼴 위에 차례 · 겉모습만 바꿈)
    4판: 카드 · 분야 칸 · 상자 테두리 0(여백 · 옅은 바탕으로 나눔) · 초록 세로줄 0 · 배지 → 작은 글 · 폰 h1 28px · 구획 여백 넓게.
    입력 칸 · 체크 · 단추 · 칩의 테두리는 그대로(조작 요소는 테두리가 있어야 보인다).
-   흰 바탕 · 옅은 회색 구획 · 차분한 초록 하나 · 고딕(IBM Plex Sans KR) · 워드마크만 Instrument Serif · 주문번호 같은 값은 IBM Plex Mono.
+   색(4판 2차, 오너 선택 2026-10-29 — 시안 A 수정판): 웜 아이보리 바탕(#F7F5F0) · 크림 구획(#EEEAE2) · 차콜 글자 · 단추(#252521, 흰 글 15:1) · 주황(#C66A43)은 아이콘 · 밑줄 · 초점만 ·
+   보조글 #625D55(바탕 6.0:1 · 크림 5.4:1). 고딕(IBM Plex Sans KR) · 워드마크 · 첫 화면 영문만 Instrument Serif · 주문번호 같은 값은 IBM Plex Mono.
    방향서 3절: 사진이 주인공(칸 가득) · 본문 18px(폰 17px) · 값 22~32px 굵게 · 대비 7:1 근처 · 누르는 곳 48px 이상 · 한 줄에 한 정보.
    아치 · 번호판 · 영문 머리말 0. 이 파일 = 바탕 · 머리 · 바닥 · 단추 · 사진 칸 · 홈. 가게 부품은 shop.css. */
 :root{
-  --bg:#ffffff; --soft:#f3f5f2; --soft-2:#e8ece7; --line:#d9dfd8; --line-2:#c6cec5;
-  --ink:#141714; --ink-2:#384038; --ink-3:#556055;
-  --green:#1b5e40; --green-2:#124530; --green-soft:#e6f0ea; --green-line:#c5dccd;
+  --bg:#F7F5F0; --soft:#EEEAE2; --soft-2:#E4DFD5; --line:#DDD8CE; --line-2:#C9C3B7;
+  --ink:#252521; --ink-2:#4A463F; --ink-3:#625D55;
+  /* --green = 단추 · 링크 · 켜진 칩의 강조색(이름은 3판 그대로, 값은 차콜). 주황 --accent 는 아이콘 · 밑줄 · 초점 테두리만(글자 · 단추엔 대비 3.5:1 미달) */
+  --green:#252521; --green-2:#0F0F0D; --green-soft:#F1E4DC; --green-line:#E3C9BA; --accent:#C66A43;
   --warn:#8a3b2e; --warn-soft:#f7e9e5;
   --f-ui:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   --f-mono:"IBM Plex Mono",monospace;
@@ -25,7 +27,11 @@ h1,h2,h3,p{margin:0}
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--gut)}
 .wrap.narrow{max-width:880px}
 .ic{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:8px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+/* 주황 강조 — 아이콘 동그라미 · 글 단추 밑줄 · 장바구니 개수만(글자 · 단추엔 쓰지 않음) */
+.three-ic,.prob-go,.guide-card-ic,.ask-ic{color:var(--accent)}
+.textlink{text-decoration-color:var(--accent)}
+.cnt{background:var(--accent)}
 
 /* ── 머리 ── */
 .hd{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
@@ -40,7 +46,7 @@ h1,h2,h3,p{margin:0}
 .nav a[aria-current="page"]{background:var(--green-soft);color:var(--green)}
 .nav .ic{font-size:22px}
 /* 4판 폰 메뉴 — 단추 · 아래로 펼치는 작은 판(컴퓨터 너비에서는 숨김) */
-.nav-menu{display:none;align-items:center;gap:8px;min-height:48px;min-width:48px;padding:0 14px;border:2px solid var(--line-2);border-radius:12px;background:#fff;font-size:17px;font-weight:600;cursor:pointer}
+.nav-menu{display:none;align-items:center;gap:8px;min-height:48px;min-width:48px;padding:0 14px;border:2px solid var(--line-2);border-radius:12px;background:var(--bg);font-size:17px;font-weight:600;cursor:pointer}
 .nav-menu .ic{font-size:22px}
 .nav-menu[aria-expanded="true"]{border-color:var(--green);color:var(--green)}
 .nav-panel{border-top:1px solid var(--line);background:var(--bg)}
@@ -59,8 +65,8 @@ h1,h2,h3,p{margin:0}
   background:var(--green);color:#fff;font-size:18px;font-weight:700;letter-spacing:-.01em;text-align:center;cursor:pointer;transition:background .2s,border-color .2s}
 .btn:hover{background:var(--green-2);border-color:var(--green-2)}
 .btn .ic{font-size:22px}
-.btn.line,.btn.ghost{background:#fff;color:var(--ink);border-color:var(--line-2)}
-.btn.line:hover,.btn.ghost:hover{border-color:var(--ink);background:#fff}
+.btn.line,.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line-2)}
+.btn.line:hover,.btn.ghost:hover{border-color:var(--ink);background:var(--bg)}
 .btn.small{min-height:48px;padding:0 20px;font-size:17px}
 .btn.wide{width:100%}
 .btn.big{min-height:60px;font-size:19px}
@@ -112,7 +118,7 @@ h1,h2,h3,p{margin:0}
 .prob:hover{background:var(--soft-2)}
 .prob .pic{flex:none;width:clamp(96px,12vw,140px);border-radius:14px}
 .prob-t{flex:1;font-size:clamp(19px,2vw,24px);font-weight:700;line-height:1.4;letter-spacing:-.02em}
-.prob-go{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:#fff;color:var(--green)}
+.prob-go{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:var(--bg);color:var(--green)}
 .prob-go .ic{font-size:22px}
 
 /* ── 고르는 법 카드 · 목록 '이렇게 고르세요' 접힌 줄(details — 닫힘 기본) ── */
@@ -120,7 +126,7 @@ h1,h2,h3,p{margin:0}
 .guide-card > summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;padding:12px clamp(18px,2.4vw,28px);cursor:pointer;list-style:none}
 .guide-card > summary::-webkit-details-marker{display:none}
 .guide-card-t{font-size:clamp(19px,2vw,23px);font-weight:700;line-height:1.4;letter-spacing:-.02em}
-.guide-card-ic{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:#fff;color:var(--green);transition:transform .2s}
+.guide-card-ic{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:var(--bg);color:var(--green);transition:transform .2s}
 .guide-card-ic .ic{font-size:22px}
 .guide-card[open] .guide-card-ic{transform:rotate(180deg)}
 .guide-body{padding:0 clamp(18px,2.4vw,28px) clamp(18px,2.4vw,26px)}
@@ -131,12 +137,12 @@ h1,h2,h3,p{margin:0}
 .guide-tabs{margin-top:16px}
 #guide .textlink{margin-top:10px}
 .guide-steps{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.guide-steps li{display:flex;gap:14px;padding:20px;border-radius:var(--r);background:#fff}
+.guide-steps li{display:flex;gap:14px;padding:20px;border-radius:var(--r);background:var(--bg)}
 .guide-steps .num{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
 .guide-steps b{display:block;font-size:19px;font-weight:700;line-height:1.4}
 .guide-steps p{margin-top:4px;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
 /* 고를 때 이런 점도 — 분야 cautions(후기 · 문의에서 자주 나온 점) 1~3줄, 세 단계 바로 아래 작은 상자 */
-.cautions{margin-top:14px;padding:18px 22px;border-radius:var(--r);background:#fff}
+.cautions{margin-top:14px;padding:18px 22px;border-radius:var(--r);background:var(--bg)}
 .cautions h3{font-size:18px;font-weight:700;line-height:1.4}
 .cautions ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
 .cautions li{position:relative;padding-left:18px;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
@@ -144,7 +150,7 @@ h1,h2,h3,p{margin:0}
 
 /* ── 상품 카드(4판: 사진 크게 → 이름 2줄 → 값. 테두리 · 세로줄 · 배지 0) ── */
 .grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px 24px}
-.card{display:flex;flex-direction:column;height:100%;background:#fff}
+.card{display:flex;flex-direction:column;height:100%;background:var(--bg)}
 .card .pic{border-radius:var(--r);background:#fff;transition:transform .25s}
 .card:hover .pic{transform:translateY(-2px)}
 .card:hover .card-name{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
@@ -161,7 +167,7 @@ h1,h2,h3,p{margin:0}
 .card.is-out .pic img{opacity:.5;filter:grayscale(.5)}
 /* 4판: 배지 → 작은 글(상세 값 옆 '배송비 포함') */
 .chip-ok{display:inline-flex;align-items:center;font-size:16px;font-weight:600;color:var(--ink-2);line-height:1.4}
-.tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:7px;border:1px solid var(--line-2);background:#fff;color:var(--ink-2);font-size:15px;font-weight:600;line-height:1.4}
+.tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:7px;border:1px solid var(--line-2);background:var(--bg);color:var(--ink-2);font-size:15px;font-weight:600;line-height:1.4}
 .tag.solid{background:var(--ink);border-color:var(--ink);color:#fff}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 
@@ -175,11 +181,11 @@ h1,h2,h3,p{margin:0}
 .three li > div > b{display:block;font-size:17.5px;font-weight:700}
 .three li > div > span{display:block;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
 .promise .three li + li{border-top-color:var(--line-2)}
-.promise .three-ic{background:#fff}
+.promise .three-ic{background:var(--bg)}
 
 /* ── 문의(config.json contact — 비면 숨김) ── */
 .ask{display:flex;flex-wrap:wrap;align-items:center;gap:16px 18px;padding:24px 28px;border-radius:18px;background:var(--soft)}
-.ask-ic{display:grid;place-items:center;flex:none;width:54px;height:54px;border-radius:50%;background:#fff;color:var(--green)}
+.ask-ic{display:grid;place-items:center;flex:none;width:54px;height:54px;border-radius:50%;background:var(--bg);color:var(--green)}
 .ask-ic .ic{font-size:26px}
 .ask-t{flex:1 1 280px}
 .ask-t b{display:block;font-size:20px;font-weight:700}
