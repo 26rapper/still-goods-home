@@ -4,17 +4,19 @@
    색(4판 2차, 오너 선택 2026-10-29 — 시안 A 수정판): 웜 아이보리 바탕(#F7F5F0) · 크림 구획(#EEEAE2) · 차콜 글자 · 단추(#252521, 흰 글 15:1) · 주황(#C66A43)은 아이콘 · 밑줄 · 초점만 ·
    보조글 #625D55(바탕 6.0:1 · 크림 5.4:1). 고딕(IBM Plex Sans KR) · 워드마크 · 첫 화면 영문만 Instrument Serif · 주문번호 같은 값은 IBM Plex Mono.
    방향서 3절: 사진이 주인공(칸 가득) · 본문 18px(폰 17px) · 값 22~32px 굵게 · 대비 7:1 근처 · 누르는 곳 48px 이상 · 한 줄에 한 정보.
-   아치 · 번호판 · 영문 머리말 0. 이 파일 = 바탕 · 머리 · 바닥 · 단추 · 사진 칸 · 홈. 가게 부품은 shop.css. */
+   아치 · 번호판 · 영문 머리말 0. 이 파일 = 바탕 · 머리 · 바닥 · 단추 · 사진 칸 · 홈. 가게 부품은 shop.css.
+   5판 디자인(외부 의견 3 채택분, 2026-10-29 밤 — docs/자사몰_디자인_외부의견3_2026-10-29.md): 보조글 #57524A(바탕 7.1:1) · 글자용 포인트 --accent-ink(변수만) ·
+   반지름 3단(--r-s 10 · --r-m 14 · --r-l 20) · 굵기는 400/500/600만(700 0) · 히어로 띠 0(쪽 바탕) · 상품 카드 1px --line · 사진 칸은 흰색(multiply 0) · 절 간격 80(폰 56). */
 :root{
   --bg:#F7F5F0; --soft:#EEEAE2; --soft-2:#E4DFD5; --line:#DDD8CE; --line-2:#C9C3B7;
-  --ink:#252521; --ink-2:#4A463F; --ink-3:#625D55;
+  --ink:#252521; --ink-2:#4A463F; --ink-3:#57524A;
   /* --green = 단추 · 링크 · 켜진 칩의 강조색(이름은 3판 그대로, 값은 차콜). 주황 --accent 는 아이콘 · 밑줄 · 초점 테두리만(글자 · 단추엔 대비 3.5:1 미달) */
-  --green:#252521; --green-2:#0F0F0D; --green-soft:#F1E4DC; --green-line:#E3C9BA; --accent:#C66A43;
+  --green:#252521; --green-2:#0F0F0D; --green-soft:#F1E4DC; --green-line:#E3C9BA; --accent:#C66A43; --accent-ink:#9E4A28;   /* --accent-ink = 글자용 포인트(바탕 5.6:1 — 작은 강조 글자만, 지금 쓰는 곳 0) */
   --warn:#8a3b2e; --warn-soft:#f7e9e5;
   --f-ui:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   --f-mono:"IBM Plex Mono",monospace;
   --f-display:"Instrument Serif","Times New Roman",serif;
-  --r:16px; --gut:clamp(16px,4vw,40px); --sec:clamp(52px,7vw,96px);
+  --r-s:10px; --r-m:14px; --r-l:20px; --gut:clamp(16px,4vw,40px); --sec:clamp(48px,6vw,80px);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -29,7 +31,8 @@ h1,h2,h3,p{margin:0}
 .ic{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
 /* 주황 강조 — 아이콘 동그라미 · 글 단추 밑줄 · 장바구니 개수만(글자 · 단추엔 쓰지 않음) */
-.three-ic,.prob-go,.guide-card-ic,.ask-ic{color:var(--accent)}
+.three-ic,.guide-card-ic,.ask-ic{color:var(--accent)}
+.prob-go{color:var(--ink)}   /* --soft-2 위(카드 hover)에서 주황은 2.9:1 — 아이콘은 --ink */
 .textlink{text-decoration-color:var(--accent)}
 .cnt{background:var(--accent)}
 
@@ -41,12 +44,13 @@ h1,h2,h3,p{margin:0}
 .wm-en i{font-style:italic}
 .wm-ko{font-size:16px;font-weight:600;color:var(--ink-2)}
 .nav{display:flex;align-items:center;gap:4px}
-.nav a{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 14px;border-radius:12px;font-size:17px;font-weight:600;color:var(--ink)}
+.nav a{display:inline-flex;align-items:baseline;gap:8px;min-height:48px;padding:14px 14px 0;border-radius:var(--r-s);font-size:15px;font-weight:500;color:var(--ink)}
+.nav a.nav-cart{align-items:center;padding-top:0}
 .nav a:hover{background:var(--soft)}
 .nav a[aria-current="page"]{background:var(--green-soft);color:var(--green)}
 .nav .ic{font-size:22px}
 /* 4판 폰 메뉴 — 단추 · 아래로 펼치는 작은 판(컴퓨터 너비에서는 숨김) */
-.nav-menu{display:none;align-items:center;gap:8px;min-height:48px;min-width:48px;padding:0 14px;border:2px solid var(--line-2);border-radius:12px;background:var(--bg);font-size:17px;font-weight:600;cursor:pointer}
+.nav-menu{display:none;align-items:center;gap:8px;min-height:48px;min-width:48px;padding:0 14px;border:2px solid var(--line-2);border-radius:var(--r-s);background:var(--bg);font-size:15px;font-weight:500;cursor:pointer}
 .nav-menu .ic{font-size:22px}
 .nav-menu[aria-expanded="true"]{border-color:var(--green);color:var(--green)}
 .nav-panel{border-top:1px solid var(--line);background:var(--bg)}
@@ -54,24 +58,25 @@ h1,h2,h3,p{margin:0}
 .nav-panel a{display:flex;align-items:center;min-height:52px;font-size:18px;font-weight:600;border-bottom:1px solid var(--soft-2)}
 .nav-panel a:last-child{border-bottom:0}
 @media (min-width:720px){.nav-panel{display:none !important}}
-.cnt{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:var(--green);color:#fff;font-size:15px;font-weight:700;line-height:1}
+.cnt{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:var(--green);color:#fff;font-size:15px;font-weight:600;line-height:1}
 .cnt:empty{display:none}
 
 /* 시험 결제 띠 */
 .band{padding:10px var(--gut);background:#fff4d6;border-bottom:1px solid #e8d49a;color:#5a4300;font-size:16px;font-weight:600;text-align:center}
 
 /* ── 단추 ── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border:2px solid var(--green);border-radius:12px;
-  background:var(--green);color:#fff;font-size:18px;font-weight:700;letter-spacing:-.01em;text-align:center;cursor:pointer;transition:background .2s,border-color .2s}
-.btn:hover{background:var(--green-2);border-color:var(--green-2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border:2px solid var(--green);border-radius:var(--r-s);
+  background:var(--green);color:#fff;font-size:16px;font-weight:600;letter-spacing:-.01em;text-align:center;cursor:pointer;transition:background .2s,border-color .2s}
+.btn:hover{background:var(--ink-2);border-color:var(--ink-2)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-s)}
 .btn .ic{font-size:22px}
 .btn.line,.btn.ghost{background:var(--bg);color:var(--ink);border-color:var(--line-2)}
 .btn.line:hover,.btn.ghost:hover{border-color:var(--ink);background:var(--bg)}
-.btn.small{min-height:48px;padding:0 20px;font-size:17px}
+.btn.small{min-height:48px;padding:0 20px;font-size:16px}
 .btn.wide{width:100%}
-.btn.big{min-height:60px;font-size:19px}
+.btn.big{min-height:56px;font-size:17px}
 .btn[disabled],.btn[aria-disabled="true"]{background:var(--soft-2);border-color:var(--soft-2);color:var(--ink-3);cursor:not-allowed}
-.textlink{display:inline-flex;align-items:center;gap:6px;min-height:48px;font-weight:700;color:var(--green);text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--green-line)}
+.textlink{display:inline-flex;align-items:center;gap:6px;min-height:48px;font-weight:600;color:var(--green);text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--green-line)}
 .textlink .ic{font-size:20px}
 
 /* ── 사진 칸 — 상품이 칸의 90% 를 채우게(ui.js) ── */
@@ -81,55 +86,58 @@ h1,h2,h3,p{margin:0}
 /* ── 쪽 공통 ── */
 .page{padding-top:clamp(20px,3vw,36px)}
 .page-head{margin-bottom:clamp(20px,3vw,32px)}
-.page-head h1{font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1.3;letter-spacing:-.03em}
-.lede{margin-top:10px;max-width:40em;font-size:clamp(17px,1.6vw,19px);line-height:1.7;color:var(--ink-2)}
+.page-head h1{font-size:clamp(28px,3.4vw,40px);font-weight:600;line-height:1.3;letter-spacing:-.03em}
+.lede{margin-top:10px;max-width:34em;font-size:clamp(17px,1.6vw,19px);line-height:1.7;color:var(--ink-2)}
 .sec{padding-top:var(--sec)}
-.h2{font-size:clamp(23px,2.3vw,28px);font-weight:700;line-height:1.35;letter-spacing:-.02em}
-.sub{margin-top:6px;font-size:17px;color:var(--ink-2)}
+.h2{font-size:22px;font-weight:600;line-height:1.4;letter-spacing:-.01em}
+.sub{margin-top:6px;max-width:34em;font-size:17px;color:var(--ink-2)}
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:12px}
 .grid-more{display:flex;justify-content:flex-end;margin-top:18px}   /* 전체 상품 보기 — 격자 아래(4판 2차: 제목 밑에 홀로 서던 글 단추를 끝으로) */
-/* 4판 2차: 첫 화면 바로 아래 분야 · 상품은 구획 간격의 반 — 문제 · 고르는 법 · 알아 두세요 사이는 --sec 그대로 */
-#catsSec,#picks{padding-top:clamp(28px,3.5vw,48px)}
+/* 분야 칸은 첫 화면에서 64(폰 40) · 상품은 분야 바로 아래 반 간격 · 문제 → 해결 ↔ 고르는 법은 이어진 블록이라 24 · 나머지는 --sec */
+#catsSec{padding-top:64px}
+#picks{padding-top:clamp(28px,3.5vw,48px)}
+#problems:not([hidden]) + #guide{padding-top:24px}
 .note{margin:0;font-size:16px;line-height:1.6;color:var(--ink-3)}
 
 /* ── 홈: 브랜드 첫인상(4판 2차 — 글 + 여백. assets/hero.jpg 가 있을 때만 옆(폰은 아래)에 큰 사진 한 장) ── */
-.hero{background:var(--soft);padding:clamp(28px,4.5vw,64px) 0 clamp(32px,4.5vw,64px)}
+.hero{padding:72px 0 0}   /* 띠 0 — 바탕은 쪽 배경 그대로 */
 .hero-row{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
 .hero-row.has-photo{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
-.hero-en{font-family:var(--f-display);font-size:clamp(34px,4.4vw,60px);line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
-.hero-ko{margin-top:14px;font-size:clamp(28px,3vw,40px);font-weight:700;line-height:1.35;letter-spacing:-.03em}
-.hero-go{margin-top:24px}
+.hero-en{max-width:14em;font-family:var(--f-display);font-size:clamp(44px,5.8vw,84px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:var(--ink)}
+.hero-ko{max-width:30em;margin-top:20px;font-size:clamp(17px,1.5vw,22px);font-weight:500;line-height:1.6;letter-spacing:-.01em;color:var(--ink-2)}   /* h1 태그 그대로 · 모양만 설명 글 */
+.hero-go{margin-top:28px}
+.btn.small.hero-go{min-height:52px;padding:0 24px}
 /* 사진 파일 그대로 — 칸을 채워 자름(object-fit:cover), 90% 맞춤 · 가공 · 글자 얹기 0 */
-.hero-photo{overflow:hidden;aspect-ratio:4/3;border-radius:20px;background:var(--soft-2)}
+.hero-photo{overflow:hidden;aspect-ratio:4/3;border-radius:var(--r-l);background:var(--soft-2)}
 .hero-photo img{width:100%;height:100%;max-width:none;object-fit:cover}
 
 /* ── 홈: 분야(4판 2차 — 사진이 칸 전체 · 이름은 사진 아래 작은 글. 상자 0) ── */
 .cats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
 .cat{display:flex;flex-direction:column;gap:8px;height:100%}
-.cat .pic{border-radius:14px;background:var(--soft)}
-.cat .pic img{mix-blend-mode:multiply}   /* 사진의 흰 바탕이 칸의 옅은 바탕으로 보이게(파일은 그대로) */
-.cat:hover .pic{background:var(--soft-2)}
-.cat-name{display:flex;align-items:center;min-height:32px;font-size:17px;font-weight:600;line-height:1.35;text-align:left}
+.cat .pic{border:1px solid var(--line);border-radius:var(--r-m);background:#fff}   /* 사진 칸은 흰색(multiply 0 — 상품 색은 사실) */
+.cat:hover .pic{border-color:var(--line-2)}
+.cat:hover .cat-name{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
+.cat-name{display:flex;align-items:center;min-height:32px;font-size:16px;font-weight:600;line-height:1.35;text-align:left}
 
 /* ── 홈: 문제 → 해결(문장이 있는 분야만 — 가로로 넓은 카드, 여러 장이면 2열) ── */
 .probs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
 .probs.many{grid-template-columns:repeat(2,minmax(0,1fr))}
-.prob{display:flex;align-items:center;gap:clamp(16px,2.4vw,28px);min-height:120px;padding:16px clamp(16px,2.4vw,28px) 16px 16px;border-radius:20px;background:var(--soft);transition:background .2s}
+.prob{display:flex;align-items:center;gap:20px;min-height:128px;padding:16px 20px 16px 16px;border-radius:var(--r-l);background:var(--soft);transition:background .2s}
 .prob:hover{background:var(--soft-2)}
-.prob .pic{flex:none;width:clamp(96px,12vw,140px);border-radius:14px}
-.prob-t{flex:1;font-size:clamp(19px,2vw,24px);font-weight:700;line-height:1.4;letter-spacing:-.02em}
-.prob-go{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:var(--bg);color:var(--green)}
-.prob-go .ic{font-size:22px}
+.prob .pic{flex:none;width:96px;border-radius:var(--r-s)}   /* 흰 네모 그대로 */
+.prob-t{flex:1;font-size:18px;font-weight:600;line-height:1.45;letter-spacing:-.01em}
+.prob-go{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;background:var(--bg)}
+.prob-go .ic{font-size:18px}
 
 /* ── 고르는 법 카드 · 목록 '이렇게 고르세요' 접힌 줄(details — 닫힘 기본) ── */
-.guide-card{border-radius:20px;background:var(--soft)}
-.guide-card > summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;padding:12px clamp(18px,2.4vw,28px);cursor:pointer;list-style:none}
+.guide-card{border-radius:var(--r-m);background:var(--soft)}
+.guide-card > summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:0 20px;cursor:pointer;list-style:none}
 .guide-card > summary::-webkit-details-marker{display:none}
-.guide-card-t{font-size:clamp(19px,2vw,23px);font-weight:700;line-height:1.4;letter-spacing:-.02em}
+.guide-card-t{font-size:17px;font-weight:600;line-height:1.4;letter-spacing:-.01em}
 .guide-card-ic{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:var(--bg);color:var(--green);transition:transform .2s}
 .guide-card-ic .ic{font-size:22px}
 .guide-card[open] .guide-card-ic{transform:rotate(180deg)}
-.guide-body{padding:0 clamp(18px,2.4vw,28px) clamp(18px,2.4vw,26px)}
+.guide-body{padding:0 20px 20px}
 .guide-body .guide-tabs{margin-top:0}
 .guide-body .guide-steps{margin-top:14px}
 
@@ -137,28 +145,28 @@ h1,h2,h3,p{margin:0}
 .guide-tabs{margin-top:16px}
 #guide .textlink{margin-top:10px}
 .guide-steps{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.guide-steps li{display:flex;gap:14px;padding:20px;border-radius:var(--r);background:var(--bg)}
-.guide-steps .num{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
-.guide-steps b{display:block;font-size:19px;font-weight:700;line-height:1.4}
-.guide-steps p{margin-top:4px;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
+.guide-steps li{display:flex;gap:14px;padding:20px;border-radius:var(--r-m);background:var(--bg)}
+.guide-steps .num{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.guide-steps b{display:block;font-size:19px;font-weight:600;line-height:1.4}
+.guide-steps p{max-width:34em;margin-top:4px;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
 /* 고를 때 이런 점도 — 분야 cautions(후기 · 문의에서 자주 나온 점) 1~3줄, 세 단계 바로 아래 작은 상자 */
-.cautions{margin-top:14px;padding:18px 22px;border-radius:var(--r);background:var(--bg)}
-.cautions h3{font-size:18px;font-weight:700;line-height:1.4}
+.cautions{margin-top:14px;padding:18px 22px;border-radius:var(--r-m);background:var(--bg)}
+.cautions h3{font-size:18px;font-weight:600;line-height:1.4}
 .cautions ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
 .cautions li{position:relative;padding-left:18px;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
 .cautions li::before{content:"";position:absolute;left:2px;top:.72em;width:7px;height:7px;border-radius:50%;background:var(--green)}
 
 /* ── 상품 카드(4판: 사진 크게 → 이름 2줄 → 값. 테두리 · 세로줄 · 배지 0) ── */
-.grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px 24px}
-.card{display:flex;flex-direction:column;height:100%;background:var(--bg)}
-.card .pic{border-radius:var(--r);background:#fff;transition:transform .25s}
-.card:hover .pic{transform:translateY(-2px)}
+.grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.card{display:flex;flex-direction:column;height:100%;overflow:hidden;border:1px solid var(--line);border-radius:var(--r-m);background:var(--bg);transition:border-color .2s}   /* 1px 옅은 선 — 흰 사진 칸이 떠 보이지 않게 */
+.card .pic{background:#fff}
+.card:hover{border-color:var(--line-2)}
 .card:hover .card-name{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
-.card-info{display:flex;flex-direction:column;gap:6px;padding:12px 2px 0}
-.card-name{font-size:17px;font-weight:500;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
-.card-price b{font-size:22px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.card-ship{font-size:15px;font-weight:500;color:var(--ink-3)}
+.card-info{display:flex;flex-direction:column;gap:6px;padding:12px 14px 14px}
+.card-name{font-size:15px;font-weight:500;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-price{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.card-price b{font-family:var(--f-mono);font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+.card-ship{display:block;font-size:13px;font-weight:500;color:var(--ink-3)}   /* 값 아래 줄(같은 줄 '·' 0) */
 .card-unit{font-size:15.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .card-sub{margin-top:-2px;font-size:15px;line-height:1.5;color:var(--ink-2)}
 .card .tags{gap:4px}
@@ -172,23 +180,23 @@ h1,h2,h3,p{margin:0}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 
 /* ── 주문 전에 알아 두세요 · 세 줄 ── */
-.promise{padding:clamp(22px,3vw,36px) clamp(20px,3vw,40px);border-radius:20px;background:var(--soft)}
+.promise{padding:32px;border-radius:var(--r-l);background:var(--soft)}
 .three{list-style:none;margin:14px 0 0;padding:0}
 .three li{display:flex;align-items:flex-start;gap:14px;padding:14px 0}
 .three li + li{border-top:1px solid var(--line)}
 .three-ic{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:50%;background:var(--green-soft);color:var(--green)}
 .three-ic .ic{font-size:22px}
-.three li > div > b{display:block;font-size:17.5px;font-weight:700}
-.three li > div > span{display:block;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
+.three li > div > b{display:block;font-size:17.5px;font-weight:600}
+.three li > div > span{display:block;max-width:34em;font-size:16.5px;line-height:1.6;color:var(--ink-3)}   /* 안내 설명만 --ink-3 */
 .promise .three li + li{border-top-color:var(--line-2)}
 .promise .three-ic{background:var(--bg)}
 
 /* ── 문의(config.json contact — 비면 숨김) ── */
-.ask{display:flex;flex-wrap:wrap;align-items:center;gap:16px 18px;padding:24px 28px;border-radius:18px;background:var(--soft)}
+.ask{display:flex;flex-wrap:wrap;align-items:center;gap:16px 18px;padding:24px 28px;border-radius:var(--r-m);background:var(--soft)}
 .ask-ic{display:grid;place-items:center;flex:none;width:54px;height:54px;border-radius:50%;background:var(--bg);color:var(--green)}
 .ask-ic .ic{font-size:26px}
 .ask-t{flex:1 1 280px}
-.ask-t b{display:block;font-size:20px;font-weight:700}
+.ask-t b{display:block;font-size:20px;font-weight:600}
 .ask-t p{margin-top:4px;font-size:17px;color:var(--ink-2)}
 .ask-btns{display:flex;flex-wrap:wrap;gap:10px}
 
@@ -203,7 +211,7 @@ h1,h2,h3,p{margin:0}
 .ft-links{display:flex;flex-wrap:wrap;gap:0 22px}
 .ft-links a{display:inline-flex;align-items:center;min-height:48px;font-size:16px;color:var(--ink-2)}
 .ft-links a:hover,.ft-links a[aria-current="page"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
-.ft-links b{font-weight:700;color:var(--ink)}
+.ft-links b{font-weight:600;color:var(--ink)}
 .biz{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0;font-size:15px;line-height:1.7;color:var(--ink-2)}
 .biz > div{display:inline-flex;gap:6px}
 .biz dt{color:var(--ink-3)}
@@ -232,27 +240,27 @@ h1,h2,h3,p{margin:0}
   .cats{display:flex;gap:12px;margin:0 calc(-1 * var(--gut));padding:0 var(--gut) 4px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--gut);scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .cats::-webkit-scrollbar{display:none}
   .cats > li{flex:0 0 150px;scroll-snap-align:start}
-  .cat-name{font-size:16px}
+  #catsSec{padding-top:40px}
 }
 @media (max-width:760px){
+  :root{--sec:56px}
   body{font-size:17px}
+  .hero{padding:40px 0 0}
+  .hero-ko{margin-top:14px}
+  .hero-go{display:flex;width:100%}
+  .h2{font-size:20px}
   .wm{gap:8px}
   .wm-en{font-size:25px}
   .wm-ko{font-size:15px}
   .nav a{padding:0 10px;font-size:16px}
-  .prob{min-height:0;padding:12px 14px 12px 12px}
-  .prob .pic{width:88px}
   .guide-steps{grid-template-columns:minmax(0,1fr);gap:10px}
   .guide-steps li{padding:16px}
   .cautions{padding:16px 18px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 14px}
-  .card-info{padding:10px 2px 0}
-  .card-name{font-size:16px}
-  .card-price b{font-size:20px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .card-info{padding:10px 12px 12px}
   .card-unit{font-size:15px}
   .sec-head{flex-direction:column;align-items:flex-start;gap:12px}
-  .promise{padding:20px}
-  .guide-card > summary{min-height:64px}
+  .promise{padding:24px}
   .ask{flex-direction:column;align-items:flex-start;padding:22px}
   .ask-btns{width:100%}
   .ask-btns .btn{flex:1 1 100%}
@@ -260,6 +268,5 @@ h1,h2,h3,p{margin:0}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .rise{animation:none}
-  .btn,.prob,.card .pic,.nav a,.guide-card-ic{transition:none}
-  .card:hover .pic{transform:none}
+  .btn,.prob,.card,.nav a,.guide-card-ic{transition:none}
 }
