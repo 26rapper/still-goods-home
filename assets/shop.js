@@ -398,7 +398,7 @@
     if (nm[1]) info.appendChild(el('span', 'card-sub', nm[1]));
     var pr = el('div', 'card-price');
     pr.appendChild(el('b', null, won(p.price)));
-    if (p.shipping.fee === 0) pr.appendChild(el('span', 'chip-ok', T('badge.free_ship')));
+    if (p.shipping.fee === 0) pr.appendChild(el('span', 'card-ship', T('badge.free_ship')));   /* 4판: 배지 아님 — 값 옆 작은 회색 글 */
     info.appendChild(pr);
     var pm = perMeter(p);
     if (pm) info.appendChild(el('span', 'card-unit', T('price.unit', { p: pm.toLocaleString('ko-KR') })));
@@ -586,8 +586,7 @@
       [''].concat(niches).forEach(function (n) {
         var b = el('button', 'chip');
         b.type = 'button';
-        b.appendChild(doc.createTextNode(n ? nicheName(n) : T('filter.all')));
-        b.appendChild(el('small', null, String(n ? count[n] : shown.length)));
+        b.appendChild(doc.createTextNode(n ? nicheName(n) : T('filter.all')));   /* 4판: 분야 칩은 글자만(개수 0) */
         b.setAttribute('aria-pressed', String(n === cur));
         b.addEventListener('click', function () {
           cur = n;

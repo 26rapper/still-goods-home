@@ -7,7 +7,7 @@
 <meta name="description" content="Still Goods 스틸 굿즈 — 집을 직접 관리할 때 필요한 생활용품을 분야별로 골라 보세요.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-<!-- 홈(3판) — 무엇을 바꾸고 싶으세요?(분야 칸 — data/products.json 의 분야 값) → 이렇게 고르세요(data/guides.json) → 지금 파는 상품 → 주문 전에 알아 두세요 → 문의(config.json contact) -->
+<!-- 홈(4판) — 첫인상(영문 · 한글 한 줄 · 상품 사진 셋) → 분야(사진 칸) → 지금 파는 상품 → 문제 → 해결 → 고르는 법(접힌 카드 · data/guides.json) → 주문 전에 알아 두세요 → 문의(config.json contact) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
@@ -19,31 +19,30 @@
 <header class="hd">
   <div class="wrap hd-row">
     <a class="wm" href="index.html" aria-label="Still Goods 스틸 굿즈 처음으로" data-copy-aria="brand.home_aria"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a>
-    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria" data-shop><a href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a href="cart.html" data-nav="cart"><span data-icon="cart"></span><span data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a></nav>
+    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria" data-shop><a class="nav-wide" href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a class="nav-wide" href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a class="nav-cart" href="cart.html" data-nav="cart"><span data-icon="cart"></span><span class="nav-cart-t" data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a><button class="nav-menu" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="메뉴" data-copy-aria="nav.menu" data-menu><span data-icon="menu"></span><span data-copy="nav.menu">메뉴</span></button></nav>
+  </div>
+  <div class="nav-panel" id="navPanel" data-shop hidden>
+    <div class="wrap"><a href="shop.html" data-copy="nav.shop">상품 보기</a><a href="order.html" data-copy="nav.order">주문 조회</a><a href="#ask" data-contact hidden data-copy="nav.inquiry">문의하기</a></div>
   </div>
 </header>
 
 <main id="top">
-  <section class="ask-hero" aria-labelledby="qH">
-    <div class="wrap">
-      <p class="pledge" id="pledge" data-copy="home.pledge" hidden>집을 조금 더 편하게.</p>
-      <h1 id="qH" data-copy="home.q_title">무엇을 바꾸고 싶으세요?</h1>
-      <p class="lede" data-copy="home.q_sub">바꾸고 싶은 곳을 고르면 그 분야 상품을 보여 드려요.</p>
-      <ul class="tiles" id="cats" aria-label="분야" data-copy-aria="filter.aria" data-shop></ul>
+  <!-- 첫인상 — 영문 한 줄 · 한글 한 줄 · 단추 + 분야가 다른 판매 중 상품 사진 셋(욕실 · 셀프 집수리 · 현관/신발 차례, face 우선 — app.js) -->
+  <section class="hero" id="hero" aria-labelledby="heroH">
+    <div class="wrap hero-row">
+      <div class="hero-t">
+        <p class="hero-en" lang="en" data-copy="home.hero_en">Small Changes, Better Living.</p>
+        <h1 class="hero-ko" id="heroH" data-copy="home.hero_ko">집을 조금 더 편하게 만드는 물건들.</h1>
+        <a class="btn small hero-go" href="shop.html" data-shop data-copy="home.hero_cta">상품 둘러보기</a>
+      </div>
+      <ul class="hero-pics" id="heroPics" hidden></ul>
     </div>
   </section>
 
-  <!-- 이렇게 고르세요 — data/guides.json 의 분야(domains) 중 지금 상품이 있는 분야의 세 단계(없으면 숨김) + 그 분야 cautions 1~3줄(없으면 그 상자만 숨김) -->
-  <section class="sec" id="guide" aria-labelledby="guideH" hidden>
+  <!-- 분야 — data/products.json 의 분야 값(상품이 있는 분야만) · 대표 상품 사진 + 분야 이름 -->
+  <section class="sec" id="catsSec" aria-label="분야" data-copy-aria="filter.aria" data-shop>
     <div class="wrap">
-      <h2 class="h2" id="guideH" data-copy="guide.title">이렇게 고르세요</h2>
-      <div class="filters guide-tabs" id="guideTabs" role="group" aria-label="분야 고르기" data-copy-aria="guide.tabs_aria"></div>
-      <ol class="guide-steps" id="guideSteps"></ol>
-      <div class="cautions" id="guideCautions" hidden>
-        <h3 data-copy="guide.cautions_title">고를 때 이런 점도 봐 주세요</h3>
-        <ul id="guideCautionList"></ul>
-      </div>
-      <a class="textlink" id="guideGo" href="shop.html" data-shop hidden></a>
+      <ul class="cats" id="cats"></ul>
     </div>
   </section>
 
@@ -51,9 +50,34 @@
     <div class="wrap">
       <div class="sec-head">
         <div><h2 class="h2" id="picksH" data-copy="home.grid_title">지금 파는 상품</h2><p class="sub" id="gridSub" data-copy="home.grid_sub" hidden>모두 배송비가 포함된 가격이에요.</p></div>
-        <a class="btn ghost small" href="shop.html" data-shop data-copy="home.all">전체 상품 보기</a>
+        <a class="textlink" href="shop.html" data-shop data-copy="home.all">전체 상품 보기</a>
       </div>
       <ul class="grid" id="grid"></ul>
+    </div>
+  </section>
+
+  <!-- 문제 → 해결 — copy.ko.js 의 home.problem.<분야> 문장이 있고 그 분야 상품이 있을 때만 카드(없으면 절째 숨김) -->
+  <section class="sec" id="problems" hidden>
+    <div class="wrap">
+      <ul class="probs" id="probList"></ul>
+    </div>
+  </section>
+
+  <!-- 고르는 법 — 한 줄 카드(닫힘 기본) → 열면 data/guides.json 의 분야 탭 · 세 단계 · 주의 · 그 분야 상품 보기(없으면 숨김) -->
+  <section class="sec" id="guide" aria-labelledby="guideH" hidden>
+    <div class="wrap">
+      <details class="guide-card">
+        <summary><h2 class="guide-card-t" id="guideH" data-copy="home.guide_card">우리 집에 맞는 제품 고르는 법</h2><span class="guide-card-ic" data-icon="chev"></span></summary>
+        <div class="guide-body">
+          <div class="filters guide-tabs" id="guideTabs" role="group" aria-label="분야 고르기" data-copy-aria="guide.tabs_aria"></div>
+          <ol class="guide-steps" id="guideSteps"></ol>
+          <div class="cautions" id="guideCautions" hidden>
+            <h3 data-copy="guide.cautions_title">고를 때 이런 점도 봐 주세요</h3>
+            <ul id="guideCautionList"></ul>
+          </div>
+          <a class="textlink" id="guideGo" href="shop.html" data-shop hidden></a>
+        </div>
+      </details>
     </div>
   </section>
 

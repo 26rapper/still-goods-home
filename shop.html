@@ -20,7 +20,10 @@
 <header class="hd">
   <div class="wrap hd-row">
     <a class="wm" href="index.html" aria-label="Still Goods 스틸 굿즈 처음으로" data-copy-aria="brand.home_aria"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a>
-    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria"><a href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a href="cart.html" data-nav="cart"><span data-icon="cart"></span><span data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a></nav>
+    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria"><a class="nav-wide" href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a class="nav-wide" href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a class="nav-cart" href="cart.html" data-nav="cart"><span data-icon="cart"></span><span class="nav-cart-t" data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a><button class="nav-menu" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="메뉴" data-copy-aria="nav.menu" data-menu><span data-icon="menu"></span><span data-copy="nav.menu">메뉴</span></button></nav>
+  </div>
+  <div class="nav-panel" id="navPanel" hidden>
+    <div class="wrap"><a href="shop.html" data-copy="nav.shop">상품 보기</a><a href="order.html" data-copy="nav.order">주문 조회</a><a href="index.html#ask" data-contact hidden data-copy="nav.inquiry">문의하기</a></div>
   </div>
 </header>
 
@@ -35,15 +38,17 @@
       <div class="filters" id="filters" role="group" aria-label="분야" data-copy-aria="filter.aria"></div>
       <p class="note" id="asOf"></p>
     </div>
-    <!-- 고른 분야의 '이렇게 고르세요' — data/guides.json 의 domains 에 있을 때만 + 그 분야 cautions 1~3줄 -->
-    <section class="cat-guide" id="catGuide" aria-labelledby="catGuideH" hidden>
-      <h2 class="h2" id="catGuideH" data-copy="guide.title">이렇게 고르세요</h2>
-      <ol class="guide-steps" id="catSteps"></ol>
-      <div class="cautions" id="catCautions" hidden>
-        <h3 data-copy="guide.cautions_title">고를 때 이런 점도 봐 주세요</h3>
-        <ul id="catCautionList"></ul>
+    <!-- 고른 분야의 '이렇게 고르세요' — 접힌 줄(닫힘 기본). data/guides.json 의 domains 에 있을 때만 + 그 분야 cautions 1~3줄 -->
+    <details class="cat-guide guide-card" id="catGuide" aria-labelledby="catGuideH" hidden>
+      <summary><h2 class="guide-card-t" id="catGuideH" data-copy="guide.title">이렇게 고르세요</h2><span class="guide-card-ic" data-icon="chev"></span></summary>
+      <div class="guide-body">
+        <ol class="guide-steps" id="catSteps"></ol>
+        <div class="cautions" id="catCautions" hidden>
+          <h3 data-copy="guide.cautions_title">고를 때 이런 점도 봐 주세요</h3>
+          <ul id="catCautionList"></ul>
+        </div>
       </div>
-    </section>
+    </details>
     <div class="filters attrs" id="attrs" role="group" aria-label="고를 때 보는 것" data-copy-aria="list.attrs_aria" hidden></div>
     <ul class="grid" id="pGrid" aria-live="polite"></ul>
   </div>

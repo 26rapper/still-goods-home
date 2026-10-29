@@ -1,7 +1,7 @@
 /* Still Goods · 스틸 굿즈 — 손님 화면 문구(한국어) 한 곳
    - 위쪽 'A~H' 묶음은 docs/문구_통합본.md(오너 확정 2026-10-25)의 이름표와 문구 그대로다. 바꿀 때는 통합본부터 고치고 여기를 맞춘다.
    - 아래쪽 '더한 자리'는 통합본에 없는 작은 글(오류 · 단계 · 표 머리 · 3판 새 자리)이다. 통합본 말투(친근한 해요체)를 따른다.
-   - 3판: 겨울 문구(brand.sub · home.hero_* · home.story_* 등)는 새 문구가 올 때까지 화면에 쓰지 않는다(키는 통합본과 같게 남김 — check.py 의 '쉬는 키').
+   - 3판 · 4판: 겨울 문구(brand.sub · home.hero_title · home.hero_sub · home.story_* 등)는 새 문구가 올 때까지 화면에 쓰지 않는다(키는 통합본과 같게 남김 — check.py 의 '쉬는 키').
    - 꼴: 전역 객체 SG_COPY 하나 · 키는 이름표 그대로 · 값은 글자만(HTML 0). {n} {id} 같은 자리는 화면이 채운다.
    - 고친 뒤: python brand/tools/copy_sync.py(쪽의 기본 글을 맞춤) → python brand/check.py
    - 약관 세 쪽 본문과 주문서의 '수집 · 이용 내용' 표는 법 문서라 여기 없다(각 쪽에 그대로). */
@@ -147,6 +147,7 @@ window.SG_COPY = {
   "nav.cart_count": "장바구니 {n}개",
   "nav.cart_empty": "장바구니 비어 있음",
   "nav.inquiry": "문의하기",
+  "nav.menu": "메뉴",
   "footer.links_aria": "약관과 안내",
   "footer.terms": "이용약관",
   "footer.privacy": "개인정보처리방침",
@@ -161,11 +162,13 @@ window.SG_COPY = {
   "biz.mail_order_no": "통신판매업 신고번호",
   "biz.hosting": "호스팅 제공자",
   "biz.privacy_officer": "개인정보 보호책임자",
-  // 홈(3판 흐름: 무엇을 바꾸고 싶으세요? → 이렇게 고르세요 → 상품 → 주문 전에 알아 두세요 → 문의)
+  // 홈(4판 흐름: 첫인상 → 분야 → 상품 → 문제 → 해결 → 고르는 법 → 주문 전에 알아 두세요 → 문의)
   "home.pledge": "집을 조금 더 편하게.",
-  "home.q_title": "무엇을 바꾸고 싶으세요?",
-  "home.q_sub": "바꾸고 싶은 곳을 고르면 그 분야 상품을 보여 드려요.",
-  "cats.count": "상품 {n}개",
+  // 4판 홈(2026-10-29) — 오너가 가져온 문장 그대로(docs/문구_통합본.md M절에 기록). 문제 → 해결은 분야마다 home.problem.<분야 값>, 있는 분야만 화면에
+  "home.hero_en": "Small Changes, Better Living.",
+  "home.hero_ko": "집을 조금 더 편하게 만드는 물건들.",
+  "home.problem.욕실": "욕실에 수납공간이 부족하다면?",
+  "home.guide_card": "우리 집에 맞는 제품 고르는 법",
   "guide.title": "이렇게 고르세요",
   "guide.tabs_aria": "분야 고르기",
   "guide.go": "{cat} 상품 보기",

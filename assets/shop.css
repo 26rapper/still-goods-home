@@ -1,4 +1,4 @@
-/* Still Goods · 스틸 굿즈 — 3판 가게 쪽 부품(style.css 위에 얹는다)
+/* Still Goods · 스틸 굿즈 — 가게 쪽 부품(style.css 위에 얹는다). 4판: 상자 테두리 → 여백 · 옅은 바탕(--soft), 입력 칸 · 체크 · 단추 · 칩 테두리는 그대로
    목록(분야 칩 · 카드) · 상세(사진 → 이름 → 값 → 담기 → 세 줄 → 맞아요/안 맞아요 → 설명 · 고시 · 폰 아래 고정 띠)
    · 단계 표시 · 장바구니 줄 · 합계 상자 · 주문서 칸 · 동의 · 결과 · 조회 · 약관 글. 색은 흰 · 옅은 회색 · 초록 하나. */
 
@@ -13,12 +13,12 @@
 .chip small{font-size:15px;font-weight:600;color:var(--ink-3)}
 .chip[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff}
 .chip[aria-pressed="true"] small{color:#dcebe2}
-.cat-guide{margin-bottom:22px}
+.cat-guide{margin-bottom:28px}
 .attrs{margin:-6px 0 22px}
 .attrs .chip{min-height:48px;border-width:2px;font-size:16px}
 .attrs .chip[aria-pressed="true"]{background:var(--green-soft);border-color:var(--green);color:var(--green)}
 .attrs .chip[aria-pressed="true"] small{color:var(--green)}
-.empty{padding:40px 24px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft);font-size:17px;line-height:1.7;color:var(--ink-2);text-align:center}
+.empty{padding:40px 24px;border-radius:var(--r);background:var(--soft);font-size:17px;line-height:1.7;color:var(--ink-2);text-align:center}
 .empty p{margin:0}
 .empty .empty-t{margin-bottom:4px;font-size:20px;font-weight:700;color:var(--ink)}
 .empty a:not(.btn){color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:4px}
@@ -27,8 +27,8 @@
 /* ── 상세 ── */
 .item{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
 .gallery{min-width:0}
-.gallery .pic{border:1px solid var(--line);border-radius:20px}
-.shots{display:flex;width:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border:1px solid var(--line);border-radius:20px}
+.gallery .pic{border-radius:20px}
+.shots{display:flex;width:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:20px}
 .shots::-webkit-scrollbar{display:none}
 .shots > .pic{flex:0 0 100%;scroll-snap-align:center;border:0;border-radius:0}
 .dots{display:flex;justify-content:center;gap:4px;margin-top:8px}
@@ -60,12 +60,14 @@
 .msg{min-height:26px;margin:0;font-size:17px;line-height:1.6;color:var(--ink-2)}
 .msg.err{color:var(--warn);font-weight:600}
 .msg a{color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:4px}
-.buybox .three{margin-top:16px;padding:2px 18px;border:1px solid var(--line);border-radius:14px}
+.buybox .three{margin-top:16px;padding:2px 18px;border-radius:14px;background:var(--soft)}
+.buybox .three li + li{border-top-color:var(--line-2)}
+.buybox .three-ic{background:#fff}
 .narrow-col{max-width:880px}
 .detail-body figure img{max-width:640px}
-.fitbox{margin-top:clamp(36px,5vw,56px);padding:22px 24px;border:2px solid var(--green-line);border-radius:18px}
+.fitbox{margin-top:clamp(36px,5vw,56px);padding:22px 24px;border-radius:18px;background:var(--soft)}
 .fit-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:14px}
-.fit-col > b{display:block;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid var(--line);font-size:17.5px;font-weight:700}
+.fit-col > b{display:block;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid var(--line-2);font-size:17.5px;font-weight:700}
 .fit-col.yes > b{color:var(--green)}
 .fit-col.no > b{color:var(--warn)}
 .fit-col ul{list-style:none;margin:0;padding:0}
@@ -77,11 +79,11 @@
 .detail .h2{padding-bottom:14px;border-bottom:2px solid var(--ink)}
 .detail-body p{margin-top:14px;font-size:18px;line-height:1.8}
 .detail-body figure{margin:18px 0 0}
-.detail-body figure img{width:100%;border:1px solid var(--line);border-radius:14px}
+.detail-body figure img{width:100%;border-radius:14px}
 .tbl{width:100%;margin-top:18px;border-collapse:collapse;font-size:17px}
 .tbl th{width:30%;padding:14px 12px 14px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-weight:600;color:var(--ink-2)}
 .tbl td{padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top}
-.fold{border:1px solid var(--line);border-radius:14px;background:#fff}
+.fold{border-radius:14px;background:var(--soft)}
 .fold summary{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:0 20px;cursor:pointer;list-style:none;font-size:18px;font-weight:700}
 .fold summary::-webkit-details-marker{display:none}
 .fold summary::after{content:"+";font-size:24px;font-weight:400;color:var(--green)}
@@ -110,7 +112,7 @@
 .split{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:clamp(24px,3vw,40px);align-items:start}
 .lines-c{border-top:2px solid var(--ink)}
 .c-row{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
-.c-row .pic{border:1px solid var(--line);border-radius:12px}
+.c-row .pic{border-radius:12px;background:var(--soft)}
 .c-row .t{display:flex;flex-direction:column;gap:4px;min-width:0}
 .c-row .t a{display:flex;align-items:center;min-height:48px;font-size:17px;font-weight:600;line-height:1.5}
 .c-row .t a:hover{text-decoration:underline;text-underline-offset:4px}
@@ -120,10 +122,10 @@
 .linkbtn{appearance:none;flex:none;white-space:nowrap;min-height:48px;min-width:48px;padding:0 10px;border:0;background:none;font-size:16px;font-weight:600;color:var(--ink-2);cursor:pointer;text-decoration:underline;text-underline-offset:4px}
 .linkbtn:hover{color:var(--warn)}
 /* 구성 — 세트의 구성품 · 수량 · 나눠 적은 값, 맨 아래 종 · 개수 · 개당(값 · 담기 아래, 세 줄 위) */
-.parts{margin-top:18px;padding:16px 20px 14px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.parts{margin-top:18px;padding:16px 20px 14px;border-radius:var(--r);background:var(--soft)}
 .parts h2{font-size:18px;font-weight:700}
 .parts-list{list-style:none;margin:6px 0 0;padding:0}
-.parts-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:10px 0;border-top:1px solid var(--line)}
+.parts-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:10px 0;border-top:1px solid var(--line-2)}
 .parts-list li:first-child{border-top:0}
 .parts-list .pn{font-size:16.5px;line-height:1.5}
 .parts-list .pq{font-size:16px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -132,7 +134,7 @@
 .ship-from{margin-top:2px}
 .supplier-consent .ck{border-top:0}
 .measure{margin-top:10px;font-size:16px;font-weight:600;color:var(--ink-2);font-variant-numeric:tabular-nums}
-.summary{position:sticky;top:96px;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--soft)}
+.summary{position:sticky;top:96px;padding:24px;border-radius:18px;background:var(--soft)}
 .summary h2{font-size:21px;font-weight:700}
 .sum-rows{margin:14px 0 18px}
 .sum-rows > div{display:flex;justify-content:space-between;gap:16px;padding:8px 0;font-size:17px;color:var(--ink-2)}
@@ -194,9 +196,9 @@
 .status.wait{background:#fff4d6;color:#5a4300}
 .spin{display:inline-block;width:18px;height:18px;margin-right:10px;border:3px solid var(--line-2);border-top-color:var(--green);border-radius:50%;vertical-align:-3px;animation:spin .9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.lookup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:16px;align-items:end;max-width:880px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--soft)}
+.lookup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:16px;align-items:end;max-width:880px;padding:22px;border-radius:18px;background:var(--soft)}
 .panel{margin-top:24px}
-.panel .result{max-width:none;padding:24px;border:1px solid var(--line);border-radius:18px}
+.panel .result{max-width:none;padding:24px;border-radius:18px;background:var(--soft)}
 .req-form{display:flex;flex-direction:column;gap:14px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
 .radio{display:flex;flex-wrap:wrap;gap:10px}
 .radio label{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 18px;border:2px solid var(--line-2);border-radius:12px;font-size:17px;font-weight:600;cursor:pointer}
@@ -206,7 +208,7 @@
 .draft{display:inline-flex;margin-bottom:12px;padding:4px 12px;border-radius:999px;background:#fff4d6;color:#5a4300;font-size:15px;font-weight:700}
 .meta{margin-top:8px;font-size:16px;color:var(--ink-2)}
 .doc-wrap{display:grid;grid-template-columns:240px minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
-.toc{position:sticky;top:96px;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--soft);font-size:16px}
+.toc{position:sticky;top:96px;padding:18px;border-radius:16px;background:var(--soft);font-size:16px}
 .toc ol,.toc ul{margin:0;padding-left:20px}
 .toc a{display:inline-flex;align-items:center;min-height:48px;color:var(--ink-2)}
 .toc a:hover{color:var(--green);text-decoration:underline;text-underline-offset:4px}
@@ -231,7 +233,7 @@
 @media (max-width:760px){
   .item{grid-template-columns:minmax(0,1fr)}
   .gallery{margin:0 calc(-1 * var(--gut))}
-  .gallery .pic,.shots{border-radius:0;border-left:0;border-right:0}
+  .gallery .pic,.shots{border-radius:0}
   .fitbox{padding:18px}
   .fit-cols{grid-template-columns:minmax(0,1fr)}
   .tbl th{width:36%}

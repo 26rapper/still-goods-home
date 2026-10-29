@@ -1,8 +1,9 @@
-/* Still Goods · 스틸 굿즈 — 화면 부품(3판): 사진 맞추기 · 선 아이콘
+/* Still Goods · 스틸 굿즈 — 화면 부품(3판 · 4판): 사진 맞추기 · 선 아이콘 · 폰 메뉴
    - 사진: .pic 칸 안의 상품 사진은 흰 여백을 읽어 상품이 칸의 90%(data-fill)를 채우게 크기 · 자리만 정한다.
      사진 파일은 고치지 않는다. 사진 속 글자 · 표지(구석의 '• AI 활용' 등)도 내용으로 쳐서 잘라 가리지 않는다.
      이 사이트 안 사진만 읽는다(바깥 사진은 브라우저가 픽셀 읽기를 막는다 → 기본 자리 그대로).
    - 아이콘: 24칸 선 그림. 쪽의 data-icon="이름" 자리에 넣고, 스크립트는 SG_UI.icon(이름)으로 만든다.
+   - 폰 메뉴(4판): 머리의 [data-menu] 단추가 aria-controls 의 작은 판(상품 보기 · 주문 조회 · 문의하기)을 여닫는다. 링크를 누르거나 Esc 면 닫힌다.
    바깥 요청 0 · 저장 0 · 글 0(HTML 끼워 넣기 0). 쪽마다 가게 스크립트(shop.js · app.js)보다 먼저 읽는다. */
 (function () {
   'use strict';
@@ -31,7 +32,9 @@
     phone: 'M6.5 3.5h3l1.5 4.5-2 1.4a11 11 0 0 0 5.6 5.6l1.4-2 4.5 1.5v3a2 2 0 0 1-2 2A16.5 16.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z',
     arrow: 'M4 12h15 M13 6l6 6-6 6',
     cart: 'M2.5 3.5h2.6l2.3 10.8h10.4l2.2-7.6H6.2 M9 19.5a1.3 1.3 0 1 0 2.6 0a1.3 1.3 0 1 0 -2.6 0 M16 19.5a1.3 1.3 0 1 0 2.6 0a1.3 1.3 0 1 0 -2.6 0',
-    search: 'M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 1 0 0-13z M15.5 15.5 20 20'
+    search: 'M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 1 0 0-13z M15.5 15.5 20 20',
+    menu: 'M4 7h16 M4 12h16 M4 17h16',
+    chev: 'M6 9l6 6 6-6'
   };
   var NS = 'http://www.w3.org/2000/svg';   /* SVG 이름공간(요청 아님) */
   function icon(name, cls) {
@@ -124,6 +127,18 @@
     }, 120);
   });
 
+  /* ── 폰 메뉴 — 단추 하나 · 아래로 펼치는 작은 판(컴퓨터 너비에서는 CSS 가 둘 다 숨김) ── */
+  function armMenu() {
+    var btn = doc.querySelector('[data-menu]');
+    var panel = btn ? doc.getElementById(btn.getAttribute('aria-controls') || '') : null;
+    if (!btn || !panel) return;
+    function set(open) { btn.setAttribute('aria-expanded', String(open)); panel.hidden = !open; }
+    btn.addEventListener('click', function () { set(panel.hidden); });
+    panel.addEventListener('click', function (ev) { if (ev.target && ev.target.closest && ev.target.closest('a')) set(false); });
+    doc.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+  }
+
   paintIcons(doc);
+  armMenu();
   window.SG_UI = { icon: icon, paintIcons: paintIcons, pic: pic, fit: fit };
 })();

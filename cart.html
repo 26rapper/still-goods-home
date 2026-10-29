@@ -20,7 +20,10 @@
 <header class="hd">
   <div class="wrap hd-row">
     <a class="wm" href="index.html" aria-label="Still Goods 스틸 굿즈 처음으로" data-copy-aria="brand.home_aria"><span class="wm-en">Still <i>Goods</i></span><span class="wm-ko" data-copy="brand.name_ko">스틸 굿즈</span></a>
-    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria"><a href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a href="cart.html" data-nav="cart"><span data-icon="cart"></span><span data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a></nav>
+    <nav class="nav" aria-label="가게 메뉴" data-copy-aria="nav.aria"><a class="nav-wide" href="shop.html" data-nav="shop" data-copy="nav.shop">상품 보기</a><a class="nav-wide" href="order.html" data-nav="order" data-copy="nav.order">주문 조회</a><a class="nav-cart" href="cart.html" data-nav="cart"><span data-icon="cart"></span><span class="nav-cart-t" data-copy="nav.cart">장바구니</span><span class="cnt" data-cart-count></span></a><button class="nav-menu" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="메뉴" data-copy-aria="nav.menu" data-menu><span data-icon="menu"></span><span data-copy="nav.menu">메뉴</span></button></nav>
+  </div>
+  <div class="nav-panel" id="navPanel" hidden>
+    <div class="wrap"><a href="shop.html" data-copy="nav.shop">상품 보기</a><a href="order.html" data-copy="nav.order">주문 조회</a><a href="index.html#ask" data-contact hidden data-copy="nav.inquiry">문의하기</a></div>
   </div>
 </header>
 
