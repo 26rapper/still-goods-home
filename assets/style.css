@@ -80,29 +80,30 @@ h1,h2,h3,p{margin:0}
 .sec{padding-top:var(--sec)}
 .h2{font-size:clamp(23px,2.3vw,28px);font-weight:700;line-height:1.35;letter-spacing:-.02em}
 .sub{margin-top:6px;font-size:17px;color:var(--ink-2)}
-.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:12px}
+.grid-more{display:flex;justify-content:flex-end;margin-top:18px}   /* 전체 상품 보기 — 격자 아래(4판 2차: 제목 밑에 홀로 서던 글 단추를 끝으로) */
+/* 4판 2차: 첫 화면 바로 아래 분야 · 상품은 구획 간격의 반 — 문제 · 고르는 법 · 알아 두세요 사이는 --sec 그대로 */
+#catsSec,#picks{padding-top:clamp(28px,3.5vw,48px)}
 .note{margin:0;font-size:16px;line-height:1.6;color:var(--ink-3)}
 
-/* ── 홈: 브랜드 첫인상(영문 한 줄 · 한글 한 줄 · 단추 + 상품 사진 셋을 정물처럼) ── */
-.hero{background:var(--soft);padding:clamp(36px,6vw,88px) 0 clamp(40px,6vw,88px)}
-.hero-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,72px);align-items:center}
+/* ── 홈: 브랜드 첫인상(4판 2차 — 글 + 여백. assets/hero.jpg 가 있을 때만 옆(폰은 아래)에 큰 사진 한 장) ── */
+.hero{background:var(--soft);padding:clamp(28px,4.5vw,64px) 0 clamp(32px,4.5vw,64px)}
+.hero-row{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.hero-row.has-photo{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
 .hero-en{font-family:var(--f-display);font-size:clamp(34px,4.4vw,60px);line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
-.hero-ko{margin-top:16px;font-size:clamp(28px,3vw,40px);font-weight:700;line-height:1.35;letter-spacing:-.03em}
-.hero-go{margin-top:28px}
-.hero-pics{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
-.hero-pics[data-n="1"]{grid-template-columns:minmax(0,1fr);max-width:420px}
-.hero-pics[data-n="3"]{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
-.hero-pics[data-n="3"] .hero-pic:first-child{grid-row:span 2}
-.hero-pic a{display:block;height:100%}
-.hero-pic .pic{border-radius:20px;box-shadow:0 22px 40px -34px rgba(20,40,25,.45)}
-.hero-pics[data-n="3"] .hero-pic:first-child .pic{aspect-ratio:auto;height:100%}
+.hero-ko{margin-top:14px;font-size:clamp(28px,3vw,40px);font-weight:700;line-height:1.35;letter-spacing:-.03em}
+.hero-go{margin-top:24px}
+/* 사진 파일 그대로 — 칸을 채워 자름(object-fit:cover), 90% 맞춤 · 가공 · 글자 얹기 0 */
+.hero-photo{overflow:hidden;aspect-ratio:4/3;border-radius:20px;background:var(--soft-2)}
+.hero-photo img{width:100%;height:100%;max-width:none;object-fit:cover}
 
-/* ── 홈: 분야(사진 칸 — 대표 상품 사진 + 분야 이름, 테두리 0 · 옅은 바탕) ── */
+/* ── 홈: 분야(4판 2차 — 사진이 칸 전체 · 이름은 사진 아래 작은 글. 상자 0) ── */
 .cats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
-.cat{display:flex;flex-direction:column;gap:12px;height:100%;padding:14px 14px 16px;border-radius:18px;background:var(--soft);transition:background .2s}
-.cat:hover{background:var(--soft-2)}
-.cat .pic{border-radius:12px}
-.cat-name{display:flex;align-items:center;min-height:48px;font-size:18px;font-weight:700;line-height:1.35;letter-spacing:-.02em}
+.cat{display:flex;flex-direction:column;gap:8px;height:100%}
+.cat .pic{border-radius:14px;background:var(--soft)}
+.cat .pic img{mix-blend-mode:multiply}   /* 사진의 흰 바탕이 칸의 옅은 바탕으로 보이게(파일은 그대로) */
+.cat:hover .pic{background:var(--soft-2)}
+.cat-name{display:flex;align-items:center;min-height:32px;font-size:17px;font-weight:600;line-height:1.35;text-align:left}
 
 /* ── 홈: 문제 → 해결(문장이 있는 분야만 — 가로로 넓은 카드, 여러 장이면 2열) ── */
 .probs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
@@ -210,7 +211,6 @@ h1,h2,h3,p{margin:0}
 /* ── 너비 ── */
 @media (max-width:1000px){
   .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .cats{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 /* 폰 머리(4판 — 720px 아래): 워드마크 · 장바구니(아이콘 + 개수) · 메뉴 단추. 상품 보기 · 주문 조회는 메뉴 판 안 */
 @media (max-width:719px){
@@ -220,8 +220,13 @@ h1,h2,h3,p{margin:0}
   .nav .nav-cart{min-width:48px;justify-content:center;padding:0 12px}
   .nav-cart-t{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   .nav-menu{display:inline-flex;padding:0 12px;font-size:16px}
-  .hero-row{grid-template-columns:minmax(0,1fr)}
+  .hero-row,.hero-row.has-photo{grid-template-columns:minmax(0,1fr)}
   .probs.many{grid-template-columns:minmax(0,1fr)}
+  /* 분야: 가로로 넘기는 한 줄 — 칸 폭 150px · 좌우 --gut 안쪽 여백으로 오른쪽 끝에 다음 칸이 살짝 보이게 */
+  .cats{display:flex;gap:12px;margin:0 calc(-1 * var(--gut));padding:0 var(--gut) 4px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--gut);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .cats::-webkit-scrollbar{display:none}
+  .cats > li{flex:0 0 150px;scroll-snap-align:start}
+  .cat-name{font-size:16px}
 }
 @media (max-width:760px){
   body{font-size:17px}
@@ -229,9 +234,6 @@ h1,h2,h3,p{margin:0}
   .wm-en{font-size:25px}
   .wm-ko{font-size:15px}
   .nav a{padding:0 10px;font-size:16px}
-  .cats{gap:10px}
-  .cat{padding:10px 10px 12px;gap:8px}
-  .cat-name{font-size:17px}
   .prob{min-height:0;padding:12px 14px 12px 12px}
   .prob .pic{width:88px}
   .guide-steps{grid-template-columns:minmax(0,1fr);gap:10px}
@@ -252,6 +254,6 @@ h1,h2,h3,p{margin:0}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .rise{animation:none}
-  .btn,.cat,.prob,.card .pic,.nav a,.guide-card-ic{transition:none}
+  .btn,.prob,.card .pic,.nav a,.guide-card-ic{transition:none}
   .card:hover .pic{transform:none}
 }

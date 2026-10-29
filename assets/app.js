@@ -1,6 +1,7 @@
 /* Still Goods · 스틸 굿즈 — 홈 스크립트(4판: 브랜드 첫인상 → 분야 → 상품 → 문제 → 해결 → 고르는 법, docs/자사몰_디자인_방향_4판.md 3절)
    하는 일
-   0. 첫인상 사진 셋 — 분야가 다른 판매 중 상품 셋(욕실 · 셀프 집수리 · 현관/신발 차례, 없으면 다음 분야). face(엔진 얼굴 상품) 우선, 같으면 image_scores 높은 것.
+   0. 첫인상 — 글 + 여백. config.json hero_photo(쓰는 장면 사진, 예: assets/hero.jpg)가 있을 때만 큰 사진 한 장(4판 2차 — 상품 사진 셋은 뺌).
+   홈에 보이는 상품 사진(분야 칸 · 지금 파는 상품 · 문제 카드)은 흰 배경(image_bg[0] "white" — tools/photo_bg.py) 먼저, 그다음 face → image_scores.
    1. 분야 — data/products.json 의 분야(niche) 값으로 사진 칸(대표 상품 사진 + 분야 이름)을 만든다. 0 개 분야는 칸을 만들지 않는다. 개수는 적지 않는다.
    2. 고르는 법 — data/guides.json 의 분야(domains) 중 지금 팔 수 있는 상품이 있는 분야만 단추로, 고른 분야의 세 단계(없으면 절째 숨김). 접힌 카드 안.
    3. 지금 파는 상품 — 팔고 있고 사진 있는 상품 앞에서부터 8개(config.json home_hide 뺌 · 같은 이름은 하나). 모두 배송비 포함일 때만 그 한 줄. 카드에 배지 0.
@@ -48,8 +49,7 @@
   function icon(name) { return UI ? UI.icon(name) : el('span'); }
 
   var NICHE_LABEL = {};   /* 옛 분야(방한 · 자동차) 이름은 쉬는 키 — 분야 값 그대로(감사 5차 B1) */
-  /* 분야 차례 — 새 분야 여섯(리서치 1차). 첫인상 사진은 HERO_ORDER 앞에서부터, 모자라면 CAT_ORDER 의 다음 분야 */
-  var HERO_ORDER = ['욕실', '셀프 집수리', '현관/신발'];
+  /* 분야 차례 — 새 분야 여섯(리서치 1차) */
   var CAT_ORDER = ['욕실', '셀프 집수리', '수납정리', '세탁/빨래', '주방 정리', '현관/신발'];
   var BIZ = [['name', T('biz.name')], ['ceo', T('biz.ceo')], ['address', T('biz.address')], ['phone', T('biz.phone')], ['email', T('biz.email')],
              ['biz_no', T('biz.biz_no')], ['mail_order_no', T('biz.mail_order_no')], ['hosting', T('biz.hosting')], ['privacy_officer', T('biz.privacy_officer')]];
@@ -80,7 +80,7 @@
     var score = -1;
     (Array.isArray(it.image_scores) ? it.image_scores : []).forEach(function (v) { if (typeof v === 'number' && isFinite(v) && v > score) score = v; });
     return { id: it.id, name: it.name, price: price, img: thumb, niche: okText(it.niche, 12) ? it.niche : '', free: sh.fee === 0, rows: rows, set: isSet(it.unit),
-             face: it.face === true, score: score };
+             face: it.face === true, score: score, white: Array.isArray(it.image_bg) && it.image_bg[0] === 'white' };
   }
   function spec(p, k) { for (var i = 0; i < p.rows.length; i++) if (p.rows[i][0] === k) return p.rows[i][1]; return ''; }
   /* 1m당 값 — '크기 Nm' 와 '수량 N개'(같은 것 여러 개, 구성에 ×)일 때만 */
@@ -104,38 +104,29 @@
   /* 분야 대표 상품 — 그 분야 판매 중 사진 있는 상품 중 face 우선 · 같으면 image_scores 높은 것.
      skip(이미 위에 보인 상품 id)은 뺀다 — 첫 화면 · 분야 칸 · 문제 카드에 같은 사진이 겹치지 않게. 뺄 것밖에 없으면 그것이라도 */
   var SHOWN = {};
+  /* 홈 사진 고르기 차례 — 흰 배경 먼저 → face → image_scores 높은 것(같으면 원래 차례) */
+  function better(a, b) {
+    return (Number(b.white) - Number(a.white)) || (Number(b.face) - Number(a.face)) || (b.score - a.score) || (a.i - b.i);
+  }
   function lead(items, n, skip) {
-    var inCat = items.filter(function (p) { return p.niche === n && p.img; }).sort(function (a, b) {
-      return (Number(b.face) - Number(a.face)) || (b.score - a.score);
-    });
+    var inCat = items.filter(function (p) { return p.niche === n && p.img; }).sort(better);
     return inCat.filter(function (p) { return !(skip && skip[p.id]); })[0] || inCat[0] || null;
   }
 
-  /* 0 첫인상 사진 셋 — 분야가 다른 셋, face 우선 · 같으면 image_scores 높은 것(사진 파일 · 맞춤 그대로, 글자 얹기 0) */
-  function paintHero(items, hide) {
-    var box = $('#heroPics');
+  /* 0 첫인상 사진 자리 — config.json 의 hero_photo(예: assets/hero.jpg — 쓰는 장면 사진)가 있을 때만 글 옆(폰은 아래)에 한 장. 비면 요청 0 · 자리째 숨김(글 + 여백만).
+     따로 묻는 요청(HEAD) 0 — 사진을 한 번 읽어 보고 onload 면 보이고, onerror 면 숨긴 채 둔다. 사진 파일 그대로(object-fit:cover, 90% 맞춤 아님) */
+  var RE_HERO = /^assets\/[A-Za-z0-9_.-]+\.(jpe?g|png|webp)$/;
+  function paintHeroPhoto(conf) {
+    var box = $('#heroPhoto'), row = $('.hero-row');
     if (!box) return;
-    var names = nicheOrder(items), order = HERO_ORDER.filter(function (n) { return names.indexOf(n) >= 0; });
-    names.forEach(function (n) { if (order.indexOf(n) < 0) order.push(n); });
-    var picks = [], seen = {};
-    order.forEach(function (n) {
-      if (picks.length >= 3) return;
-      var c = items.filter(function (p) { return p.niche === n && p.img && hide.indexOf(p.id) < 0 && !seen[p.name]; }).sort(function (a, b) {
-        return (Number(b.face) - Number(a.face)) || (b.score - a.score);
-      })[0];
-      if (c) { seen[c.name] = 1; picks.push(c); SHOWN[c.id] = 1; }
-    });
-    while (box.firstChild) box.removeChild(box.firstChild);
-    picks.forEach(function (p, i) {
-      var li = el('li', 'hero-pic rise'), a = el('a');
-      li.style.setProperty('--i', String(i + 1));
-      a.href = shopOff ? '#top' : 'item.html?id=' + encodeURIComponent(p.id);
-      a.appendChild(UI ? UI.pic(p.img, p.name, {}) : el('div', 'pic'));
-      li.appendChild(a);
-      box.appendChild(li);
-    });
-    box.setAttribute('data-n', String(picks.length));
-    box.hidden = picks.length === 0;
+    var src = conf && typeof conf.hero_photo === 'string' ? conf.hero_photo.trim() : '';
+    if (!RE_HERO.test(src)) { box.hidden = true; return; }   /* 비면 요청 0 — 자리째 숨김 */
+    var im = new Image();
+    im.alt = '';
+    im.decoding = 'async';
+    im.onload = function () { box.appendChild(im); box.hidden = false; if (row) row.classList.add('has-photo'); };
+    im.onerror = function () { box.hidden = true; };
+    im.src = src;
   }
 
   /* 1 분야 — 사진 칸(대표 상품 사진 + 분야 이름, 개수 0) */
@@ -264,7 +255,7 @@
   }
   function paintGrid(items, hide) {
     var grid = $('#grid'), seen = {}, list = [];
-    items.forEach(function (p) {
+    items.slice().sort(better).forEach(function (p) {   /* 흰 배경 먼저(모자라면 other 로 채움) — 고르기 규칙은 그대로 */
       if (!p.img || hide.indexOf(p.id) >= 0 || seen[p.name] || list.length >= MAX_GRID) return;
       seen[p.name] = 1; list.push(p);
     });
@@ -336,10 +327,10 @@
   Promise.all([getJSON('config.json'), getJSON('data/products.json'), getJSON('data/guides.json')]).then(function (r) {
     var conf = r[0] && typeof r[0] === 'object' ? r[0] : {};
     paintConfig(conf);
+    paintHeroPhoto(conf);
     var items = [];
-    (r[1] && Array.isArray(r[1].items) ? r[1].items : []).slice(0, 500).forEach(function (it) { var p = fromProduct(it); if (p) items.push(p); });
+    (r[1] && Array.isArray(r[1].items) ? r[1].items : []).slice(0, 500).forEach(function (it) { var p = fromProduct(it); if (p) { p.i = items.length; items.push(p); } });
     var hide = Array.isArray(conf.home_hide) ? conf.home_hide.filter(function (x) { return typeof x === 'string' && RE_ID.test(x); }) : [];
-    paintHero(items, hide);
     paintCats(items);
     paintGrid(items, hide);
     paintProblems(items);

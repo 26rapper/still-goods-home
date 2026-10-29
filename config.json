@@ -15,6 +15,7 @@
   },
   "shop_enabled": true,
   "shop_api_base": "http://localhost:8780",
+  "hero_photo": "",
   "home_hide": [
     "SG-0004",
     "SG-0015",

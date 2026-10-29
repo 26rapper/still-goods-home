@@ -19,6 +19,9 @@
       "image_scores": [
         58
       ],
+      "image_bg": [
+        "white"
+      ],
       "unit": {
         "pieces": 2,
         "per_piece": 4250
@@ -146,6 +149,9 @@
       "image_scores": [
         98
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -216,6 +222,9 @@
       "options": [],
       "image_scores": [
         61
+      ],
+      "image_bg": [
+        "white"
       ],
       "measure": "60x12cm",
       "unit": null,
@@ -305,6 +314,9 @@
       "image_scores": [
         82
       ],
+      "image_bg": [
+        "other"
+      ],
       "measure": "30x10cm",
       "unit": null,
       "return_fee": 6000,
@@ -389,6 +401,9 @@
       "image_scores": [
         83
       ],
+      "image_bg": [
+        "other"
+      ],
       "measure": "10x12x0.2",
       "unit": null,
       "return_fee": 2900,
@@ -472,6 +487,9 @@
       "options": [],
       "image_scores": [
         62
+      ],
+      "image_bg": [
+        "white"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -561,6 +579,9 @@
       "image_scores": [
         77
       ],
+      "image_bg": [
+        "other"
+      ],
       "measure": "150x85x130",
       "unit": null,
       "return_fee": 6000,
@@ -640,6 +661,9 @@
       "options": [],
       "image_scores": [
         80
+      ],
+      "image_bg": [
+        "white"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -724,6 +748,9 @@
       "image_scores": [
         89
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -798,6 +825,9 @@
       "options": [],
       "image_scores": [
         86
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -881,6 +911,9 @@
       "options": [],
       "image_scores": [
         79
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 5800,
@@ -984,6 +1017,9 @@
       "image_scores": [
         71
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -1062,6 +1098,9 @@
       "options": [],
       "image_scores": [
         68
+      ],
+      "image_bg": [
+        "white"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -1151,6 +1190,9 @@
       "image_scores": [
         72
       ],
+      "image_bg": [
+        "other"
+      ],
       "measure": "00x00x00",
       "unit": null,
       "return_fee": 6000,
@@ -1235,6 +1277,9 @@
       "image_scores": [
         67
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -1318,6 +1363,9 @@
       "image_scores": [
         81
       ],
+      "image_bg": [
+        "white"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -1392,6 +1440,9 @@
       "options": [],
       "image_scores": [
         83
+      ],
+      "image_bg": [
+        "other"
       ],
       "measure": "36x26x5.5",
       "unit": null,
@@ -1510,6 +1561,9 @@
       "image_scores": [
         88
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -1580,6 +1634,9 @@
       "options": [],
       "image_scores": [
         84
+      ],
+      "image_bg": [
+        "other"
       ],
       "measure": "13cm",
       "unit": null,
@@ -1665,6 +1722,9 @@
       "image_scores": [
         67
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -1740,6 +1800,9 @@
       "image_scores": [
         84
       ],
+      "image_bg": [
+        "white"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -1814,6 +1877,9 @@
       "options": [],
       "image_scores": [
         78
+      ],
+      "image_bg": [
+        "white"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -1898,6 +1964,9 @@
       "image_scores": [
         89
       ],
+      "image_bg": [
+        "white"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -1972,6 +2041,9 @@
       "options": [],
       "image_scores": [
         97
+      ],
+      "image_bg": [
+        "other"
       ],
       "measure": "234x260mm",
       "unit": null,
@@ -2053,6 +2125,9 @@
       "image_scores": [
         78
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -2127,6 +2202,9 @@
       "options": [],
       "image_scores": [
         71
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -2216,6 +2294,9 @@
       "image_scores": [
         78
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -2286,6 +2367,9 @@
       "options": [],
       "image_scores": [
         78
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -2369,6 +2453,9 @@
       "options": [],
       "image_scores": [
         83
+      ],
+      "image_bg": [
+        "white"
       ],
       "measure": "12cm",
       "unit": null,
@@ -2467,6 +2554,9 @@
       "image_scores": [
         70
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -2551,6 +2641,9 @@
       "image_scores": [
         75
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -2621,6 +2714,9 @@
       "options": [],
       "image_scores": [
         66
+      ],
+      "image_bg": [
+        "white"
       ],
       "measure": "70x55x50mm",
       "unit": null,
@@ -2725,6 +2821,9 @@
       "image_scores": [
         65
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -2795,6 +2894,9 @@
       "options": [],
       "image_scores": [
         83
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 7000,
@@ -2894,6 +2996,9 @@
       "image_scores": [
         86
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 15000,
       "shipping": {
@@ -2988,6 +3093,9 @@
       "image_scores": [
         67
       ],
+      "image_bg": [
+        "white"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -3062,6 +3170,9 @@
       "options": [],
       "image_scores": [
         77
+      ],
+      "image_bg": [
+        "white"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -3157,6 +3268,9 @@
       "image_scores": [
         84
       ],
+      "image_bg": [
+        "other"
+      ],
       "measure": "21X5X5",
       "unit": null,
       "return_fee": 6400,
@@ -3236,6 +3350,9 @@
       "options": [],
       "image_scores": [
         78
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 5800,
@@ -3339,6 +3456,9 @@
       "image_scores": [
         80
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -3423,6 +3543,9 @@
       "image_scores": [
         92
       ],
+      "image_bg": [
+        "other"
+      ],
       "measure": "0x0x0",
       "unit": null,
       "return_fee": 6000,
@@ -3498,6 +3621,9 @@
       "options": [],
       "image_scores": [
         87
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -3587,6 +3713,9 @@
       "image_scores": [
         74
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -3657,6 +3786,9 @@
       "options": [],
       "image_scores": [
         40
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -3733,6 +3865,9 @@
       "image_scores": [
         65
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -3807,6 +3942,9 @@
       "options": [],
       "image_scores": [
         72
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": null,
       "return_fee": 6000,
@@ -3914,6 +4052,9 @@
       "image_scores": [
         77
       ],
+      "image_bg": [
+        "white"
+      ],
       "unit": null,
       "return_fee": 6000,
       "shipping": {
@@ -4006,6 +4147,9 @@
       ],
       "image_scores": [
         68
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": {
         "pieces": 14,
@@ -4162,6 +4306,9 @@
       "image_scores": [
         85
       ],
+      "image_bg": [
+        "white"
+      ],
       "unit": {
         "pieces": 15,
         "per_piece": 980,
@@ -4293,6 +4440,9 @@
       "options": [],
       "image_scores": [
         84
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": {
         "pieces": 14,
@@ -4474,6 +4624,9 @@
       "image_scores": [
         86
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": {
         "pieces": 11,
         "per_piece": 1355,
@@ -4617,6 +4770,9 @@
       "image_scores": [
         75
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": {
         "pieces": 3,
         "per_piece": 4300,
@@ -4747,6 +4903,9 @@
       "image_scores": [
         83
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": {
         "pieces": 3,
         "per_piece": 8300,
@@ -4876,6 +5035,9 @@
       "options": [],
       "image_scores": [
         75
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": {
         "pieces": 3,
@@ -5028,6 +5190,9 @@
       "image_scores": [
         81
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": {
         "pieces": 3,
         "per_piece": 5633,
@@ -5158,6 +5323,9 @@
       "image_scores": [
         85
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": {
         "pieces": 7,
         "per_piece": 1700,
@@ -5287,6 +5455,9 @@
       "options": [],
       "image_scores": [
         80
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": {
         "pieces": 3,
@@ -5422,6 +5593,9 @@
       "image_scores": [
         86
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": {
         "pieces": 3,
         "per_piece": 3300,
@@ -5551,6 +5725,9 @@
       "options": [],
       "image_scores": [
         85
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": {
         "pieces": 3,
@@ -5695,6 +5872,9 @@
       "image_scores": [
         84
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": {
         "pieces": 3,
         "per_piece": 3067,
@@ -5825,6 +6005,9 @@
       "image_scores": [
         84
       ],
+      "image_bg": [
+        "other"
+      ],
       "unit": {
         "pieces": 3,
         "per_piece": 3733,
@@ -5954,6 +6137,9 @@
       "options": [],
       "image_scores": [
         78
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": {
         "pieces": 3,
@@ -6125,6 +6311,9 @@
       ],
       "image_scores": [
         81
+      ],
+      "image_bg": [
+        "other"
       ],
       "unit": {
         "pieces": 3,

@@ -27,7 +27,7 @@
 </header>
 
 <main id="top">
-  <!-- 첫인상 — 영문 한 줄 · 한글 한 줄 · 단추 + 분야가 다른 판매 중 상품 사진 셋(욕실 · 셀프 집수리 · 현관/신발 차례, face 우선 — app.js) -->
+  <!-- 첫인상 — 영문 한 줄 · 한글 한 줄 · 단추(글 + 여백). config.json hero_photo(쓰는 장면 사진, 예: assets/hero.jpg)가 생기면 그 자리에 큰 사진 한 장(app.js — 비면 숨김 · 요청 0) -->
   <section class="hero" id="hero" aria-labelledby="heroH">
     <div class="wrap hero-row">
       <div class="hero-t">
@@ -35,7 +35,7 @@
         <h1 class="hero-ko" id="heroH" data-copy="home.hero_ko">집을 조금 더 편하게 만드는 물건들.</h1>
         <a class="btn small hero-go" href="shop.html" data-shop data-copy="home.hero_cta">상품 둘러보기</a>
       </div>
-      <ul class="hero-pics" id="heroPics" hidden></ul>
+      <div class="hero-photo" id="heroPhoto" hidden></div>
     </div>
   </section>
 
@@ -50,9 +50,9 @@
     <div class="wrap">
       <div class="sec-head">
         <div><h2 class="h2" id="picksH" data-copy="home.grid_title">지금 파는 상품</h2><p class="sub" id="gridSub" data-copy="home.grid_sub" hidden>모두 배송비가 포함된 가격이에요.</p></div>
-        <a class="textlink" href="shop.html" data-shop data-copy="home.all">전체 상품 보기</a>
       </div>
       <ul class="grid" id="grid"></ul>
+      <p class="grid-more"><a class="textlink" href="shop.html" data-shop data-copy="home.all">전체 상품 보기</a></p>
     </div>
   </section>
 
