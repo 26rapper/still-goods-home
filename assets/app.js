@@ -280,6 +280,10 @@
     $('#gridSub').hidden = !allFree;
     var trustShip = $('#trustShip');   /* '주문 전에 알아 두세요 — 배송비 포함' 줄도 모두 배송비 포함일 때만(5판: 상품값 + 배송비라 평소엔 숨김 — 사실 문장) */
     if (trustShip) trustShip.hidden = !allFree;
+    /* 3~5판(2026-10-30): '배송비 안내 — 같은 공급사 상품 합계 2만 원부터 무료배송이에요.'는 판매 중 상품 전부의 무료배송 기준이 20,000원일 때만(사실 문장 — 하나라도 다르면 숨김) */
+    var allFree20 = !!(items.length && items.every(function (p) { return p.freeOver === 20000; }));
+    var trustFree = $('#trustFree');
+    if (trustFree) trustFree.hidden = !allFree20;
   }
 
   /* 4 문의 — config.json contact */

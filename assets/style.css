@@ -215,6 +215,7 @@ h1,h2,h3,p{margin:0}
 .ft .wrap{display:flex;flex-direction:column;gap:16px}
 .ft-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;padding-bottom:16px;border-bottom:1px solid var(--line)}
 .ft-top .wm-en{font-size:26px}
+.ft-about{margin:0;max-width:40em;font-size:15px;line-height:1.6;color:var(--ink-2)}   /* 바닥 가게 설명(footer.about — 3~5판 2026-10-30 오너 문장) */
 .ft-links{display:flex;flex-wrap:wrap;gap:0 22px}
 .ft-links a{display:inline-flex;align-items:center;min-height:48px;font-size:16px;color:var(--ink-2)}
 .ft-links a:hover,.ft-links a[aria-current="page"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
