@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-29T22:22:35+09:00",
+ "as_of": "2026-10-30T22:57:51+09:00",
  "items": [
   {
    "id": "SG-H0002",
@@ -428,8 +428,16 @@
    },
    "gate_mode": "bundle",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": null,
+    "wet_ok": null,
+    "not_for": [],
+    "source": null
+   },
    "market_volatility": null,
    "niche": "셀프 집수리",
    "thumb": "img/SG-H0010/thumb.jpg",
@@ -1239,8 +1247,8 @@
     "white"
    ],
    "together": [
-    "SG-H0455",
-    "SG-H0107"
+    "SG-H0107",
+    "SG-H0455"
    ],
    "unit": {
     "pieces": 2,
@@ -1508,8 +1516,16 @@
    },
    "gate_mode": "bundle",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": null,
+    "wet_ok": null,
+    "not_for": [],
+    "source": null
+   },
    "market_volatility": null,
    "niche": "셀프 집수리",
    "thumb": "img/SG-H0022/thumb.jpg",
@@ -2686,8 +2702,16 @@
    },
    "gate_mode": "bundle",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": null,
+    "wet_ok": null,
+    "not_for": [],
+    "source": null
+   },
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0046/thumb.jpg",
@@ -4031,8 +4055,16 @@
    },
    "gate_mode": "bundle",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": null,
+    "wet_ok": null,
+    "not_for": [],
+    "source": null
+   },
    "market_volatility": null,
    "niche": "주방 정리",
    "thumb": "img/SG-H0091/thumb.jpg",
@@ -5225,8 +5257,16 @@
    },
    "gate_mode": "bundle",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": null,
+    "wet_ok": null,
+    "not_for": [],
+    "source": null
+   },
    "market_volatility": null,
    "niche": "셀프 집수리",
    "thumb": "img/SG-H0113/thumb.jpg",
@@ -5732,8 +5772,8 @@
     "other"
    ],
    "together": [
-    "SG-H0104",
-    "SG-H0113"
+    "SG-H0113",
+    "SG-H0104"
    ],
    "unit": null,
    "return_fee": 6000,
@@ -6797,9 +6837,7 @@
    "image_bg": [
     "white"
    ],
-   "together": [
-    "SG-H0479"
-   ],
+   "together": [],
    "measure": "260x175x50mm",
    "unit": {
     "pieces": 3,
@@ -7578,8 +7616,16 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": null,
+    "wet_ok": null,
+    "not_for": [],
+    "source": null
+   },
    "market_volatility": null,
    "niche": "셀프 집수리",
    "thumb": "img/SG-H0165/thumb.jpg",
@@ -7812,8 +7858,8 @@
     "other"
    ],
    "together": [
-    "SG-H0448",
     "SG-H0272",
+    "SG-H0448",
     "SG-H0478"
    ],
    "unit": {
@@ -7905,9 +7951,7 @@
    "image_bg": [
     "white"
    ],
-   "together": [
-    "SG-H0479"
-   ],
+   "together": [],
    "measure": "260x175x50mm",
    "unit": null,
    "return_fee": 5600,
@@ -7988,8 +8032,16 @@
    },
    "gate_mode": "bundle",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": null,
+    "wet_ok": null,
+    "not_for": [],
+    "source": null
+   },
    "market_volatility": null,
    "niche": "수납정리",
    "thumb": "img/SG-H0180/thumb.jpg",
@@ -10801,8 +10853,16 @@
    },
    "gate_mode": "bundle",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": null,
+    "wet_ok": null,
+    "not_for": [],
+    "source": null
+   },
    "market_volatility": null,
    "niche": "주방 정리",
    "thumb": "img/SG-H0272/thumb.jpg",
@@ -11739,7 +11799,7 @@
    "guide_id": "H433",
    "name": "흡착 코너 선반 겸 수건걸이",
    "price": 10900,
-   "on_sale": true,
+   "on_sale": false,
    "stock": "in",
    "supplier": {
     "key": "s80",
@@ -12164,16 +12224,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [],
-    "method": "구멍 없이 붙여요",
-    "load_kg": null,
-    "size": null,
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0440/thumb.jpg",
@@ -12223,43 +12275,6 @@
     },
     {
      "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "모름"
-      ],
-      [
-       "설치 방식",
-       "구멍 없이 붙여요"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "모름"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
-      ]
-     ]
-    },
-    {
-     "type": "text",
      "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
     }
    ],
@@ -12300,18 +12315,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [
-     "욕실 · 세탁실 · 주방 · 다용도실에 써요"
-    ],
-    "method": null,
-    "load_kg": null,
-    "size": "377×250×222mm(9.3L) 크기예요",
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0441/thumb.jpg",
@@ -12372,43 +12377,6 @@
       [
        "무게",
        "250"
-      ]
-     ]
-    },
-    {
-     "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "욕실 · 세탁실 · 주방 · 다용도실에 써요"
-      ],
-      [
-       "설치 방식",
-       "모름"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "377×250×222mm(9.3L) 크기예요"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
       ]
      ]
     },
@@ -12924,18 +12892,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [
-     "벽 · 선반 · 문에 써요"
-    ],
-    "method": "뒷면 본드(핫멜트)를 녹여 붙여요",
-    "load_kg": 1,
-    "size": null,
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0448/thumb.jpg",
@@ -12980,43 +12938,6 @@
       [
        "색상",
        "단일(사진과 같음)"
-      ]
-     ]
-    },
-    {
-     "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "벽 · 선반 · 문에 써요"
-      ],
-      [
-       "설치 방식",
-       "뒷면 본드(핫멜트)를 녹여 붙여요"
-      ],
-      [
-       "견디는 무게",
-       "1kg"
-      ],
-      [
-       "크기",
-       "모름"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
       ]
      ]
     },
@@ -13163,16 +13084,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [],
-    "method": "구멍 없이 붙여요",
-    "load_kg": null,
-    "size": null,
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "주방 정리",
    "thumb": "img/SG-H0450/thumb.jpg",
@@ -13222,43 +13135,6 @@
     },
     {
      "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "모름"
-      ],
-      [
-       "설치 방식",
-       "구멍 없이 붙여요"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "모름"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
-      ]
-     ]
-    },
-    {
-     "type": "text",
      "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
     }
    ],
@@ -13299,16 +13175,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [],
-    "method": "접착 스티커나 나사로 달아요",
-    "load_kg": null,
-    "size": null,
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0452/thumb.jpg",
@@ -13349,43 +13217,6 @@
       [
        "색상",
        "선반형 휴지걸이"
-      ]
-     ]
-    },
-    {
-     "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "모름"
-      ],
-      [
-       "설치 방식",
-       "접착 스티커나 나사로 달아요"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "모름"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
       ]
      ]
     },
@@ -13527,18 +13358,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [
-     "세면대 위 벽에 써요"
-    ],
-    "method": "구멍 없이 부착 패치 2개로 달아요",
-    "load_kg": null,
-    "size": "50×11×3.5cm 크기예요",
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0455/thumb.jpg",
@@ -13603,43 +13424,6 @@
       [
        "구성",
        "세면대 무타공 일자 선반 × 1개"
-      ]
-     ]
-    },
-    {
-     "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "세면대 위 벽에 써요"
-      ],
-      [
-       "설치 방식",
-       "구멍 없이 부착 패치 2개로 달아요"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "50×11×3.5cm 크기예요"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
       ]
      ]
     },
@@ -13884,8 +13668,8 @@
     "white"
    ],
    "together": [
-    "SG-H0440",
     "SG-H0435",
+    "SG-H0440",
     "SG-H0461"
    ],
    "unit": null,
@@ -13975,8 +13759,8 @@
     "white"
    ],
    "together": [
-    "SG-H0440",
     "SG-H0435",
+    "SG-H0440",
     "SG-H0459"
    ],
    "unit": null,
@@ -14050,18 +13834,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [
-     "욕실 모서리에 써요"
-    ],
-    "method": null,
-    "load_kg": null,
-    "size": "26×25cm 크기예요",
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0462/thumb.jpg",
@@ -14106,43 +13880,6 @@
       [
        "색상",
        "단일(사진과 같음)"
-      ]
-     ]
-    },
-    {
-     "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "욕실 모서리에 써요"
-      ],
-      [
-       "설치 방식",
-       "모름"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "26×25cm 크기예요"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
       ]
      ]
     },
@@ -14562,18 +14299,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [
-     "싱크대 수납장 문에 걸어 써요"
-    ],
-    "method": null,
-    "load_kg": null,
-    "size": "두께 1.3~2.7cm 문에 맞아요",
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0470/thumb.jpg",
@@ -14631,43 +14358,6 @@
     },
     {
      "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "싱크대 수납장 문에 걸어 써요"
-      ],
-      [
-       "설치 방식",
-       "모름"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "두께 1.3~2.7cm 문에 맞아요"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
-      ]
-     ]
-    },
-    {
-     "type": "text",
      "text": "결제 확인 후 2영업일 안에 출고해요. 상품은 협력 배송처에서 직접 보내드려요."
     }
    ],
@@ -14708,16 +14398,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [],
-    "method": null,
-    "load_kg": null,
-    "size": "12cm",
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "욕실",
    "thumb": "img/SG-H0472/thumb.jpg",
@@ -14767,43 +14449,6 @@
       [
        "색상",
        "단일(사진과 같음)"
-      ]
-     ]
-    },
-    {
-     "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "모름"
-      ],
-      [
-       "설치 방식",
-       "모름"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "12cm"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
       ]
      ]
     },
@@ -15065,8 +14710,8 @@
     "other"
    ],
    "together": [
-    "SG-H0448",
     "SG-H0272",
+    "SG-H0448",
     "SG-H0170"
    ],
    "unit": null,
@@ -15127,7 +14772,7 @@
    "guide_id": "H479",
    "name": "각도조절 샤워기 거치대 1개",
    "price": 4200,
-   "on_sale": true,
+   "on_sale": false,
    "stock": "in",
    "supplier": {
     "key": "s24",
@@ -15151,9 +14796,7 @@
    "image_bg": [
     "white"
    ],
-   "together": [
-    "SG-H0153"
-   ],
+   "together": [],
    "measure": "70x55x50mm",
    "unit": null,
    "return_fee": 5600,
@@ -15431,18 +15074,8 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": true,
-   "install": {
-    "wall": [
-     "옷 · 생활용품 · 이불 보관에 써요"
-    ],
-    "method": null,
-    "load_kg": null,
-    "size": null,
-    "wet_ok": null,
-    "not_for": [],
-    "source": "supplier_detail"
-   },
+   "face": false,
+   "install": null,
    "market_volatility": null,
    "niche": "수납정리",
    "thumb": "img/SG-H0482/thumb.jpg",
@@ -15502,43 +15135,6 @@
       [
        "재질",
        "플라스틱"
-      ]
-     ]
-    },
-    {
-     "type": "text",
-     "text": "설치 조건"
-    },
-    {
-     "type": "table",
-     "rows": [
-      [
-       "붙이는 · 다는 곳",
-       "옷 · 생활용품 · 이불 보관에 써요"
-      ],
-      [
-       "설치 방식",
-       "모름"
-      ],
-      [
-       "견디는 무게",
-       "모름"
-      ],
-      [
-       "크기",
-       "모름"
-      ],
-      [
-       "물 닿는 곳",
-       "모름"
-      ],
-      [
-       "맞지 않는 곳",
-       "모름"
-      ],
-      [
-       "출처",
-       "공급사 상세 정보"
       ]
      ]
     },
@@ -15874,8 +15470,16 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": "21X5X5",
+    "wet_ok": null,
+    "not_for": [],
+    "source": "supplier_detail"
+   },
    "market_volatility": null,
    "niche": "셀프 집수리",
    "thumb": "img/SG-H0491/thumb.jpg",
@@ -15940,6 +15544,43 @@
       [
        "무게",
        "0.1"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "설치 조건"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "붙이는 · 다는 곳",
+       "모름"
+      ],
+      [
+       "설치 방식",
+       "모름"
+      ],
+      [
+       "견디는 무게",
+       "모름"
+      ],
+      [
+       "크기",
+       "21X5X5"
+      ],
+      [
+       "물 닿는 곳",
+       "모름"
+      ],
+      [
+       "맞지 않는 곳",
+       "모름"
+      ],
+      [
+       "출처",
+       "공급사 상세 정보"
       ]
      ]
     },
@@ -16186,8 +15827,16 @@
    },
    "gate_mode": "single",
    "hidden": false,
-   "face": false,
-   "install": null,
+   "face": true,
+   "install": {
+    "wall": [],
+    "method": null,
+    "load_kg": null,
+    "size": "0x0x0",
+    "wet_ok": null,
+    "not_for": [],
+    "source": "supplier_detail"
+   },
    "market_volatility": null,
    "niche": "셀프 집수리",
    "thumb": "img/SG-H0495/thumb.jpg",
@@ -16242,6 +15891,43 @@
       [
        "크기",
        "0x0x0"
+      ]
+     ]
+    },
+    {
+     "type": "text",
+     "text": "설치 조건"
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "붙이는 · 다는 곳",
+       "모름"
+      ],
+      [
+       "설치 방식",
+       "모름"
+      ],
+      [
+       "견디는 무게",
+       "모름"
+      ],
+      [
+       "크기",
+       "0x0x0"
+      ],
+      [
+       "물 닿는 곳",
+       "모름"
+      ],
+      [
+       "맞지 않는 곳",
+       "모름"
+      ],
+      [
+       "출처",
+       "공급사 상세 정보"
       ]
      ]
     },
