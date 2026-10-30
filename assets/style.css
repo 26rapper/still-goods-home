@@ -108,11 +108,12 @@ h1,h2,h3,p{margin:0}
 .hero-ko{max-width:30em;margin-top:20px;font-size:clamp(17px,1.5vw,22px);font-weight:500;line-height:1.6;letter-spacing:-.01em;color:var(--ink-2)}   /* h1 태그 그대로 · 모양만 설명 글 */
 .hero-go{margin-top:28px}
 .btn.small.hero-go{min-height:52px;padding:0 24px}
-/* 사진 있을 때(#hero.has-photo — app.js 가 onload 때 붙임): 띠 높이 400~620px(폭의 41.67% = 사진 비율 2.4:1) · 사진이 띠를 채움(object-fit:cover) · 글은 왼쪽 44%(사진의 왼쪽 46% 는 빈 바탕이라 겹치지 않음). 글자 얹기 · 가공 0 */
-.hero.has-photo{position:relative;display:flex;align-items:center;height:clamp(400px,41.67vw,620px);padding:0;overflow:hidden}
-.hero.has-photo .wrap{width:100%}
-.hero.has-photo .hero-t{max-width:44%}
-.hero-photo{position:absolute;inset:0;z-index:0}
+/* 사진 있을 때(#hero.has-photo — app.js 가 onload 때 붙임, 5판 5차 2026-10-30 오너 "사진이 진짜"): 진짜 장면 사진 한 장(공급사 상세 사진에서 글자 없는 부분만 잘라냄, 860×645 = 4:3)이라
+   띠 전체에 늘이지 않고(1.7배 늘리면 흐려짐) 글 왼쪽 · 사진 오른쪽 두 칸 — 사진은 제 크기 근처로 보이고 글은 사진 위에 얹지 않는다(겹침 0). 글자 얹기 · 가공 0 */
+.hero.has-photo{padding:56px 0 8px}
+.hero.has-photo .hero-row{grid-template-columns:minmax(0,10fr) minmax(0,11fr)}
+.hero.has-photo .hero-t{max-width:none}
+.hero-photo{aspect-ratio:860/645;border-radius:var(--r-l);overflow:hidden;background:var(--bg-2)}
 .hero-photo picture,.hero-photo img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center}
 
 /* ── 홈: 분야(4판 2차 — 사진이 칸 전체 · 이름은 사진 아래 작은 글. 상자 0) ── */
@@ -255,10 +256,10 @@ h1,h2,h3,p{margin:0}
   .hero-ko{margin-top:14px}
   .hero-en-l2{display:block}   /* 폰: 쉼표 뒤 둘째 조각을 새 줄로(데스크톱은 한 줄) */
   .hero-go{display:flex;width:100%}
-  /* 폰 사진 띠: 글 위 · 상품은 사진 아래 40%(hero_photo_mobile 1200×1600) — 띠는 글 길이만큼 늘고 아래 54vw 를 비워 두어 겹치지 않음 */
-  .hero.has-photo{display:block;height:auto;padding:36px 0 54vw}
-  .hero.has-photo .hero-t{max-width:none}
-  .hero-photo img{object-position:center bottom}
+  /* 폰: 글 아래에 사진이 가로로 꽉(양쪽 여백까지) · 모서리 0 — 글은 사진 위에 얹지 않는다 */
+  .hero.has-photo{padding:36px 0 0}
+  .hero.has-photo .hero-row{grid-template-columns:minmax(0,1fr);gap:28px}
+  .hero-photo{margin:0 calc(-1 * var(--gut));border-radius:0}
   .h2{font-size:20px}
   .wm{gap:8px}
   .wm-en{font-size:25px}
