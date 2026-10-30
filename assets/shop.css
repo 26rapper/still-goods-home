@@ -26,7 +26,8 @@
 .empty .btn{margin-top:20px}
 
 /* ── 상세 ── */
-.item{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.item{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}   /* 칸 둘 = .gallery-col(사진 + 실측 줄) · .buybox — 격자 직접 자식은 이 둘뿐이어야 배치가 상품마다 같다(2026-10-30) */
+.gallery-col{min-width:0}
 .gallery{min-width:0}
 .gallery .pic{border-radius:var(--r-l)}
 .shots{display:flex;width:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:var(--r-l)}

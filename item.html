@@ -32,9 +32,11 @@
     <nav class="crumb" aria-label="위치" data-copy-aria="crumb.aria"><a href="shop.html" data-copy="crumb.shop">상품</a><span aria-hidden="true">›</span><span id="crumbNiche">—</span></nav>
     <p class="example-note" id="exNote" hidden></p>
     <div class="item" id="itemMain">
-      <div class="gallery" id="gallery"><div class="pic"></div></div>
-      <!-- 실측 한 줄 — 데이터(measure)가 있을 때만 -->
-      <p class="measure" id="itemMeasure" hidden></p>
+      <!-- 사진 칸 + 실측 한 줄(데이터 measure 가 있을 때만)을 한 칸에 — 실측 줄이 격자의 둘째 칸을 차지해 값 · 단추가 아래로 밀리던 것(오너 2026-10-30 "상세 배치가 제각각") 고침 -->
+      <div class="gallery-col">
+        <div class="gallery" id="gallery"><div class="pic"></div></div>
+        <p class="measure" id="itemMeasure" hidden></p>
+      </div>
       <div class="buybox">
         <h1 id="itemName" data-copy="item.loading">불러오는 중이에요</h1>
         <div class="price-row"><span class="bigprice" id="itemPrice"></span><span class="chip-ok" id="itemFree" data-copy="badge.free_ship" aria-label="배송비는 상품 가격에 포함되어 있어요." data-copy-aria="item.ship_1" hidden>배송비 포함</span><span class="ship-fee" id="itemShip" hidden></span></div>
