@@ -17,9 +17,9 @@
   "shop_api_base": "http://localhost:8780",
   "hero_photo": "assets/hero.jpg",
   "cat_photos": {
-    "욕실": "data/img/SG-H0441/2.jpg",
-    "셀프 집수리": "data/img/SG-H0107/3.jpg",
-    "수납정리": "data/img/SG-H0487/2.jpg",
+    "욕실": "assets/cat-bath.jpg",
+    "셀프 집수리": "assets/cat-repair.jpg",
+    "수납정리": "assets/cat-storage.jpg",
     "주방 정리": "assets/cat-kitchen.jpg",
     "현관/신발": "assets/cat-entry.jpg"
   },

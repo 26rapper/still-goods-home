@@ -143,7 +143,7 @@
 
   /* 0b 배너(5판 7차 폰 · 8차 컴퓨터 2026-10-31 — 오너 "사진 안에 슬로건 · 단추, if 문구는 스와이프로 / 웹도 동일하게"): 한 틀 = 글 + 사진, 옆으로 넘김.
      첫 장 = 첫 화면 사진(config.json hero_photo) + home.hero_en · hero_ko · hero_cta, 다음 장 = 분야 장면 사진(cat_photos) + home.problem.<분야> + guide.go('<분야> 상품 보기') → 목록의 그 분야.
-     폰은 사진 안 아래쪽(어두운 띠 위 흰 글), 컴퓨터는 글 왼쪽 · 사진 오른쪽 제 크기(CSS). 문장은 copy.ko.js 그대로. 자동 넘김 0(손 · 화살표 · 키보드 ← →) · 점 + 'n / 전체'. 사진이 없으면 안 만들고 글 + 사진 두 칸 그대로 */
+     폰은 사진 안 아래쪽(어두운 띠 위 흰 글), 컴퓨터는 글 왼쪽 50 · 사진 오른쪽 50(사진은 전부 4:3 파일 — 설계안 안 A 2026-10-31, CSS). 문장은 copy.ko.js 그대로. 자동 넘김 0(손 · 화살표 · 키보드 ← →) · 점 + 'n / 전체'. 사진이 없으면 안 만들고 글 + 사진 두 칸 그대로 */
   function paintSlides(conf, items) {
     var box = $('#heroSlides'), sec = $('#hero');
     if (!box || !sec) return;
@@ -155,7 +155,7 @@
       nicheOrder(items).slice(0, MAX_CATS).forEach(function (n) {
         var src = catPhoto(conf, n), k = 'home.problem.' + n, q = hasCopy(k) ? COPY[k].trim() : '';
         /* 5판 10차: if 장은 문장 + 단추 + 장면 사진만(9차에 넣었던 그 분야 상품 3개는 오너 "번잡 · 사진 잘림" + 아래 격자와 겹쳐 뺌 — 빈자리는 CSS 비율 글 35 · 사진 65 로) */
-        if (src && q) { CAT_Q[n] = 1; slides.push({ src: src, pos: 'center', q: q, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) }); }
+        if (src && q) { CAT_Q[n] = 1; slides.push({ src: src, pos: 'center', eyebrow: NICHE_LABEL[n] || n, q: q, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) }); }
       });
       if (!slides.length) return;
       var track = el('div', 'slides-track');
@@ -165,7 +165,6 @@
         var im = new Image();
         im.alt = ''; im.decoding = 'async'; if (i > 0) im.loading = 'lazy';
         im.style.objectPosition = sl.pos;
-        im.onload = function () { if (im.naturalWidth && im.naturalHeight) pic.style.aspectRatio = im.naturalWidth + ' / ' + im.naturalHeight; };   /* 컴퓨터 띠: 사진 제 생김새(CSS .slide-pic) */
         im.src = sl.src;
         pic.appendChild(im);
         a.appendChild(pic);
@@ -178,6 +177,7 @@
           t.appendChild(en);
         }
         if (sl.ko) t.appendChild(el('p', 'slide-ko', sl.ko));
+        if (sl.eyebrow) t.appendChild(el('span', 'slide-eyebrow', sl.eyebrow));   /* 분야 이름(작게) — 데이터, 폰은 숨김 */
         if (sl.q) t.appendChild(el('p', 'slide-q', sl.q));
         if (sl.btn) { var go = el('a', 'slide-go', sl.btn); go.href = sl.href; t.appendChild(go); }
         a.appendChild(t);
