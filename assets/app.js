@@ -154,18 +154,24 @@
       if (RE_HERO.test(hero)) slides.push({ src: hero, pos: 'left center', en: hasCopy('home.hero_en') ? COPY['home.hero_en'] : '', ko: hasCopy('home.hero_ko') ? COPY['home.hero_ko'] : '', btn: hasCopy('home.hero_cta') ? COPY['home.hero_cta'] : '', href: 'shop.html' });
       nicheOrder(items).slice(0, MAX_CATS).forEach(function (n) {
         var src = catPhoto(conf, n), k = 'home.problem.' + n, q = hasCopy(k) ? COPY[k].trim() : '';
-        if (src && q) { CAT_Q[n] = 1; slides.push({ src: src, pos: 'center', q: q, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) }); }
+        if (src && q) {
+          CAT_Q[n] = 1;
+          /* 5판 9차(오너 "컴퓨터 if 장의 여백이 많다"): 그 분야 상품 3개(사진 · 이름 · 값 — 데이터만, 차례는 목록과 같이 face → 흰 배경 → 점수)를 글 밑에. 폰은 CSS 가 숨김 */
+          var top = items.filter(function (p) { return p.niche === n && p.img; }).sort(better).slice(0, 3);
+          slides.push({ src: src, pos: 'center', q: q, items: top, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) });
+        }
       });
       if (!slides.length) return;
       var track = el('div', 'slides-track');
       slides.forEach(function (sl, i) {
-        var a = el('a', 'slide');
-        a.href = sl.href;
+        var a = el('div', 'slide'), pic = el('a', 'slide-pic');   /* 한 장 = 사진 링크 + 글 칸(상품 3개도 링크라 장 전체를 링크로 하지 않는다) */
+        pic.href = sl.href;
         var im = new Image();
         im.alt = ''; im.decoding = 'async'; if (i > 0) im.loading = 'lazy';
         im.style.objectPosition = sl.pos;
         im.src = sl.src;
-        a.appendChild(im);
+        pic.appendChild(im);
+        a.appendChild(pic);
         var t = el('div', 'slide-t');
         if (sl.en) {
           var en = el('p', 'slide-en'), j = sl.en.indexOf(', ');
@@ -176,7 +182,19 @@
         }
         if (sl.ko) t.appendChild(el('p', 'slide-ko', sl.ko));
         if (sl.q) t.appendChild(el('p', 'slide-q', sl.q));
-        if (sl.btn) t.appendChild(el('span', 'slide-go', sl.btn));
+        if (sl.items && sl.items.length) {
+          var row = el('div', 'slide-items');
+          sl.items.forEach(function (p) {
+            var it = el('a', 'slide-item');
+            it.href = shopOff ? '#top' : 'item.html?id=' + encodeURIComponent(p.id);
+            it.appendChild(UI ? UI.pic(p.img, '', { lazy: true }) : el('div', 'pic'));
+            it.appendChild(el('span', 'slide-item-n', p.name));
+            it.appendChild(el('b', 'slide-item-p', won(p.price)));
+            row.appendChild(it);
+          });
+          t.appendChild(row);
+        }
+        if (sl.btn) { var go = el('a', 'slide-go', sl.btn); go.href = sl.href; t.appendChild(go); }
         a.appendChild(t);
         track.appendChild(a);
       });
@@ -188,20 +206,26 @@
         Array.prototype.forEach.call(dots.children, function (d, j) { d.className = j === i ? 'on' : ''; });
         num.textContent = (i + 1) + ' / ' + slides.length;
       }
+      var cur = 0;
       mark(0);
+      function stepW() { return track.firstChild ? track.firstChild.offsetWidth + 10 : 1; }
       var tick = null;
       track.addEventListener('scroll', function () {
         if (tick) return;
         tick = setTimeout(function () {
           tick = null;
-          var w = track.firstChild ? track.firstChild.offsetWidth + 10 : 1;
-          mark(Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / w))));
+          cur = Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / stepW())));
+          mark(cur);
         }, 80);
       }, { passive: true });
       /* 화살표(컴퓨터 — CSS 가 폰에서는 숨김): 글 0 · 화면 읽기에는 숨김, 키보드는 띠에 초점을 주고 ← → */
       var prev = el('button', 'slides-arrow prev'), next = el('button', 'slides-arrow next');
       [prev, next].forEach(function (b) { b.type = 'button'; b.setAttribute('aria-hidden', 'true'); b.tabIndex = -1; b.appendChild(icon('chev')); });
-      function step(d) { var w = track.firstChild ? track.firstChild.offsetWidth + 10 : 0; if (w) track.scrollBy({ left: d * w, behavior: 'smooth' }); }
+      function step(d) {   /* 현재 장 번호 기준으로 정확한 자리로(연타 · 넘기던 중에도 어긋남 0) · 숫자는 바로 */
+        cur = Math.max(0, Math.min(slides.length - 1, cur + d));
+        track.scrollTo({ left: cur * stepW(), behavior: 'smooth' });
+        mark(cur);
+      }
       prev.addEventListener('click', function () { step(-1); });
       next.addEventListener('click', function () { step(1); });
       track.tabIndex = 0;
