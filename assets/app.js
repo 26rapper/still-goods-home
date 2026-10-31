@@ -141,13 +141,12 @@
     im.src = src;
   }
 
-  /* 0b 폰 배너(5판 7차 2026-10-31 — 오너 "사진 안에 슬로건 · 단추를 넣고, if 문구는 스와이프로"): 760px 아래에서만 한 번 만든다.
+  /* 0b 배너(5판 7차 폰 · 8차 컴퓨터 2026-10-31 — 오너 "사진 안에 슬로건 · 단추, if 문구는 스와이프로 / 웹도 동일하게"): 한 틀 = 글 + 사진, 옆으로 넘김.
      첫 장 = 첫 화면 사진(config.json hero_photo) + home.hero_en · hero_ko · hero_cta, 다음 장 = 분야 장면 사진(cat_photos) + home.problem.<분야> + guide.go('<분야> 상품 보기') → 목록의 그 분야.
-     글은 사진 아래쪽(어두운 띠 위) — 문장은 copy.ko.js 그대로. 자동 넘김 0(손으로만) · 점 + 'n / 전체' 숫자 · 다음 장이 살짝 보임. 사진이 없으면 안 만들고 글 + 사진 두 칸 그대로 */
+     폰은 사진 안 아래쪽(어두운 띠 위 흰 글), 컴퓨터는 글 왼쪽 · 사진 오른쪽 제 크기(CSS). 문장은 copy.ko.js 그대로. 자동 넘김 0(손 · 화살표 · 키보드 ← →) · 점 + 'n / 전체'. 사진이 없으면 안 만들고 글 + 사진 두 칸 그대로 */
   function paintSlides(conf, items) {
     var box = $('#heroSlides'), sec = $('#hero');
     if (!box || !sec) return;
-    var mq = window.matchMedia ? window.matchMedia('(max-width:760px)') : null;
     function build() {
       if (box.childNodes.length) return;
       var slides = [];
@@ -155,7 +154,7 @@
       if (RE_HERO.test(hero)) slides.push({ src: hero, pos: 'left center', en: hasCopy('home.hero_en') ? COPY['home.hero_en'] : '', ko: hasCopy('home.hero_ko') ? COPY['home.hero_ko'] : '', btn: hasCopy('home.hero_cta') ? COPY['home.hero_cta'] : '', href: 'shop.html' });
       nicheOrder(items).slice(0, MAX_CATS).forEach(function (n) {
         var src = catPhoto(conf, n), k = 'home.problem.' + n, q = hasCopy(k) ? COPY[k].trim() : '';
-        if (src && q) slides.push({ src: src, pos: 'center', q: q, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) });
+        if (src && q) { CAT_Q[n] = 1; slides.push({ src: src, pos: 'center', q: q, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) }); }
       });
       if (!slides.length) return;
       var track = el('div', 'slides-track');
@@ -199,46 +198,39 @@
           mark(Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / w))));
         }, 80);
       }, { passive: true });
-      box.appendChild(track); box.appendChild(nav);
+      /* 화살표(컴퓨터 — CSS 가 폰에서는 숨김): 글 0 · 화면 읽기에는 숨김, 키보드는 띠에 초점을 주고 ← → */
+      var prev = el('button', 'slides-arrow prev'), next = el('button', 'slides-arrow next');
+      [prev, next].forEach(function (b) { b.type = 'button'; b.setAttribute('aria-hidden', 'true'); b.tabIndex = -1; b.appendChild(icon('chev')); });
+      function step(d) { var w = track.firstChild ? track.firstChild.offsetWidth + 10 : 0; if (w) track.scrollBy({ left: d * w, behavior: 'smooth' }); }
+      prev.addEventListener('click', function () { step(-1); });
+      next.addEventListener('click', function () { step(1); });
+      track.tabIndex = 0;
+      box.appendChild(track); box.appendChild(prev); box.appendChild(next); box.appendChild(nav);
       box.hidden = false;
       sec.classList.add('has-slides');
     }
-    if (!mq || mq.matches) build();
-    else if (mq.addEventListener) mq.addEventListener('change', function (e) { if (e.matches) build(); });
+    build();
   }
 
-  /* 1 분야 카드(5판 6차 2026-10-31 — 오너 "폰에서 if 문구를 가로로 넘기게"): 장면 사진(config.json cat_photos[분야] — 상품 상세 사진에서 글자 없는 장면, 없으면 대표 상품 사진 흰 칸)
-     + 그 분야 문장(home.problem.<분야> — 오너가 가져온 것만, 없으면 분야 이름만) + 분야 이름 → 목록의 그 분야. 폰은 가로로 넘기는 한 줄(다음 칸이 살짝 보임), 컴퓨터는 한 줄 격자 */
+  /* 1 분야 칩 줄(5판 8차 2026-10-31 — 배너 밑: 분야 이름 → 목록의 그 분야. 폰은 가로로 넘김 · 컴퓨터는 줄바꿈. 사진 · 문장은 0b 배너가 맡는다)
+     cat_photos(config.json: 분야 → assets/ 또는 data/img/<id>/<n>.jpg — 상품 상세 사진에서 글자 없는 장면)는 배너 장에 쓴다 */
   var RE_CAT_PHOTO = new RegExp('^(assets/[A-Za-z0-9_.-]+|data/img/[A-Za-z0-9_-]+/[0-9]{1,2})[.](jpe?g|png|webp)$');
-  var CAT_Q = {};   /* 분야 카드에 문장이 들어간 분야 — 아래 문제 → 해결 절에서는 뺀다(같은 문장 두 번 0) */
+  var CAT_Q = {};   /* 배너 장에 문장이 들어간 분야 — 아래 문제 → 해결 절에서는 뺀다(같은 문장 두 번 0) */
   function catPhoto(conf, n) {
     var m = conf && conf.cat_photos && typeof conf.cat_photos === 'object' ? conf.cat_photos[n] : '';
     return typeof m === 'string' && RE_CAT_PHOTO.test(m) ? m : '';
   }
-  function paintCats(items, conf) {
+  function paintCats(items) {
     var box = $('#cats');
     if (!box) return;
     var names = nicheOrder(items).slice(0, MAX_CATS);
     while (box.firstChild) box.removeChild(box.firstChild);
     names.forEach(function (n, i) {
-      var li = el('li'), a = el('a', 'cat rise'), p = lead(items, n, SHOWN), src = catPhoto(conf, n), qk = 'home.problem.' + n;
-      var q = hasCopy(qk) ? COPY[qk].trim() : '';
-      if (p) SHOWN[p.id] = 1;
+      var li = el('li'), a = el('a', 'cat rise');
       a.style.setProperty('--i', String(i));
       a.href = 'shop.html?niche=' + encodeURIComponent(n);
-      var fallback = function () { return UI ? UI.pic(p ? p.img : null, '', { lazy: true }) : el('div', 'pic'); };
-      if (src) {
-        var ph = el('div', 'cat-photo'), im = new Image();
-        im.alt = ''; im.decoding = 'async'; im.loading = 'lazy';
-        im.onerror = function () { if (ph.parentNode) ph.parentNode.replaceChild(fallback(), ph); };   /* 파일이 없으면 대표 상품 사진으로 */
-        im.src = src;
-        ph.appendChild(im);
-        a.appendChild(ph);
-      } else a.appendChild(fallback());
-      if (q) { CAT_Q[n] = 1; a.appendChild(el('b', 'cat-q', q)); }
-      var nm = el('span', q ? 'cat-name cat-name-sub' : 'cat-name', NICHE_LABEL[n] || n);
-      nm.appendChild(icon('arrow'));
-      a.appendChild(nm);
+      a.appendChild(el('span', 'cat-name', NICHE_LABEL[n] || n));
+      a.appendChild(icon('arrow'));
       li.appendChild(a);
       box.appendChild(li);
     });
@@ -247,7 +239,7 @@
   }
 
   /* 3b 문제 → 해결 — home.problem.<분야> 문장이 있는 분야만(문장은 copy.ko.js, 오너가 가져온 것만).
-     5판 6차: 분야 카드(위)에 문장이 들어간 분야는 뺀다 → 분야 6개 안이면 전부 빠져 절은 숨김(분야가 7개 넘을 때 넘친 분야만 여기) */
+     5판 7차: 배너 장에 문장이 들어간 분야는 뺀다 → 장면 사진이 있는 분야는 전부 빠져 보통 숨김(사진 없는 분야 · 배너가 없을 때만 여기) */
   function paintProblems(items) {
     var sec = $('#problems'), ul = $('#probList');
     if (!sec || !ul) return;
@@ -453,7 +445,7 @@
     var items = [];
     (r[1] && Array.isArray(r[1].items) ? r[1].items : []).slice(0, 500).forEach(function (it) { var p = fromProduct(it); if (p) { p.i = items.length; items.push(p); } });
     var hide = Array.isArray(conf.home_hide) ? conf.home_hide.filter(function (x) { return typeof x === 'string' && RE_ID.test(x); }) : [];
-    paintCats(items, conf);
+    paintCats(items);
     paintSlides(conf, items);
     paintGrid(items, hide);
     paintProblems(items);

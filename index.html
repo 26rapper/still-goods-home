@@ -37,11 +37,11 @@
       </div>
       <div class="hero-photo" id="heroPhoto" hidden></div>
     </div>
-    <!-- 폰 배너(5판 7차) — app.js 가 760px 아래에서만 채운다: 첫 장 사진 + 슬로건 + 단추, 다음 장 분야 장면 사진 + 문장. 컴퓨터는 CSS 로 숨김 -->
+    <!-- 배너(5판 7차 폰 · 8차 컴퓨터) — app.js 가 채운다: 첫 장 첫 화면 사진 + 슬로건 + 단추, 다음 장 분야 장면 사진 + 문장. 폰은 사진 안에 글, 컴퓨터는 글 왼쪽 · 사진 오른쪽. 있으면 위 hero-row 는 숨김 -->
     <div class="wrap slides" id="heroSlides" hidden></div>
   </section>
 
-  <!-- 분야 카드 — data/products.json 의 분야 값(상품이 있는 분야만): 장면 사진(config.json cat_photos, 없으면 대표 상품 사진) + home.problem.<분야> 문장 + 분야 이름 →. 폰은 가로로 넘기는 한 줄(5판 6차 2026-10-31) -->
+  <!-- 분야 칩 줄 — data/products.json 의 분야 값(상품이 있는 분야만) 이름 → 목록. 폰은 가로로 넘김 · 컴퓨터는 줄바꿈(5판 8차 2026-10-31). 사진 · 문장은 위 배너 -->
   <section class="sec" id="catsSec" aria-label="분야" data-copy-aria="filter.aria" data-shop>
     <div class="wrap">
       <ul class="cats" id="cats"></ul>
