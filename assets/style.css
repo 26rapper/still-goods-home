@@ -116,6 +116,9 @@ h1,h2,h3,p{margin:0}
 .hero-photo{aspect-ratio:860/645;border-radius:var(--r-l);overflow:hidden;background:var(--bg-2)}
 .hero-photo picture,.hero-photo img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center}
 
+/* ── 홈: 폰 배너(5판 7차 2026-10-31 — 오너 "사진 안에 슬로건 · 단추, if 문구는 스와이프") — 컴퓨터(761px 위)는 숨김, 모양은 아래 @media (max-width:760px) ── */
+.slides{display:none}
+
 /* ── 홈: 분야 카드(5판 6차 2026-10-31 — 장면 사진 4:3 + 그 분야 문장(home.problem.*) + 분야 이름 →. 컴퓨터는 한 줄 격자(칸 200px 이상 · 분야가 적어도 칸은 안 늘어남), 폰은 가로로 넘기는 한 줄 — 아래 @media) ── */
 .cats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px 16px}
 .cat{display:flex;flex-direction:column;gap:10px;height:100%}
@@ -271,6 +274,32 @@ h1,h2,h3,p{margin:0}
   .hero.has-photo .hero-ko{margin-top:10px;font-size:16px}
   .hero.has-photo .hero-go{display:inline-flex;width:auto;margin-top:18px}
   .hero.has-photo .btn.small.hero-go{min-height:48px}
+  /* 폰 배너(5판 7차): 글 + 사진 두 칸 대신 한 장 — 사진 안 아래쪽에 슬로건 · 단추(어두운 띠 위 흰 글), 옆으로 넘기면 분야 장면 + if 문장. 다음 장이 18px 보임 · 점 + 숫자. 상품 격자가 첫 화면 안에 들어오게 높이는 5:6 */
+  .hero.has-slides{padding:12px 0 0}
+  .hero.has-slides .hero-row{display:none}
+  .hero.has-slides .slides{display:block}
+  .slides-track{display:flex;gap:10px;margin:0 calc(-1 * var(--gut));padding:0 var(--gut);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--gut);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .slides-track::-webkit-scrollbar{display:none}
+  .slide{position:relative;flex:0 0 calc(100% - 28px);scroll-snap-align:start;aspect-ratio:5/6;border-radius:var(--r-l);overflow:hidden;background:var(--bg-2);color:#fff;text-decoration:none}
+  .slide img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}   /* 사진 파일 그대로 — 자리 · 크기만 */
+  .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(20,18,15,.74) 100%)}   /* 글이 읽히게 아래만 어둡게 — 사진 파일은 안 건드림 */
+  .slide-t{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:0 20px 20px}
+  .slide-en{margin:0;font-family:var(--f-display);font-size:34px;font-weight:400;line-height:1.05;letter-spacing:-.02em;color:#fff}
+  .slide-en-l2{display:block}
+  .slide-ko{margin:8px 0 0;font-size:15px;font-weight:500;line-height:1.5;color:rgba(255,255,255,.92)}
+  .slide-q{margin:0;font-size:22px;font-weight:600;line-height:1.35;letter-spacing:-.01em;color:#fff}
+  .slide-go{display:inline-flex;align-items:center;margin-top:14px;min-height:40px;padding:0 16px;border-radius:999px;background:#fff;color:var(--ink);font-size:14px;font-weight:600}
+  .slides-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;font-family:var(--f-mono);font-size:13px;color:var(--ink-3)}
+  .slides-dots{display:flex;gap:6px}
+  .slides-dots i{display:block;width:6px;height:6px;border-radius:50%;background:var(--line-2)}
+  .slides-dots i.on{background:var(--ink)}
+  /* 폰 분야 줄: 배너에 사진 · 문장이 있으니 여기는 이름 칩만 한 줄(넘기지 않아도 분야로 바로) */
+  .hero.has-slides + #catsSec{padding-top:14px}
+  .hero.has-slides + #catsSec .cats > li{flex:0 0 auto}
+  .hero.has-slides + #catsSec .cat{flex-direction:row;gap:0}
+  .hero.has-slides + #catsSec .cat .cat-photo,.hero.has-slides + #catsSec .cat .pic,.hero.has-slides + #catsSec .cat .cat-q{display:none}
+  .hero.has-slides + #catsSec .cat-name,.hero.has-slides + #catsSec .cat-name-sub{margin:0;min-height:36px;padding:0 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:600;color:var(--ink);background:var(--bg)}
+  .hero.has-slides + #catsSec .cat:hover .cat-name{text-decoration:none;border-color:var(--line-2)}
   .h2{font-size:20px}
   .wm{gap:8px}
   .wm-en{font-size:25px}

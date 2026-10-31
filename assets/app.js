@@ -141,6 +141,72 @@
     im.src = src;
   }
 
+  /* 0b 폰 배너(5판 7차 2026-10-31 — 오너 "사진 안에 슬로건 · 단추를 넣고, if 문구는 스와이프로"): 760px 아래에서만 한 번 만든다.
+     첫 장 = 첫 화면 사진(config.json hero_photo) + home.hero_en · hero_ko · hero_cta, 다음 장 = 분야 장면 사진(cat_photos) + home.problem.<분야> + guide.go('<분야> 상품 보기') → 목록의 그 분야.
+     글은 사진 아래쪽(어두운 띠 위) — 문장은 copy.ko.js 그대로. 자동 넘김 0(손으로만) · 점 + 'n / 전체' 숫자 · 다음 장이 살짝 보임. 사진이 없으면 안 만들고 글 + 사진 두 칸 그대로 */
+  function paintSlides(conf, items) {
+    var box = $('#heroSlides'), sec = $('#hero');
+    if (!box || !sec) return;
+    var mq = window.matchMedia ? window.matchMedia('(max-width:760px)') : null;
+    function build() {
+      if (box.childNodes.length) return;
+      var slides = [];
+      var hero = conf && typeof conf.hero_photo === 'string' ? conf.hero_photo.trim() : '';
+      if (RE_HERO.test(hero)) slides.push({ src: hero, pos: 'left center', en: hasCopy('home.hero_en') ? COPY['home.hero_en'] : '', ko: hasCopy('home.hero_ko') ? COPY['home.hero_ko'] : '', btn: hasCopy('home.hero_cta') ? COPY['home.hero_cta'] : '', href: 'shop.html' });
+      nicheOrder(items).slice(0, MAX_CATS).forEach(function (n) {
+        var src = catPhoto(conf, n), k = 'home.problem.' + n, q = hasCopy(k) ? COPY[k].trim() : '';
+        if (src && q) slides.push({ src: src, pos: 'center', q: q, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) });
+      });
+      if (!slides.length) return;
+      var track = el('div', 'slides-track');
+      slides.forEach(function (sl, i) {
+        var a = el('a', 'slide');
+        a.href = sl.href;
+        var im = new Image();
+        im.alt = ''; im.decoding = 'async'; if (i > 0) im.loading = 'lazy';
+        im.style.objectPosition = sl.pos;
+        im.src = sl.src;
+        a.appendChild(im);
+        var t = el('div', 'slide-t');
+        if (sl.en) {
+          var en = el('p', 'slide-en'), j = sl.en.indexOf(', ');
+          en.lang = 'en';
+          if (j > 0 && j + 2 < sl.en.length) { en.appendChild(document.createTextNode(sl.en.slice(0, j + 2))); en.appendChild(el('span', 'slide-en-l2', sl.en.slice(j + 2))); }
+          else en.textContent = sl.en;
+          t.appendChild(en);
+        }
+        if (sl.ko) t.appendChild(el('p', 'slide-ko', sl.ko));
+        if (sl.q) t.appendChild(el('p', 'slide-q', sl.q));
+        if (sl.btn) t.appendChild(el('span', 'slide-go', sl.btn));
+        a.appendChild(t);
+        track.appendChild(a);
+      });
+      var nav = el('div', 'slides-nav'), dots = el('span', 'slides-dots'), num = el('span', 'slides-n');
+      nav.setAttribute('aria-hidden', 'true');
+      slides.forEach(function () { dots.appendChild(el('i', '')); });
+      nav.appendChild(dots); nav.appendChild(num);
+      function mark(i) {
+        Array.prototype.forEach.call(dots.children, function (d, j) { d.className = j === i ? 'on' : ''; });
+        num.textContent = (i + 1) + ' / ' + slides.length;
+      }
+      mark(0);
+      var tick = null;
+      track.addEventListener('scroll', function () {
+        if (tick) return;
+        tick = setTimeout(function () {
+          tick = null;
+          var w = track.firstChild ? track.firstChild.offsetWidth + 10 : 1;
+          mark(Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / w))));
+        }, 80);
+      }, { passive: true });
+      box.appendChild(track); box.appendChild(nav);
+      box.hidden = false;
+      sec.classList.add('has-slides');
+    }
+    if (!mq || mq.matches) build();
+    else if (mq.addEventListener) mq.addEventListener('change', function (e) { if (e.matches) build(); });
+  }
+
   /* 1 분야 카드(5판 6차 2026-10-31 — 오너 "폰에서 if 문구를 가로로 넘기게"): 장면 사진(config.json cat_photos[분야] — 상품 상세 사진에서 글자 없는 장면, 없으면 대표 상품 사진 흰 칸)
      + 그 분야 문장(home.problem.<분야> — 오너가 가져온 것만, 없으면 분야 이름만) + 분야 이름 → 목록의 그 분야. 폰은 가로로 넘기는 한 줄(다음 칸이 살짝 보임), 컴퓨터는 한 줄 격자 */
   var RE_CAT_PHOTO = new RegExp('^(assets/[A-Za-z0-9_.-]+|data/img/[A-Za-z0-9_-]+/[0-9]{1,2})[.](jpe?g|png|webp)$');
@@ -388,6 +454,7 @@
     (r[1] && Array.isArray(r[1].items) ? r[1].items : []).slice(0, 500).forEach(function (it) { var p = fromProduct(it); if (p) { p.i = items.length; items.push(p); } });
     var hide = Array.isArray(conf.home_hide) ? conf.home_hide.filter(function (x) { return typeof x === 'string' && RE_ID.test(x); }) : [];
     paintCats(items, conf);
+    paintSlides(conf, items);
     paintGrid(items, hide);
     paintProblems(items);
     paintGuide(r[2], items);
