@@ -125,10 +125,12 @@ h1,h2,h3,p{margin:0}
 .slides-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;outline:none}
 .slides-track::-webkit-scrollbar{display:none}
 .slides-track:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
-.slide{position:relative;flex:0 0 100%;scroll-snap-align:start;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,13fr);align-items:center;border-radius:var(--r-l);overflow:hidden;background:var(--soft);color:var(--ink);text-decoration:none}   /* 5판 10차: 글 35 · 사진 65 — 사진이 띠를 채우고(1,200px 띠에서 780px, 원본 860px 안) 글 칸은 문장 + 단추만 */
-.slide-pic{display:block;order:2;min-width:0}
-.slide img{display:block;width:100%;height:auto;max-width:none;aspect-ratio:8/5;object-fit:cover}   /* 사진 파일 그대로 — 자리 · 크기만(4:3 원본을 8:5 로 위아래만 조금 자름) */
-.slide-t{order:1;padding:28px clamp(20px,3vw,44px)}
+.slide{position:relative;flex:0 0 100%;scroll-snap-align:start;display:flex;align-items:stretch;height:clamp(340px,36vw,460px);border-radius:var(--r-l);overflow:hidden;background:var(--soft);color:var(--ink);text-decoration:none}
+/* 5판 11차(오너 "늘리면 잘리거나 흰 바탕이 보인다"): 상자에 맞추지 않는다 — 사진은 제 생김새 그대로 띠 높이에 맞춰 오른쪽에(폭은 장마다 다름 · 세로 사진은 좁게, 가로 사진은 넓게), 남는 왼쪽이 글 칸.
+   app.js 가 사진을 읽은 뒤 그 가로세로비를 .slide-pic 에 적는다(읽기 전엔 4:3). 크기는 원본(860px)보다 작게만 쓰고, 조각 가장자리의 1~2px 흰 줄만 3% 확대로 가린다(자르기 0 · 늘리기 0) */
+.slide-pic{position:relative;order:2;flex:0 0 auto;height:100%;max-width:66%;aspect-ratio:4/3;overflow:hidden}
+.slide img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;transform:scale(1.03)}
+.slide-t{order:1;flex:1 1 auto;align-self:center;min-width:0;padding:28px clamp(20px,3vw,44px)}
 .slide-en{margin:0;font-family:var(--f-display);font-size:clamp(34px,3.5vw,50px);font-weight:400;line-height:1.05;letter-spacing:-.02em;color:var(--ink)}
 .slide-en-l2{display:block}
 .slide-ko{margin:14px 0 0;font-size:clamp(15px,1.25vw,18px);font-weight:500;line-height:1.6;color:var(--ink-2)}
@@ -295,9 +297,9 @@ h1,h2,h3,p{margin:0}
   /* 폰 배너(5판 7차): 한 장 — 사진 안 아래쪽에 글(어두운 띠 위 흰 글, 사진 파일은 그대로), 다음 장이 18px 보임 · 화살표 숨김. 상품 격자가 첫 화면 안에 들어오게 높이는 5:6 */
   .hero.has-slides{padding:12px 0 0}
   .slides-track{margin:0 calc(-1 * var(--gut));padding:0 var(--gut);scroll-padding:0 var(--gut)}
-  .slide{flex:0 0 calc(100% - 28px);display:block;aspect-ratio:5/6;background:var(--bg-2);color:#fff}
-  .slide-pic{position:absolute;inset:0}
-  .slide img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto}
+  .slide{flex:0 0 calc(100% - 28px);display:block;height:auto;aspect-ratio:5/6;background:var(--bg-2);color:#fff}
+  .slide-pic{position:absolute;inset:0;height:auto;max-width:none;aspect-ratio:auto}
+  .slide img{position:absolute;inset:0;width:100%;height:100%;transform:none}
   .slide::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(20,18,15,.74) 100%)}   /* 글이 읽히게 아래만 어둡게 — 누름은 사진 링크로 통과 */
   .slide-t{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:0 20px 20px;pointer-events:none}
   .slide-go{pointer-events:auto}

@@ -165,6 +165,7 @@
         var im = new Image();
         im.alt = ''; im.decoding = 'async'; if (i > 0) im.loading = 'lazy';
         im.style.objectPosition = sl.pos;
+        im.onload = function () { if (im.naturalWidth && im.naturalHeight) pic.style.aspectRatio = im.naturalWidth + ' / ' + im.naturalHeight; };   /* 컴퓨터 띠: 사진 제 생김새(CSS .slide-pic) */
         im.src = sl.src;
         pic.appendChild(im);
         a.appendChild(pic);
