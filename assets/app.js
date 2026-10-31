@@ -154,17 +154,13 @@
       if (RE_HERO.test(hero)) slides.push({ src: hero, pos: 'left center', en: hasCopy('home.hero_en') ? COPY['home.hero_en'] : '', ko: hasCopy('home.hero_ko') ? COPY['home.hero_ko'] : '', btn: hasCopy('home.hero_cta') ? COPY['home.hero_cta'] : '', href: 'shop.html' });
       nicheOrder(items).slice(0, MAX_CATS).forEach(function (n) {
         var src = catPhoto(conf, n), k = 'home.problem.' + n, q = hasCopy(k) ? COPY[k].trim() : '';
-        if (src && q) {
-          CAT_Q[n] = 1;
-          /* 5판 9차(오너 "컴퓨터 if 장의 여백이 많다"): 그 분야 상품 3개(사진 · 이름 · 값 — 데이터만, 차례는 목록과 같이 face → 흰 배경 → 점수)를 글 밑에. 폰은 CSS 가 숨김 */
-          var top = items.filter(function (p) { return p.niche === n && p.img; }).sort(better).slice(0, 3);
-          slides.push({ src: src, pos: 'center', q: q, items: top, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) });
-        }
+        /* 5판 10차: if 장은 문장 + 단추 + 장면 사진만(9차에 넣었던 그 분야 상품 3개는 오너 "번잡 · 사진 잘림" + 아래 격자와 겹쳐 뺌 — 빈자리는 CSS 비율 글 35 · 사진 65 로) */
+        if (src && q) { CAT_Q[n] = 1; slides.push({ src: src, pos: 'center', q: q, btn: T('guide.go', { cat: NICHE_LABEL[n] || n }), href: 'shop.html?niche=' + encodeURIComponent(n) }); }
       });
       if (!slides.length) return;
       var track = el('div', 'slides-track');
       slides.forEach(function (sl, i) {
-        var a = el('div', 'slide'), pic = el('a', 'slide-pic');   /* 한 장 = 사진 링크 + 글 칸(상품 3개도 링크라 장 전체를 링크로 하지 않는다) */
+        var a = el('div', 'slide'), pic = el('a', 'slide-pic');   /* 한 장 = 사진 링크 + 글 칸(단추 링크) */
         pic.href = sl.href;
         var im = new Image();
         im.alt = ''; im.decoding = 'async'; if (i > 0) im.loading = 'lazy';
@@ -182,18 +178,6 @@
         }
         if (sl.ko) t.appendChild(el('p', 'slide-ko', sl.ko));
         if (sl.q) t.appendChild(el('p', 'slide-q', sl.q));
-        if (sl.items && sl.items.length) {
-          var row = el('div', 'slide-items');
-          sl.items.forEach(function (p) {
-            var it = el('a', 'slide-item');
-            it.href = shopOff ? '#top' : 'item.html?id=' + encodeURIComponent(p.id);
-            it.appendChild(UI ? UI.pic(p.img, '', { lazy: true }) : el('div', 'pic'));
-            it.appendChild(el('span', 'slide-item-n', p.name));
-            it.appendChild(el('b', 'slide-item-p', won(p.price)));
-            row.appendChild(it);
-          });
-          t.appendChild(row);
-        }
         if (sl.btn) { var go = el('a', 'slide-go', sl.btn); go.href = sl.href; t.appendChild(go); }
         a.appendChild(t);
         track.appendChild(a);
