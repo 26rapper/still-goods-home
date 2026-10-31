@@ -6,7 +6,7 @@
    2. 고르는 법 — data/guides.json 의 분야(domains) 중 지금 팔 수 있는 상품이 있는 분야만 단추로, 고른 분야의 세 단계(없으면 절째 숨김). 접힌 카드 안.
    3. 고른 상품(5판) — 엔진 face: true 상품만 12개까지(face 가 하나도 없으면 팔고 있는 상품 앞에서부터 — 빈 격자 0. home_hide 뺌 · 같은 이름은 하나).
       모두 배송비 포함일 때만 격자 위 그 한 줄, 아니면 카드마다 '배송비 n원'(데이터). 카드에 배지 0. hidden: true 는 어디에도 0.
-   3b. 문제 → 해결 — copy.ko.js 의 home.problem.<분야> 문장이 있고 그 분야 상품이 있을 때만 카드(대표 사진 + 문장 + 화살) → 목록의 그 분야.
+   3b. 문제 → 해결 — copy.ko.js 의 home.problem.<분야> 문장이 있고 그 분야 상품이 있을 때만 카드(대표 사진 + 문장 + 화살) → 목록의 그 분야. 5판 6차(2026-10-31)부터 그 문장은 1 의 분야 카드에 들어가므로 보통 숨김.
    4. 문의 — config.json contact(카카오톡 · 네이버 · 이메일 · 전화)가 하나라도 있을 때만 단추. 비면 문의 절 · 바닥 '문의하기' 숨김.
    5. config.json: 장터 주소(https 일 때만 '다른 곳에서도') · 판매자 정보(seller_public true 일 때 바닥) · shop_enabled false 면 가게 링크([data-shop]) 숨김.
    손님에게 보이는 글은 assets/copy.ko.js(SG_COPY)에서, 아이콘 · 사진 칸은 assets/ui.js(SG_UI)에서. 글은 전부 textContent(HTML 끼워 넣기 0).
@@ -141,19 +141,38 @@
     im.src = src;
   }
 
-  /* 1 분야 — 사진 칸(대표 상품 사진 + 분야 이름, 개수 0) */
-  function paintCats(items) {
+  /* 1 분야 카드(5판 6차 2026-10-31 — 오너 "폰에서 if 문구를 가로로 넘기게"): 장면 사진(config.json cat_photos[분야] — 상품 상세 사진에서 글자 없는 장면, 없으면 대표 상품 사진 흰 칸)
+     + 그 분야 문장(home.problem.<분야> — 오너가 가져온 것만, 없으면 분야 이름만) + 분야 이름 → 목록의 그 분야. 폰은 가로로 넘기는 한 줄(다음 칸이 살짝 보임), 컴퓨터는 한 줄 격자 */
+  var RE_CAT_PHOTO = new RegExp('^(assets/[A-Za-z0-9_.-]+|data/img/[A-Za-z0-9_-]+/[0-9]{1,2})[.](jpe?g|png|webp)$');
+  var CAT_Q = {};   /* 분야 카드에 문장이 들어간 분야 — 아래 문제 → 해결 절에서는 뺀다(같은 문장 두 번 0) */
+  function catPhoto(conf, n) {
+    var m = conf && conf.cat_photos && typeof conf.cat_photos === 'object' ? conf.cat_photos[n] : '';
+    return typeof m === 'string' && RE_CAT_PHOTO.test(m) ? m : '';
+  }
+  function paintCats(items, conf) {
     var box = $('#cats');
     if (!box) return;
     var names = nicheOrder(items).slice(0, MAX_CATS);
     while (box.firstChild) box.removeChild(box.firstChild);
     names.forEach(function (n, i) {
-      var li = el('li'), a = el('a', 'cat rise'), p = lead(items, n, SHOWN);
+      var li = el('li'), a = el('a', 'cat rise'), p = lead(items, n, SHOWN), src = catPhoto(conf, n), qk = 'home.problem.' + n;
+      var q = hasCopy(qk) ? COPY[qk].trim() : '';
       if (p) SHOWN[p.id] = 1;
       a.style.setProperty('--i', String(i));
       a.href = 'shop.html?niche=' + encodeURIComponent(n);
-      a.appendChild(UI ? UI.pic(p ? p.img : null, '', { lazy: true }) : el('div', 'pic'));
-      a.appendChild(el('b', 'cat-name', NICHE_LABEL[n] || n));
+      var fallback = function () { return UI ? UI.pic(p ? p.img : null, '', { lazy: true }) : el('div', 'pic'); };
+      if (src) {
+        var ph = el('div', 'cat-photo'), im = new Image();
+        im.alt = ''; im.decoding = 'async'; im.loading = 'lazy';
+        im.onerror = function () { if (ph.parentNode) ph.parentNode.replaceChild(fallback(), ph); };   /* 파일이 없으면 대표 상품 사진으로 */
+        im.src = src;
+        ph.appendChild(im);
+        a.appendChild(ph);
+      } else a.appendChild(fallback());
+      if (q) { CAT_Q[n] = 1; a.appendChild(el('b', 'cat-q', q)); }
+      var nm = el('span', q ? 'cat-name cat-name-sub' : 'cat-name', NICHE_LABEL[n] || n);
+      nm.appendChild(icon('arrow'));
+      a.appendChild(nm);
       li.appendChild(a);
       box.appendChild(li);
     });
@@ -161,11 +180,12 @@
     if (sec) sec.hidden = names.length === 0 || shopOff;
   }
 
-  /* 3b 문제 → 해결 — home.problem.<분야> 문장이 있는 분야만(문장은 copy.ko.js, 오너가 가져온 것만) */
+  /* 3b 문제 → 해결 — home.problem.<분야> 문장이 있는 분야만(문장은 copy.ko.js, 오너가 가져온 것만).
+     5판 6차: 분야 카드(위)에 문장이 들어간 분야는 뺀다 → 분야 6개 안이면 전부 빠져 절은 숨김(분야가 7개 넘을 때 넘친 분야만 여기) */
   function paintProblems(items) {
     var sec = $('#problems'), ul = $('#probList');
     if (!sec || !ul) return;
-    var list = nicheOrder(items).filter(function (n) { var k = 'home.problem.' + n; return hasCopy(k) && COPY[k].trim() && lead(items, n); });
+    var list = nicheOrder(items).filter(function (n) { var k = 'home.problem.' + n; return !CAT_Q[n] && hasCopy(k) && COPY[k].trim() && lead(items, n); });
     while (ul.firstChild) ul.removeChild(ul.firstChild);
     list.forEach(function (n) {
       var li = el('li'), a = el('a', 'prob'), p = lead(items, n, SHOWN);
@@ -367,7 +387,7 @@
     var items = [];
     (r[1] && Array.isArray(r[1].items) ? r[1].items : []).slice(0, 500).forEach(function (it) { var p = fromProduct(it); if (p) { p.i = items.length; items.push(p); } });
     var hide = Array.isArray(conf.home_hide) ? conf.home_hide.filter(function (x) { return typeof x === 'string' && RE_ID.test(x); }) : [];
-    paintCats(items);
+    paintCats(items, conf);
     paintGrid(items, hide);
     paintProblems(items);
     paintGuide(r[2], items);

@@ -116,13 +116,18 @@ h1,h2,h3,p{margin:0}
 .hero-photo{aspect-ratio:860/645;border-radius:var(--r-l);overflow:hidden;background:var(--bg-2)}
 .hero-photo picture,.hero-photo img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center}
 
-/* ── 홈: 분야(4판 2차 — 사진이 칸 전체 · 이름은 사진 아래 작은 글. 상자 0) ── */
-.cats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
-.cat{display:flex;flex-direction:column;gap:8px;height:100%}
-.cat .pic{border:1px solid var(--line);border-radius:var(--r-m);background:#fff}   /* 사진 칸은 흰색(multiply 0 — 상품 색은 사실) */
+/* ── 홈: 분야 카드(5판 6차 2026-10-31 — 장면 사진 4:3 + 그 분야 문장(home.problem.*) + 분야 이름 →. 컴퓨터는 한 줄 격자(칸 200px 이상 · 분야가 적어도 칸은 안 늘어남), 폰은 가로로 넘기는 한 줄 — 아래 @media) ── */
+.cats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px 16px}
+.cat{display:flex;flex-direction:column;gap:10px;height:100%}
+.cat .pic{border:1px solid var(--line);border-radius:var(--r-m);background:#fff}   /* 장면 사진이 없는 분야: 대표 상품 사진 흰 칸(multiply 0 — 상품 색은 사실) */
+.cat-photo{aspect-ratio:4/3;border-radius:var(--r-m);overflow:hidden;background:var(--bg-2)}
+.cat-photo img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center}   /* 사진 파일 그대로 — 자리 · 크기만, 글자 얹기 0 */
 .cat:hover .pic{border-color:var(--line-2)}
-.cat:hover .cat-name{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
-.cat-name{display:flex;align-items:center;min-height:32px;font-size:16px;font-weight:600;line-height:1.35;text-align:left}
+.cat:hover .cat-q,.cat:hover .cat-name{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
+.cat-q{font-size:17px;font-weight:600;line-height:1.4;letter-spacing:-.01em;color:var(--ink)}
+.cat-name{display:flex;align-items:center;gap:4px;min-height:32px;font-size:16px;font-weight:600;line-height:1.35;text-align:left}
+.cat-name .ic{font-size:14px;color:var(--ink-3)}
+.cat-name-sub{min-height:0;margin-top:-4px;font-size:14px;font-weight:500;color:var(--ink-3)}
 
 /* ── 홈: 문제 → 해결(문장이 있는 분야만 — 가로로 넓은 카드, 여러 장이면 2열) ── */
 .probs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
@@ -244,11 +249,11 @@ h1,h2,h3,p{margin:0}
   .nav-menu{display:inline-flex;padding:0 12px;font-size:16px}
   .hero-row{grid-template-columns:minmax(0,1fr)}
   .probs.many{grid-template-columns:minmax(0,1fr)}
-  /* 분야: 가로로 넘기는 한 줄 — 칸 폭 150px · 좌우 --gut 안쪽 여백으로 오른쪽 끝에 다음 칸이 살짝 보이게 */
+  /* 분야 카드: 가로로 넘기는 한 줄 — 칸 폭 232px(폰 375px 에서 다음 칸이 90px쯤 보여 넘길 수 있다는 표시) · 좌우 --gut 안쪽 여백 */
   .cats{display:flex;gap:12px;margin:0 calc(-1 * var(--gut));padding:0 var(--gut) 4px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--gut);scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .cats::-webkit-scrollbar{display:none}
-  .cats > li{flex:0 0 150px;scroll-snap-align:start}
-  #catsSec{padding-top:40px}
+  .cats > li{flex:0 0 232px;scroll-snap-align:start}
+  #catsSec{padding-top:28px}
 }
 @media (max-width:760px){
   :root{--sec:56px}
@@ -257,10 +262,15 @@ h1,h2,h3,p{margin:0}
   .hero-ko{margin-top:14px}
   .hero-en-l2{display:block}   /* 폰: 쉼표 뒤 둘째 조각을 새 줄로(데스크톱은 한 줄) */
   .hero-go{display:flex;width:100%}
-  /* 폰: 글 아래에 사진이 가로로 꽉(양쪽 여백까지) · 모서리 0 — 글은 사진 위에 얹지 않는다 */
-  .hero.has-photo{padding:36px 0 0}
-  .hero.has-photo .hero-row{grid-template-columns:minmax(0,1fr);gap:28px}
-  .hero-photo{margin:0 calc(-1 * var(--gut));border-radius:0}
+  /* 폰(5판 6차 2026-10-31 오너 "폰에서는 별로"): 사진이 먼저(머리 바로 아래 가로로 꽉 · 모서리 0) → 글은 작게(38px) · 단추는 글 너비만 — 글은 사진 위에 얹지 않는다.
+     잘 팔리는 곳(오늘의집 · 다이소몰 폰 첫 화면, 2026-10-31 B)도 사진 배너 → 분야 줄 차례 */
+  .hero.has-photo{padding:0}
+  .hero.has-photo .hero-row{grid-template-columns:minmax(0,1fr);gap:22px}
+  .hero.has-photo .hero-photo{order:-1;margin:0 calc(-1 * var(--gut));border-radius:0}
+  .hero.has-photo .hero-en{font-size:38px}
+  .hero.has-photo .hero-ko{margin-top:10px;font-size:16px}
+  .hero.has-photo .hero-go{display:inline-flex;width:auto;margin-top:18px}
+  .hero.has-photo .btn.small.hero-go{min-height:48px}
   .h2{font-size:20px}
   .wm{gap:8px}
   .wm-en{font-size:25px}

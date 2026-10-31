@@ -39,7 +39,7 @@
     </div>
   </section>
 
-  <!-- 분야 — data/products.json 의 분야 값(상품이 있는 분야만) · 대표 상품 사진 + 분야 이름 -->
+  <!-- 분야 카드 — data/products.json 의 분야 값(상품이 있는 분야만): 장면 사진(config.json cat_photos, 없으면 대표 상품 사진) + home.problem.<분야> 문장 + 분야 이름 →. 폰은 가로로 넘기는 한 줄(5판 6차 2026-10-31) -->
   <section class="sec" id="catsSec" aria-label="분야" data-copy-aria="filter.aria" data-shop>
     <div class="wrap">
       <ul class="cats" id="cats"></ul>
@@ -56,7 +56,7 @@
     </div>
   </section>
 
-  <!-- 문제 → 해결 — copy.ko.js 의 home.problem.<분야> 문장이 있고 그 분야 상품이 있을 때만 카드(없으면 절째 숨김) -->
+  <!-- 문제 → 해결 — copy.ko.js 의 home.problem.<분야> 문장이 있고 그 분야 상품이 있을 때만 카드(없으면 절째 숨김). 5판 6차: 문장이 위 분야 카드에 들어간 분야는 빼므로 보통 숨김 -->
   <section class="sec" id="problems" hidden>
     <div class="wrap">
       <ul class="probs" id="probList"></ul>

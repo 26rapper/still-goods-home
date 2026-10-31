@@ -16,6 +16,13 @@
   "shop_enabled": true,
   "shop_api_base": "http://localhost:8780",
   "hero_photo": "assets/hero.jpg",
+  "cat_photos": {
+    "욕실": "data/img/SG-H0452/4.jpg",
+    "셀프 집수리": "data/img/SG-H0107/3.jpg",
+    "수납정리": "data/img/SG-H0487/2.jpg",
+    "주방 정리": "data/img/SG-H0224/2.jpg",
+    "현관/신발": "assets/cat-entry.jpg"
+  },
   "home_hide": [
     "SG-0004",
     "SG-0015",
